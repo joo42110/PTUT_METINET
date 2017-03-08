@@ -18,4 +18,10 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
         ]);
     }
+
+    public function debugAction(Request $request){
+
+        return $this->render('base.html.twig',array());
+
+    }
 }
