@@ -2,6 +2,17 @@ app:
     resource: "@AppBundle/Controller/"
     type:     annotation
 
+
+#---------- Player ----------
+
 create_player:
     path:      /player/create
+    defaults:  { _controller: AppBundle:Default:debug }
+
+update_player:
+    path:      /player/{id}/update
+    defaults:  { _controller: AppBundle:Default:debug }
+
+delete_player:
+    path:      /player/{id}/delete
     defaults:  { _controller: AppBundle:Default:debug }
