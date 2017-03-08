@@ -5,6 +5,14 @@ app:
 
 #---------- Player ----------
 
+list_player:
+    path:      /player/
+    defaults:  { _controller: AppBundle:Default:debug }
+
+get_player:
+    path:      /player/{id}
+    defaults:  { _controller: AppBundle:Default:debug }
+
 create_player:
     path:      /player/create
     defaults:  { _controller: AppBundle:Default:debug }
@@ -15,4 +23,75 @@ update_player:
 
 delete_player:
     path:      /player/{id}/delete
+    defaults:  { _controller: AppBundle:Default:debug }
+
+
+
+#---------- Team ----------
+
+list_team:
+    path:      /team/
+    defaults:  { _controller: AppBundle:Default:debug }
+
+get_team:
+    path:      /team/{id}
+    defaults:  { _controller: AppBundle:Default:debug }
+
+create_team:
+    path:      /team/create
+    defaults:  { _controller: AppBundle:Default:debug }
+
+update_team:
+    path:      /team/{id}/update
+    defaults:  { _controller: AppBundle:Default:debug }
+
+delete_team:
+    path:      /team/{id}/delete
+    defaults:  { _controller: AppBundle:Default:debug }
+
+
+#---------- Pool ----------
+
+list_player:
+    path:      /pool/
+    defaults:  { _controller: AppBundle:Default:debug }
+
+get_player:
+    path:      /pool/{id}
+    defaults:  { _controller: AppBundle:Default:debug }
+
+create_pool:
+    path:      /pool/create
+    defaults:  { _controller: AppBundle:Default:debug }
+
+update_pool:
+    path:      /pool/{id}/update
+    defaults:  { _controller: AppBundle:Default:debug }
+
+delete_pool:
+    path:      /pool/{id}/delete
+    defaults:  { _controller: AppBundle:Default:debug }
+
+
+
+#---------- Tournament ----------
+
+list_tournament:
+    path:      /tournament/
+    defaults:  { _controller: AppBundle:Default:debug }
+
+get_tournament:
+    path:      /tournament/{id}
+    defaults:  { _controller: AppBundle:Default:debug }
+
+create_tournament:
+    path:      /tournament/create
+    defaults:  { _controller: AppBundle:Default:debug }
+
+update_tournament:
+    path:      /tournament/{id}/update
+    defaults:  { _controller: AppBundle:Default:debug }
+
+delete_tournament:
+    path:      /tournament/{id}/delete
     defaults:  { _controller: AppBundle:Default:debug }
