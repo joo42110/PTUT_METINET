@@ -1,0 +1,8 @@
+.tournament_list_wrapper{
+    margin-top : 30px;
+}
+
+.tournament_tile{
+    height : 200px;
+    background-color: red;
+}
