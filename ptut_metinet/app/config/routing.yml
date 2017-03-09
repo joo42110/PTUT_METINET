@@ -6,6 +6,11 @@ homepage:
     path:      /
     defaults:  { _controller: AppBundle:Tournament:list }
 
+create_tournament:
+    path:      /admin/createTournament
+    defaults:  { _controller: AppBundle:Tournament:create }
+
+
 
 
 #---------- Player ----------

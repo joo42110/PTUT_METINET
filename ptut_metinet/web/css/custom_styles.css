@@ -1,8 +1,16 @@
 .tournament_list_wrapper{
     margin-top : 30px;
+    padding-left : 40px;
+    padding-right : 40px;
 }
 
 .tournament_tile{
-    height : 200px;
+    display : inline-block;
+    height : 160px;
+    width : 160px;
     background-color: red;
+    margin-top : 20px;
+    margin-right : 20px;
+    text-align : center;
+    line-height: 160px;
 }

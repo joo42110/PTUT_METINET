@@ -24,6 +24,18 @@ class Tournament extends BaseEntity
     private $name;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $teamsNumber;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $poolsNumber;
+
+
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $enabled;
@@ -73,6 +85,40 @@ class Tournament extends BaseEntity
     {
         $this->enabled = $enabled;
     }
+
+    /**
+     * @return int
+     */
+    public function getTeamsNumber():int
+    {
+        return $this->teamsNumber;
+    }
+
+    /**
+     * @param int $teamsNumber
+     */
+    public function setTeamsNumber(int $teamsNumber)
+    {
+        $this->teamsNumber = $teamsNumber;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPoolsNumber():int
+    {
+        return $this->poolsNumber;
+    }
+
+    /**
+     * @param int $poolsNumber
+     */
+    public function setPoolsNumber(int $poolsNumber)
+    {
+        $this->poolsNumber = $poolsNumber;
+    }
+
+
 
 
 
