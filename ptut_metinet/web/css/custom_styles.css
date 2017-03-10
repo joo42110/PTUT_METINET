@@ -6,11 +6,15 @@
 
 .tournament_tile{
     display : inline-block;
-    height : 160px;
-    width : 160px;
-    background-color: red;
+    height : 200px;
+    width : 200px;
+    background-color: #2F6F99;
     margin-top : 20px;
     margin-right : 20px;
     text-align : center;
-    line-height: 160px;
+    line-height: 200px;
+    font-weight : 100;
+    font-size : 22px;
+    color : #ffffff;
+    font-family: 'Roboto', sans-serif;
 }

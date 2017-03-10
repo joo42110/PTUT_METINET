@@ -9,13 +9,14 @@
                         {{ tournament.name }}
                     </div>
 
-
             {% endfor %}
             {% if true %}
 
+                <a href="{{ path('create_tournament')}}">
                     <div class="tournament_tile">
                         Ajouter un tournoi
                     </div>
+                </a>
 
             {% endif %}
         </div>

@@ -10,7 +10,9 @@ create_tournament:
     path:      /admin/createTournament
     defaults:  { _controller: AppBundle:Tournament:create }
 
-
+edit_tournament:
+    path:      /admin/editTournament/{tournamentId}
+    defaults:  { _controller: AppBundle:Tournament:edit }
 
 
 #---------- Player ----------
@@ -62,11 +64,11 @@ delete_team:
 
 #---------- Pool ----------
 
-list_player:
+list_pool:
     path:      /pool/
     defaults:  { _controller: AppBundle:Default:debug }
 
-get_player:
+get_pool:
     path:      /pool/{id}
     defaults:  { _controller: AppBundle:Default:debug }
 
@@ -83,25 +85,3 @@ delete_pool:
     defaults:  { _controller: AppBundle:Default:debug }
 
 
-
-#---------- Tournament ----------
-
-list_tournament:
-    path:      /tournament/
-    defaults:  { _controller: AppBundle:Default:debug }
-
-get_tournament:
-    path:      /tournament/{id}
-    defaults:  { _controller: AppBundle:Default:debug }
-
-create_tournament:
-    path:      /tournament/create
-    defaults:  { _controller: AppBundle:Default:debug }
-
-update_tournament:
-    path:      /tournament/{id}/update
-    defaults:  { _controller: AppBundle:Default:debug }
-
-delete_tournament:
-    path:      /tournament/{id}/delete
-    defaults:  { _controller: AppBundle:Default:debug }

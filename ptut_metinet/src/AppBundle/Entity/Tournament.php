@@ -10,10 +10,12 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="tournament")
+ * @UniqueEntity(fields="name", message="Ce nom est déjà utilisé")
  */
 class Tournament extends BaseEntity
 {
@@ -46,10 +48,9 @@ class Tournament extends BaseEntity
      * Tournament constructor.
      * @param string $name
      */
-    public function __construct($name)
+    public function __construct()
     {
         parent::__construct();
-        $this->name = $name;
         $this->enabled = false;
     }
 
@@ -57,7 +58,7 @@ class Tournament extends BaseEntity
     /**
      * @return string
      */
-    public function getName():string
+    public function getName()
     {
         return $this->name;
     }
@@ -73,7 +74,7 @@ class Tournament extends BaseEntity
     /**
      * @return bool
      */
-    public function getEnabled():bool
+    public function getEnabled()
     {
         return $this->enabled;
     }
@@ -89,7 +90,7 @@ class Tournament extends BaseEntity
     /**
      * @return int
      */
-    public function getTeamsNumber():int
+    public function getTeamsNumber()
     {
         return $this->teamsNumber;
     }
@@ -105,7 +106,7 @@ class Tournament extends BaseEntity
     /**
      * @return int
      */
-    public function getPoolsNumber():int
+    public function getPoolsNumber()
     {
         return $this->poolsNumber;
     }

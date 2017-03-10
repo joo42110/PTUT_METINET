@@ -9,24 +9,26 @@
 namespace AppBundle\Entity;
 
 
+use Doctrine\ORM\Mapping as ORM;
+
 class BaseEntity
 {
 
     /**
-     * @ORM\Column(type="string")
      * @ORM\Id
+     * @ORM\Column(type="string")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created;
+    protected $created;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $modified;
+    protected $modified;
 
 
     /**

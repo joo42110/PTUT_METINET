@@ -8,13 +8,13 @@
 
 namespace AppBundle\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="player")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PlayerRepository")
  */
 class Player extends BaseEntity
 {

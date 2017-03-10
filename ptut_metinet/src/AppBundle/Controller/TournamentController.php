@@ -18,15 +18,11 @@ class TournamentController extends Controller
 {
 
     public function listAction(Request $request){
-       // $em = $this->getDoctrine()->getManager();
-        //TODO : Import tournaments from database
-        $tournaments = array(
-            new Tournament("Tournoi du test"),
-            new Tournament("Tournoi du test"),
-            new Tournament("Tournoi du test"),
-            new Tournament("Tournoi du test"),
-            new Tournament("Tournoi du test"),
-        );
+
+        $em = $this->getDoctrine()->getManager();
+
+        $tournaments = $em->getRepository('AppBundle:Tournament')->findAll();
+
 
         return $this->render('AppBundle/Tournament/list.html.twig', array(
             'tournaments' => $tournaments,
@@ -35,10 +31,21 @@ class TournamentController extends Controller
 
     public function createAction(Request $request){
 
+        $em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(TournamentType::class, null, array(
             'method' => 'POST',
         ));
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $tournament = $form->getData();
+
+            $em->persist($tournament);
+            $em->flush();
+        }
 
         return $this->render('AppBundle/Tournament/create.html.twig', array(
             'form' => $form->createView(),
@@ -48,4 +55,33 @@ class TournamentController extends Controller
         
     }
 
+    public function editAction(Request $request,$tournamentId){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $tournament =  $em->getRepository('AppBundle:Tournament')->findOneById($tournamentId);
+
+        if (!$tournament) {
+            throw $this->createNotFoundException("Ce tournoi n'existe pas.");
+        }
+
+        $form = $this->createForm(TournamentType::class, $tournament, array(
+            'method' => 'POST',
+        ));
+
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $tournament = $form->getData();
+
+            $em->persist($tournament);
+            $em->flush();
+        }
+
+        return $this->render('AppBundle/Tournament/create.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
 }
