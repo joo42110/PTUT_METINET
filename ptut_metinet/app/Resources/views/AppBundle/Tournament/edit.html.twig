@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Bienvenue sur le bon form</h1>
+
+    <div class="row">
+    {{  form_start(form) }}
+        <div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#tournament_conf" aria-controls="tournament_conf" role="tab" data-toggle="tab">Configuration du tournoi</a></li>
+                <li role="presentation"><a href="#generate_teams" aria-controls="generate_teams" role="tab" data-toggle="tab">Générer les équipes</a></li>
+                <li role="presentation"><a href="#pool_attrib" aria-controls="pool_attrib" role="tab" data-toggle="tab">Attribution des poules</a></li>
+                <li role="presentation"><a href="#matches_gest" aria-controls="matches_gest" role="tab" data-toggle="tab">Gestion des matchs</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="tournament_conf">
+                    {{  form_row(form.name) }}
+                    {{  form_row(form.teamsNumber) }}
+                    {{  form_row(form.poolsNumber) }}
+                    {{  form_row(form.teamsByPool) }}
+                </div>
+                <div role="tabpanel" class="tab-pane" id="generate_teams">Génération des équipes</div>
+                <div role="tabpanel" class="tab-pane" id="pool_attrib">Attribution des poules</div>
+                <div role="tabpanel" class="tab-pane" id="matches_gest">Gestion des matchs</div>
+            </div>
+
+        </div>
+
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

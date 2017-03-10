@@ -47,7 +47,7 @@ class TournamentController extends Controller
             $em->flush();
         }
 
-        return $this->render('AppBundle/Tournament/create.html.twig', array(
+        return $this->render('AppBundle/Tournament/edit.html.twig', array(
             'form' => $form->createView(),
         ));
 
@@ -80,7 +80,7 @@ class TournamentController extends Controller
             $em->flush();
         }
 
-        return $this->render('AppBundle/Tournament/create.html.twig', array(
+        return $this->render('AppBundle/Tournament/edit.html.twig', array(
             'form' => $form->createView(),
         ));
     }
