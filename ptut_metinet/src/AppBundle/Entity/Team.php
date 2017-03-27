@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="tournament")
+ * @ORM\Table(name="Team")
  * 
  */
 class Team extends BaseEntity
@@ -64,7 +64,7 @@ class Team extends BaseEntity
         $this->players = $players;
     }
 
-    
+
 
 
 }
