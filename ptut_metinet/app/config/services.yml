@@ -2,8 +2,24 @@
 # http://symfony.com/doc/current/service_container.html
 parameters:
 #    parameter_name: value
+    app.team_csv_folder: '%kernel.root_dir%\..\uploaded_data\teams_csv'
 
 services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    app.file_uploader:
+        class: AppBundle\FileUploader
+        arguments: ["%app.team_csv_folder%"]
+
+
+    app.csv_player_loader:
+        class: AppBundle\CsvPlayerLoader
+        arguments: ["%app.team_csv_folder%"]
+
+    app.team_type:
+        class: AppBundle\Form\TeamType
+        arguments: ["@app.csv_player_loader","@app.file_uploader"]
+        tags:
+            - { name: form.type }

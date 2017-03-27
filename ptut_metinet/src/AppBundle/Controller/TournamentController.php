@@ -10,6 +10,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Tournament;
+use AppBundle\Form\AddTeamsType;
 use AppBundle\Form\TournamentType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -83,5 +84,36 @@ class TournamentController extends Controller
         return $this->render('AppBundle/Tournament/edit.html.twig', array(
             'form' => $form->createView(),
         ));
+    }
+
+    public function addTeamsAction(Request $request,$tournamentId){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $tournament =  $em->getRepository('AppBundle:Tournament')->findOneById($tournamentId);
+
+        if (!$tournament) {
+            throw $this->createNotFoundException("Ce tournoi n'existe pas.");
+        }
+
+        $form = $this->createForm(AddTeamsType::class, $tournament, array(
+            'method' => 'POST',
+        ));
+
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $tournament = $form->getData();
+
+            $em->persist($tournament);
+            $em->flush();
+        }
+
+        return $this->render('AppBundle/Tournament/addteams.html.twig', array(
+            'form' => $form->createView(),
+        ));
+
     }
 }

@@ -37,7 +37,7 @@ class Player extends BaseEntity
 
     /**
      * @ORM\ManyToOne(targetEntity="Team", inversedBy="players")
-     * @JoinColumn(name="team_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
      */
     private $team;
 

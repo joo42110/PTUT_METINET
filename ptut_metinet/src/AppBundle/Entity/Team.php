@@ -10,6 +10,7 @@ namespace AppBundle\Entity;
 
 
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,9 +29,18 @@ class Team extends BaseEntity
 
 
     /**
+     * @var ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity="Player", mappedBy="team")
      */
     private $players;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Tournament", inversedBy="teams")
+     * @ORM\JoinColumn(name="tournament_id", referencedColumnName="id")
+     */
+    private $tournament;
+
 
     /**
      * @return mixed
@@ -63,6 +73,25 @@ class Team extends BaseEntity
     {
         $this->players = $players;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTournament()
+    {
+        return $this->tournament;
+    }
+
+    /**
+     * @param mixed $tournament
+     */
+    public function setTournament($tournament)
+    {
+        $this->tournament = $tournament;
+    }
+
+    
+
 
 
 
