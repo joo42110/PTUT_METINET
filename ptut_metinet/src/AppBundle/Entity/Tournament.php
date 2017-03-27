@@ -46,7 +46,6 @@ class Tournament extends BaseEntity
     
     /**
      * Tournament constructor.
-     * @param string $name
      */
     public function __construct()
     {

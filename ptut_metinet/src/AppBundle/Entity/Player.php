@@ -34,6 +34,13 @@ class Player extends BaseEntity
      */
     private $firstname;
 
+
+    /*** 
+     * @ManyToOne(targetEntity="Team", inversedBy="players")
+     * @JoinColumn(name="team_id", referencedColumnName="id")
+     */
+    private $team;
+
     /**
      * Player constructor.
      * @param string $licenceNumber
@@ -97,6 +104,23 @@ class Player extends BaseEntity
         $this->firstname = $firstname;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getTeam()
+    {
+        return $this->team;
+    }
+
+    /**
+     * @param mixed $team
+     */
+    public function setTeam($team)
+    {
+        $this->team = $team;
+    }
+
+    
 
 
 }
