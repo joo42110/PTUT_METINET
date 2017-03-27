@@ -10,6 +10,7 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\GeneratedValue;
 
 class BaseEntity
 {
@@ -17,8 +18,9 @@ class BaseEntity
     /**
      * @ORM\Id
      * @ORM\Column(type="string")
+     * @GeneratedValue(strategy="UUID")
      */
-    protected $id;
+    protected $id = null;
 
     /**
      * @ORM\Column(type="datetime")
@@ -35,8 +37,7 @@ class BaseEntity
      * BaseEntity constructor.
      */
     public function __construct()
-    {
-        $this->id = uniqid();
+    { 
         $this->created = new \DateTime;
         $this->modified = new \DateTime;
     }

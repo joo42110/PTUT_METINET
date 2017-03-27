@@ -13,6 +13,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
 class AddTeamsType extends AbstractType
@@ -22,10 +23,19 @@ class AddTeamsType extends AbstractType
     {
         $builder->add('teams', CollectionType::class, array(
             'entry_type'   => TeamType::class,
+            'prototype_name' => "__index__",
             'entry_options'  => array(
+                'label' => false,
+                'attr' => array(
+                    'class' => 'team-input'
+                ),
             ),
             'allow_add' => true,
 
+        ));
+
+        $builder->add('save', SubmitType::class, array(
+            'attr' => array('class' => 'btn btn-primary'),
         ));
     }
 

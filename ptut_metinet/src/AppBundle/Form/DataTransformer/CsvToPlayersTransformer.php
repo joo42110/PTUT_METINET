@@ -53,6 +53,8 @@ class CsvToPlayersTransformer implements DataTransformerInterface
 
         $csv_filename = $this->file_uploader->uploadCsv($csv_file);
         $players = $this->player_loader->load($csv_filename);
+        $this->file_uploader->deleteFile($csv_filename);
+
 
         return $players;
 

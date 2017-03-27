@@ -36,18 +36,19 @@ class Player extends BaseEntity
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="Team", inversedBy="players")
+     * @ORM\ManyToOne(targetEntity="Team", inversedBy="players",cascade={"persist"})
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
      */
     private $team;
 
     /**
      * Player constructor.
-     * @param string $licenceNumber
+     *
      * @param string $name
      * @param string $firstname
+     * @param string $licenceNumber
      */
-    public function __construct(string $licenceNumber,string $name,string $firstname)
+    public function __construct(string $name,string $firstname,string $licenceNumber)
     {
         parent::__construct();
         $this->licenceNumber = $licenceNumber;

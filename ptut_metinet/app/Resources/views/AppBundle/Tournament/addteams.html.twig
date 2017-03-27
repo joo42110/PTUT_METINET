@@ -4,8 +4,50 @@
 
     {{  form_start(form) }}
 
-        {{  form_row(form.teams) }}
+        <div id="teams_formfields_container" data-prototype="{{ form_widget(form.teams.vars.prototype)|e }}">
+            {% for team in form.teams %}
+                {{ form_widget(form.teams.vars.prototype)|e }}
 
+                {{ form_row(team) }}
+
+            {% endfor %}
+        </div>
     {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script>
+
+        var maxindex = 0;
+
+        $(function(){
+            var form = $('form');
+
+            maxindex = form.find('.team-input').length;
+
+            var addBtn = $('<button class="btn btn-secondary">Ajouter une équipe</button>');
+
+            addBtn.on('click',addTeam);
+
+            form.append(addBtn);
+
+        });
+
+        function addTeam(e){
+            e.preventDefault();
+
+            var container =  $('#teams_formfields_container');
+            var prototype = container.attr('data-prototype');
+            var newTeamForm = prototype.replace(/__index__/g,maxindex ++);
+
+            container.append(newTeamForm);
+
+        }
+
+    </script>
 
 {% endblock %}

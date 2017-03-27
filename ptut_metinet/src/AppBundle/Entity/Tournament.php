@@ -47,7 +47,7 @@ class Tournament extends BaseEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Team", mappedBy="tournament")
+     * @ORM\OneToMany(targetEntity="Team", mappedBy="tournament",cascade={"persist"})
      */
     private $teams;
 
@@ -124,6 +124,22 @@ class Tournament extends BaseEntity
     public function setPoolsNumber(int $poolsNumber)
     {
         $this->poolsNumber = $poolsNumber;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getTeams()
+    {
+        return $this->teams;
+    }
+
+    /**
+     * @param ArrayCollection $teams
+     */
+    public function setTeams($teams)
+    {
+        $this->teams = $teams;
     }
 
 

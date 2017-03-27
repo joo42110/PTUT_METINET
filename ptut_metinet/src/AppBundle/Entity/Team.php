@@ -11,12 +11,12 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="Team")
- * 
  */
 class Team extends BaseEntity
 
@@ -31,12 +31,12 @@ class Team extends BaseEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Player", mappedBy="team")
+     * @ORM\OneToMany(targetEntity="Player", mappedBy="team",cascade={"persist"})
      */
     private $players;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tournament", inversedBy="teams")
+     * @ORM\ManyToOne(targetEntity="Tournament", inversedBy="teams",cascade={"all"})
      * @ORM\JoinColumn(name="tournament_id", referencedColumnName="id")
      */
     private $tournament;
@@ -90,7 +90,7 @@ class Team extends BaseEntity
         $this->tournament = $tournament;
     }
 
-    
+
 
 
 

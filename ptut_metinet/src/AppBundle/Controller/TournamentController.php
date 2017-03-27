@@ -12,6 +12,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Tournament;
 use AppBundle\Form\AddTeamsType;
 use AppBundle\Form\TournamentType;
+use Doctrine\Common\Util\Debug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -106,6 +107,15 @@ class TournamentController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $tournament = $form->getData();
+
+            // Doctrine is not injecting reference in the objects so we do it manually
+            foreach($tournament->getTeams() as $team){
+                $team->setTournament($tournament);
+                foreach($team->getPlayers() as $player){
+                    $player->setTeam($team);
+                }
+            }
+
 
             $em->persist($tournament);
             $em->flush();

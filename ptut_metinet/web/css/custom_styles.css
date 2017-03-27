@@ -18,3 +18,8 @@
     color : #ffffff;
     font-family: 'Roboto', sans-serif;
 }
+
+.team-input{
+    border : 1px solid black;
+    padding : 5px;
+}
