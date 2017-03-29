@@ -21,6 +21,7 @@ class AddTeamsType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder,array $options)
     {
+
         $builder->add('teams', CollectionType::class, array(
             'entry_type'   => TeamType::class,
             'prototype_name' => "__index__",
@@ -31,6 +32,7 @@ class AddTeamsType extends AbstractType
                 ),
             ),
             'allow_add' => true,
+            'allow_delete' => true,
 
         ));
 

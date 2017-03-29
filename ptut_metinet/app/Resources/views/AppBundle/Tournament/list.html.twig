@@ -5,10 +5,11 @@
     <div class="row">
         <div class="tournament_list_wrapper">
             {% for tournament in tournaments %}
+                <a href="{{ path('edit_tournament',{'tournamentId': tournament.id })}}">
                     <div class="tournament_tile">
                         {{ tournament.name }}
                     </div>
-
+                </a>
             {% endfor %}
             {% if true %}
 

@@ -18,6 +18,10 @@ add_teams:
     path:      /admin/addTeams/{tournamentId}
     defaults:  { _controller: AppBundle:Tournament:addTeams }
 
+edit_team:
+    path:      /admin/editTeam/{teamId}
+    defaults:  { _controller: AppBundle:Team:edit }
+
 
 
 #---------- Player ----------

@@ -49,6 +49,7 @@ class TeamType extends AbstractType
 
         $builder->add('players', FileType::class, array(
             'label' => "Joueurs",
+            'required' => false,
             'attr' => array(
                 'class' => 'form-control'
             ),

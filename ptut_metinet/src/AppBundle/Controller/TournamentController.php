@@ -47,6 +47,11 @@ class TournamentController extends Controller
 
             $em->persist($tournament);
             $em->flush();
+
+
+            return $this->redirectToRoute('add_teams',array(
+                'tournamentId' => $tournament->getId()
+            ));
         }
 
         return $this->render('AppBundle/Tournament/edit.html.twig', array(
@@ -80,6 +85,10 @@ class TournamentController extends Controller
 
             $em->persist($tournament);
             $em->flush();
+
+            return $this->redirectToRoute('add_teams',array(
+                        'tournamentId' => $tournament->getId()
+                    ));
         }
 
         return $this->render('AppBundle/Tournament/edit.html.twig', array(
@@ -111,14 +120,19 @@ class TournamentController extends Controller
             // Doctrine is not injecting reference in the objects so we do it manually
             foreach($tournament->getTeams() as $team){
                 $team->setTournament($tournament);
-                foreach($team->getPlayers() as $player){
-                    $player->setTeam($team);
+                if($team->getPlayers() !== null){
+                    foreach($team->getPlayers() as $player){
+                        $player->setTeam($team);
+                    }
                 }
+
             }
 
 
             $em->persist($tournament);
             $em->flush();
+
+            
         }
 
         return $this->render('AppBundle/Tournament/addteams.html.twig', array(

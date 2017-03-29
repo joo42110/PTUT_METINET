@@ -43,20 +43,26 @@ class CsvToPlayersTransformer implements DataTransformerInterface
     }
 
     /**
-     * Transforms a string (number) to an object (issue).
      *
-     * @param  UploadedFile $csv_file
+     * @param  UploadedFile|null $csv_file
      * @return ArrayCollection
      */
     public function reverseTransform($csv_file)
     {
 
-        $csv_filename = $this->file_uploader->uploadCsv($csv_file);
-        $players = $this->player_loader->load($csv_filename);
-        $this->file_uploader->deleteFile($csv_filename);
+        if($csv_file !== null){
+            $csv_filename = $this->file_uploader->uploadCsv($csv_file);
+            $players = $this->player_loader->load($csv_filename);
+            $this->file_uploader->deleteFile($csv_filename);
+
+            return $players;
+        }
+
+        return null;
 
 
-        return $players;
+
+
 
 
     }

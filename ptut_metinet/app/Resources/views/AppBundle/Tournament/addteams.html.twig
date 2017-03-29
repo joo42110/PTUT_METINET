@@ -1,17 +1,47 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme form _self %}
+
+{% block team_widget %}
+
+    <tr class="team-input">
+        <td>{{ form_widget(form.name) }}</td>
+        <td>
+            {% if form.vars.data.players is defined %}
+                - Vous avez déjà ajouté les joueurs de cette équipe -
+            {% else %}
+                {{ form_widget(form.players) }}
+            {% endif %}
+        </td>
+        <td class="teams_actions">
+
+            {% if form.vars.data.id is defined %}
+                <a class="btn btn-primary edit-button"  href="{{ path('edit_team',{'teamId': form.vars.data.id })}}"><span class="glyphicon glyphicon-edit"></span></a>
+            {% endif %}
+
+            <div class="btn btn-danger remove-button"><span class="glyphicon glyphicon-remove"></span></div>
+        </td>
+    </tr>
+
+{% endblock %}
+
 {% block body %}
 
     {{  form_start(form) }}
 
-        <div id="teams_formfields_container" data-prototype="{{ form_widget(form.teams.vars.prototype)|e }}">
-            {% for team in form.teams %}
-                {{ form_widget(form.teams.vars.prototype)|e }}
+        <table id="teams_formfields_container" data-prototype="{{ form_widget(form.teams.vars.prototype)|e }}" class="table">
+            <thead>
+                <th>Nom de l'équipe</th>
+                <th>Joueurs</th>
+                <th>Actions</th>
+            </thead>
+            <tbody>
+                {% for team in form.teams %}
+                    {{ form_widget(team) }}
+                {% endfor %}
+            </tbody>
 
-                {{ form_row(team) }}
-
-            {% endfor %}
-        </div>
+        </table>
     {{ form_end(form) }}
 
 {% endblock %}
@@ -35,17 +65,34 @@
 
             form.append(addBtn);
 
+            bindRemoveButtons();
+
         });
 
         function addTeam(e){
             e.preventDefault();
 
-            var container =  $('#teams_formfields_container');
-            var prototype = container.attr('data-prototype');
+            var tableContainer =  $('table#teams_formfields_container');
+            var prototype = tableContainer.attr('data-prototype');
             var newTeamForm = prototype.replace(/__index__/g,maxindex ++);
 
-            container.append(newTeamForm);
+            var tableBody =  $(tableContainer.find('tbody'));
 
+            tableBody.append(newTeamForm);
+            bindRemoveButtons();
+
+        }
+
+        function removeTeam(e){
+            var button = $(e.target);
+            var formRow = button.parents('tr.team-input');
+            formRow.remove();
+        }
+
+        function bindRemoveButtons(){
+            $(".remove-button").each(function(){
+                $(this).on('click',removeTeam);
+            })
         }
 
     </script>
