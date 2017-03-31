@@ -6,7 +6,7 @@
         <div class="tournament_list_wrapper">
             {% for tournament in tournaments %}
                 <a href="{{ path('edit_tournament',{'tournamentId': tournament.id })}}">
-                    <div class="tournament_tile">
+                    <div class="tournament_tile {% if tournament.enabled %}enabled_tile{% else %}disabled_tile{% endif %}">
                         {{ tournament.name }}
                     </div>
                 </a>

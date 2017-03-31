@@ -19,3 +19,11 @@
     font-family: 'Roboto', sans-serif;
 }
 
+
+.enabled_tile{
+    background-color: #0080B2;
+}
+
+.disabled_tile{
+    background-color: #FF9A2A;
+}

@@ -41,6 +41,13 @@ class Team extends BaseEntity
      */
     private $tournament;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Tournament", inversedBy="teams",cascade={"all"})
+     * @ORM\JoinColumn(name="pool_id", referencedColumnName="id")
+     *
+     */
+    private $pool;
+
 
     /**
      * @return mixed
@@ -89,6 +96,24 @@ class Team extends BaseEntity
     {
         $this->tournament = $tournament;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPool()
+    {
+        return $this->pool;
+    }
+
+    /**
+     * @param mixed $pool
+     */
+    public function setPool($pool)
+    {
+        $this->pool = $pool;
+    }
+
+    
 
 
 

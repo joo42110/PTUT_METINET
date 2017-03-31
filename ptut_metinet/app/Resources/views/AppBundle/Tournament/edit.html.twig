@@ -9,10 +9,27 @@
             {{  form_row(form.name) }}
             {{  form_row(form.teamsNumber) }}
             {{  form_row(form.poolsNumber) }}
-            {{  form_row(form.teamsByPool) }}
         </div>
 
 
         {{ form_end(form) }}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script>
+
+        $(function(){
+
+            $("#tournament_poolsNumber").attr('type','number');
+            $("#tournament_teamsNumber").attr('type','number');
+
+        });
+
+
+    </script>
+
 {% endblock %}

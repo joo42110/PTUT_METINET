@@ -40,15 +40,7 @@ class TournamentType extends AbstractType
                 'class' => 'form-control'
             ),
         ));
-
-        $builder->add('teamsByPool',NumberType::class,array(
-            'label' => "Nombre d'équipes par poules",
-            'mapped' => false,
-            'required' => false,
-            'attr' => array(
-                'class' => 'form-control'
-            ),
-        ));
+        
 
 
         $builder->add('submit',SubmitType::class,array(
