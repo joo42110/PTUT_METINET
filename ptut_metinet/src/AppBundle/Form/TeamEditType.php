@@ -11,7 +11,6 @@ namespace AppBundle\Form;
 use AppBundle\Entity\Team;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -34,10 +33,6 @@ class TeamEditType extends AbstractType
             'allow_add' => true,
             'allow_delete' => true,
 
-        ));
-
-        $builder->add('save', SubmitType::class, array(
-            'attr' => array('class' => 'btn btn-primary'),
         ));
 
 

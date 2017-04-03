@@ -27,3 +27,33 @@
 .disabled_tile{
     background-color: #FF9A2A;
 }
+
+#modal-blackout{
+    position : absolute;
+    top : 0;
+    left : 0;
+    width : 100vw;
+    height : 100vh;
+    background-color : rgba(0,0,0,0.6);
+    display : none;
+}
+
+#modal-body{
+    position : absolute;
+    top : 10vh;
+    left : 20vw;
+    width : 60vw;
+    height : 80vh;
+    background-color : #ffffff;
+    border-radius : 20px;
+    z-index : 9001; /* To avoid Bootstrap icons to display over the modal body */
+    padding-left : 5%;
+    padding-right : 5%;
+    text-align : center;
+    overflow : auto;
+}
+
+div.btn-save{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}

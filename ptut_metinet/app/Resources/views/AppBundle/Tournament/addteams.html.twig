@@ -4,7 +4,7 @@
 
 {% block team_widget %}
 
-    <tr class="team-input">
+    <tr class="team-input" {% if form.vars.data.id is defined %}data-teamid="{{ form.vars.data.id }}"{% endif %}>
         <td>{{ form_widget(form.name) }}</td>
         <td>
             {% if form.vars.data.players is defined %}
@@ -16,7 +16,7 @@
         <td class="teams_actions">
 
             {% if form.vars.data.id is defined %}
-                <a class="btn btn-primary edit-button"  href="{{ path('edit_team',{'teamId': form.vars.data.id })}}"><span class="glyphicon glyphicon-edit"></span></a>
+                <div class="btn btn-primary edit-button"><span class="glyphicon glyphicon-edit"></span></div>
             {% endif %}
 
             <div class="btn btn-danger remove-button"><span class="glyphicon glyphicon-remove"></span></div>
@@ -26,6 +26,13 @@
 {% endblock %}
 
 {% block body %}
+
+
+    <div id="modal-blackout" class="modal"></div>
+    <div id="modal-body" class="modal">
+        <div id="modal-content"></div>
+        <div class="btn btn-primary btn-save">Valider</div>
+    </div>
 
     {{  form_start(form) }}
 
@@ -63,9 +70,14 @@
 
             addBtn.on('click',addTeam);
 
+            $('#modal-blackout').on('click',hideModal);
+            $('div.btn-save').on('click',sendForm);
+
             form.append(addBtn);
 
             bindRemoveButtons();
+
+            bindEditButtons();
 
         });
 
@@ -79,7 +91,22 @@
             var tableBody =  $(tableContainer.find('tbody'));
 
             tableBody.append(newTeamForm);
+
             bindRemoveButtons();
+            bindEditButtons();
+
+        }
+
+        function editTeam(e){
+            var formRow = $(e.target).parents('tr.team-input');
+            var teamId = formRow.attr('data-teamid');
+            $.ajax({
+                url : '{{ url('edit_team') }}' + '/' + teamId,
+                success : function(data,status){
+                    updateModalContent(data,teamId);
+                    showModal();
+                }
+            });
 
         }
 
@@ -94,6 +121,44 @@
                 $(this).on('click',removeTeam);
             })
         }
+
+        function bindEditButtons(){
+            $(".edit-button").each(function(){
+                $(this).on('click',editTeam);
+            })
+        }
+
+        function showModal(){
+            $('.modal').show();
+        }
+
+        function hideModal(){
+            $('.modal').hide();
+        }
+
+        function updateModalContent($content,teamId){
+            var modal = $("#modal-content");
+            modal.html($content);
+            modal.attr('data-teamid',teamId);
+        }
+
+        function sendForm(e){
+            var modal = $("#modal-content");
+            var formData = new FormData(modal.find('form')[0]);
+            var teamId = modal.attr('data-teamid');
+            $.ajax({
+                type: 'POST',
+                url : '{{ url('edit_team') }}' + '/' + teamId,
+                data : formData,
+                processData: false,
+                contentType: false,
+                success : function(data,status){
+                    hideModal();
+                }
+            });
+
+        }
+
 
     </script>
 

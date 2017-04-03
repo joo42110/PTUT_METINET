@@ -1,92 +1,75 @@
-{% extends 'base.html.twig' %}
 
-{% form_theme form _self %}
-
-{% block player_widget %}
-
-    <tr class="player-input">
-        <td>{{ form_widget(form.name) }}</td>
-        <td>{{ form_widget(form.firstname) }}</td>
-        <td>{{ form_widget(form.licenceNumber) }}</td>
-        <td class="remove-button"><div class="btn btn-danger remove-button"><span class="glyphicon glyphicon-remove"></span></div></td>
-    </tr>
-
-{% endblock %}
-
-{% block body %}
-    <h1>Edition de l'équipe {{ team.name }}</h1>
-
-    <div class="row">
-        {{  form_start(form) }}
-            <table id="players_formfields_container" data-prototype="{{ form_widget(form.players.vars.prototype)|e }}" class="table">
-                <thead>
-                <th>Nom du joueur</th>
-                <th>Prénom du joueur</th>
-                <th>Numéro de licence</th>
-                <th>Supprimer</th>
-                </thead>
-                <tbody>
-                {% for player in form.players %}
-                    {{ form_widget(player) }}
-                {% endfor %}
-                </tbody>
-
-            </table>
-        {{ form_end(form) }}
-    </div>
-{% endblock %}
-
-{% block javascripts %}
-
-    {{ parent() }}
-
-    <script>
-
-        var maxindex = 0;
-
-        $(function(){
-
-            var form = $('form');
-
-            maxindex = form.find('.player-input').length;
-
-            var addBtn = $('<button class="btn btn-secondary">Ajouter un joueur</button>');
-
-            addBtn.on('click',addPlayer);
-
-            form.append(addBtn);
-
-            bindRemoveButtons();
-
-        });
-
-        function addPlayer(e){
-            e.preventDefault();
-
-            var tableContainer =  $('table#players_formfields_container');
-            var prototype = tableContainer.attr('data-prototype');
-            var newPlayerForm = prototype.replace(/__index__/g,maxindex ++);
-
-            var tableBody =  $(tableContainer.find('tbody'));
-
-            tableBody.append(newPlayerForm);
-            bindRemoveButtons();
-
-        }
-
-        function removePlayer(e){
-            var button = $(e.target);
-            var formRow = button.parents('tr.player-input');
-            formRow.remove();
-        }
-
-        function bindRemoveButtons(){
-            $(".remove-button").each(function(){
-                $(this).on('click',removePlayer);
-            })
-        }
+{% form_theme form 'AppBundle/Team/playerfield.html.twig' %}
 
 
-    </script>
+<h1>Edition de l'équipe {{ team.name }}</h1>
 
-{% endblock %}
+<div class="row">
+
+    {{  form_start(form) }}
+        <table id="players_formfields_container" data-prototype="{{ form_widget(form.players.vars.prototype)|e }}" class="table">
+            <thead>
+            <th>Nom du joueur</th>
+            <th>Prénom du joueur</th>
+            <th>Numéro de licence</th>
+            <th>Supprimer</th>
+            </thead>
+            <tbody>
+            {% for player in form.players %}
+                {{ form_widget(player) }}
+            {% endfor %}
+            </tbody>
+
+        </table>
+    {{ form_end(form) }}
+</div>
+
+
+<script>
+
+    var maxindex = 0;
+
+    $(function(){
+
+        var form = $('form');
+
+        maxindex = form.find('.player-input').length;
+
+        var addBtn = $('<button class="btn btn-secondary">Ajouter un joueur</button>');
+
+        addBtn.on('click',addPlayer);
+
+        form.append(addBtn);
+
+        bindRemoveButtons();
+
+    });
+
+    function addPlayer(e){
+        e.preventDefault();
+
+        var tableContainer =  $('table#players_formfields_container');
+        var prototype = tableContainer.attr('data-prototype');
+        var newPlayerForm = prototype.replace(/__index__/g,maxindex ++);
+
+        var tableBody =  $(tableContainer.find('tbody'));
+
+        tableBody.append(newPlayerForm);
+        bindRemoveButtons();
+
+    }
+
+    function removePlayer(e){
+        var button = $(e.target);
+        var formRow = button.parents('tr.player-input');
+        formRow.remove();
+    }
+
+    function bindRemoveButtons(){
+        $(".remove-button").each(function(){
+            $(this).on('click',removePlayer);
+        })
+    }
+
+
+</script>

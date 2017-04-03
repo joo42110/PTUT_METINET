@@ -20,7 +20,7 @@ add_teams:
 
 edit_team:
     path:      /admin/editTeam/{teamId}
-    defaults:  { _controller: AppBundle:Team:edit }
+    defaults:  { _controller: AppBundle:Team:edit, teamId: null }
 
 organize_pools:
     path:      /admin/organizePools/{tournamentId}
