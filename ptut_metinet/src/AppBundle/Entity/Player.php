@@ -37,9 +37,11 @@ class Player extends BaseEntity
 
     /**
      * @ORM\ManyToOne(targetEntity="Team", inversedBy="players",cascade={"persist"})
-     * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="team_id", referencedColumnName="id",nullable=true, onDelete="SET NULL")
      */
     private $team;
+
+
 
     /**
      * Player constructor.
@@ -48,19 +50,20 @@ class Player extends BaseEntity
      * @param string $firstname
      * @param string $licenceNumber
      */
-    public function __construct(string $name,string $firstname,string $licenceNumber)
+   /* public function __construct(string $name=null,string $firstname=null,string $licenceNumber=null)
     {
         parent::__construct();
-        $this->licenceNumber = $licenceNumber;
+
         $this->name = $name;
-        $this->firstname = $firstname;
-    }
+        $this->name = $firstname;
+        $this->name = $licenceNumber;
+    }*/
 
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLicenceNumber():string
+    public function getLicenceNumber()
     {
         return $this->licenceNumber;
     }
@@ -74,9 +77,9 @@ class Player extends BaseEntity
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName():string
+    public function getName()
     {
         return $this->name;
     }
@@ -90,9 +93,9 @@ class Player extends BaseEntity
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFirstname():string
+    public function getFirstname()
     {
         return $this->firstname;
     }
@@ -120,6 +123,7 @@ class Player extends BaseEntity
     {
         $this->team = $team;
     }
+
 
     
 

@@ -137,6 +137,7 @@ class TournamentController extends Controller
 
         return $this->render('AppBundle/Tournament/addteams.html.twig', array(
             'form' => $form->createView(),
+            'tournament' => $tournament,
         ));
 
     }

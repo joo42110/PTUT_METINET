@@ -31,18 +31,18 @@ class Team extends BaseEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Player", mappedBy="team",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Player", mappedBy="team",cascade={"persist"},orphanRemoval=true)
      */
     private $players;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tournament", inversedBy="teams",cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Tournament", inversedBy="teams",cascade={"persist"})
      * @ORM\JoinColumn(name="tournament_id", referencedColumnName="id")
      */
     private $tournament;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tournament", inversedBy="teams",cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Pool", inversedBy="teams",cascade={"persist"})
      * @ORM\JoinColumn(name="pool_id", referencedColumnName="id")
      *
      */

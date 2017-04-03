@@ -9,6 +9,7 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Form\TeamEditType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +27,7 @@ class TeamController extends Controller
             throw $this->createNotFoundException("Cette équipe n'existe pas.");
         }
 
-        /*$form = $this->createForm(TournamentType::class, $team, array(
+        $form = $this->createForm(TeamEditType::class, $team, array(
             'method' => 'POST',
         ));
 
@@ -35,16 +36,23 @@ class TeamController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $tournament = $form->getData();
+            $team = $form->getData();
 
-            $em->persist($tournament);
+            // Doctrine is not injecting reference in the objects so we do it manually
+            foreach($team->getPlayers() as $player){
+                $player->setTeam($team);
+            }
+
+            $em->persist($team);
             $em->flush();
+
+            return($this->redirectToRoute('add_teams',array('tournamentId' => $team->getTournament()->getId())));
         }
 
-        return $this->render('AppBundle/Tournament/edit.html.twig', array(
+        return $this->render('AppBundle/Team/edit.html.twig', array(
             'form' => $form->createView(),
-        ));*/
+            'team' => $team,
+        ));
 
-        return new JsonResponse('Edition de la team '.$teamId);
     }
 }
