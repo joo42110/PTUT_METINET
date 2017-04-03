@@ -22,7 +22,9 @@ edit_team:
     path:      /admin/editTeam/{teamId}
     defaults:  { _controller: AppBundle:Team:edit }
 
-
+organize_pools:
+    path:      /admin/organizePools/{tournamentId}
+    defaults:  { _controller: AppBundle:Tournament:organizePools }
 
 #---------- Player ----------
 

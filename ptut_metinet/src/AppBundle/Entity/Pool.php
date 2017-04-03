@@ -32,6 +32,16 @@ class Pool extends BaseEntity
     private $teams;
 
     /**
+     * Pool constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->teams = new ArrayCollection();
+    }
+
+
+    /**
      * @return mixed
      */
     public function getTournament()
@@ -61,6 +71,10 @@ class Pool extends BaseEntity
     public function setTeams($teams)
     {
         $this->teams = $teams;
+    }
+
+    public function addTeam(Team $team){
+        $this->teams->add($team);
     }
 
 

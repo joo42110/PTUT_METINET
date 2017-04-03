@@ -9,11 +9,13 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Entity\Pool;
 use AppBundle\Entity\Tournament;
 use AppBundle\Form\AddTeamsType;
 use AppBundle\Form\TournamentType;
 use Doctrine\Common\Util\Debug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class TournamentController extends Controller
@@ -132,6 +134,8 @@ class TournamentController extends Controller
             $em->persist($tournament);
             $em->flush();
 
+            return($this->redirectToRoute('organize_pools',array('tournamentId' => $tournament->getId())));
+
             
         }
 
@@ -140,5 +144,36 @@ class TournamentController extends Controller
             'tournament' => $tournament,
         ));
 
+    }
+
+    public function organizePoolsAction($tournamentId){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $tournament =  $em->getRepository('AppBundle:Tournament')->findOneById($tournamentId);
+
+        if (!$tournament) {
+            throw $this->createNotFoundException("Ce tournoi n'existe pas.");
+        }
+
+        for($i=0;$i<$tournament->getPoolsNumber();$i++){
+            $tournament->getPools()->add(new Pool());
+        }
+
+        $teams = $tournament->getTeams();
+        $i = 0;
+        foreach($teams as $team){
+            $tournament->getPools()->get($i)->addTeam($team);
+            $i++;
+            if($i>=$tournament->getPools()->count()){
+                $i=0;
+            }
+        }
+
+        foreach($tournament->getPools() as $pool){
+            dump($pool->getTeams()->count());
+        }
+
+        return new JsonResponse('le zeub');
     }
 }
