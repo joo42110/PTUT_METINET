@@ -27,6 +27,7 @@
 
 {% block body %}
 
+    <h2>Edition du tournoi {{ tournament.name }}</h2>
 
     <div id="modal-blackout" class="modal"></div>
     <div id="modal-body" class="modal">
@@ -50,6 +51,7 @@
 
         </table>
     {{ form_end(form) }}
+    <button class="btn btn-default teamadd-btn"><span class="glyphicon glyphicon-plus"></span> Ajouter une équipe</button>
 
 {% endblock %}
 
@@ -66,14 +68,13 @@
 
             maxindex = form.find('.team-input').length;
 
-            var addBtn = $('<button class="btn btn-secondary">Ajouter une équipe</button>');
+            var addBtn = $('.teamadd-btn');
 
             addBtn.on('click',addTeam);
 
             $('#modal-blackout').on('click',hideModal);
             $('div.btn-save').on('click',sendForm);
 
-            form.append(addBtn);
 
             bindRemoveButtons();
 

@@ -2,10 +2,9 @@
 {% form_theme form 'AppBundle/Team/playerfield.html.twig' %}
 
 
-<h1>Edition de l'équipe {{ team.name }}</h1>
+<h2>Edition de l'équipe {{ team.name }}</h2>
 
 <div class="row">
-
     {{  form_start(form) }}
         <table id="players_formfields_container" data-prototype="{{ form_widget(form.players.vars.prototype)|e }}" class="table">
             <thead>
@@ -22,6 +21,7 @@
 
         </table>
     {{ form_end(form) }}
+    <div class="btn btn-default playeradd-btn"><span class="glyphicon glyphicon-plus"></span> Ajouter un joueur</div>
 </div>
 
 
@@ -35,11 +35,9 @@
 
         maxindex = form.find('.player-input').length;
 
-        var addBtn = $('<button class="btn btn-secondary">Ajouter un joueur</button>');
+        var addBtn = $('.playeradd-btn');
 
         addBtn.on('click',addPlayer);
-
-        form.append(addBtn);
 
         bindRemoveButtons();
 
