@@ -23,3 +23,9 @@ services:
         arguments: ["@app.csv_player_loader","@app.file_uploader"]
         tags:
             - { name: form.type }
+
+    user.form.type.user_type:
+        class: UserBundle\Form\UserType
+        arguments: ["@security.authorization_checker"]
+        tags:
+            - { name: form.type }

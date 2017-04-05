@@ -6,6 +6,21 @@ homepage:
     path:      /
     defaults:  { _controller: AppBundle:Tournament:list }
 
+signup:
+    path:      /signup
+    defaults:  { _controller: UserBundle:User:newUser }
+
+login:
+    path: /login
+    defaults: { _controller: UserBundle:Security:login }
+
+logout:
+    path: /logout
+
+user_edit:
+    path: /user/{userId}/edit
+    defaults: {_controller: UserBundle:User:editUser}
+
 create_tournament:
     path:      /admin/createTournament
     defaults:  { _controller: AppBundle:Tournament:create }

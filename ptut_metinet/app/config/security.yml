@@ -3,9 +3,23 @@
 security:
 
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    encoders:
+        UserBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 12
+
+
+    role_hierarchy:
+        ROLE_ADMIN:       [ROLE_USER]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+
     providers:
-        in_memory:
-            memory: ~
+        main:
+            entity:
+                class:    UserBundle\Entity\User
+                property: username
+
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -15,6 +29,17 @@ security:
 
         main:
             anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login
+            logout:
+                path:       logout
+                target:     /
+
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/user, roles: ROLE_USER }
+
             # activate different ways to authenticate
 
             # http_basic: ~

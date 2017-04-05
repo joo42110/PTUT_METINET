@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="user-form-container">
+        {% if error_msg|length > 0 %}
+            <div class="error-container alert alert-danger">
+                {% for error in error_msg %}
+                    {{ error.message  }} <br />
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {{ form_start(form, {'attr': {'role': 'form', 'id': 'user-create-form'} }) }}
+
+        <div class="form-group">
+            {{ form_widget(form.mail)  }}
+        </div>
+
+        <div class="form-group">
+            {{ form_widget(form.password.first)  }}
+            <div class="description">Utilisez au moins 6 caractères</div>
+            {{ form_widget(form.password.second)  }}
+        </div>
+
+        <div class="form-group">
+            {{ form_widget(form.lastname)  }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(form.firstname)  }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(form.phone)  }}
+        </div>
+
+
+
+        <div class="form-group text-center">
+            {{ form_widget(form.submit) }}
+        </div>
+
+
+        {{ form_widget(form._token) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

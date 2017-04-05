@@ -4,18 +4,18 @@
     <h1>Bienvenue sur notre page d'accueil</h1>
     <div class="row">
         <div class="tournament_list_wrapper">
-            {% for tournament in tournaments %}
+            {% for tournament in tournaments if tournament.enabled or is_granted('ROLE_SUPER_ADMIN') %}
                 <a href="{{ path('edit_tournament',{'tournamentId': tournament.id })}}">
                     <div class="tournament_tile {% if tournament.enabled %}enabled_tile{% else %}disabled_tile{% endif %}">
                         {{ tournament.name }}
                     </div>
                 </a>
             {% endfor %}
-            {% if true %}
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
 
                 <a href="{{ path('create_tournament')}}">
-                    <div class="tournament_tile">
-                        Ajouter un tournoi
+                    <div class="tournament_tile add-tile">
+                        <span class="glyphicon glyphicon-plus-sign"></span>
                     </div>
                 </a>
 

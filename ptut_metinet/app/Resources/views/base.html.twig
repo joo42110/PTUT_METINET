@@ -10,6 +10,38 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('homepage') }}">Foot.10</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                        <li><p class="navbar-text"><span class="glyphicon glyphicon-user"></span> {{ app.user.firstname }} {{ app.user.lastname }}</p></li>
+                        <li><button class="btn btn-default navbar-btn btn-logout">Se déconnecter</button></li>
+                    {% else %}
+                        <li><button class="btn btn-default navbar-btn btn-login">Se connecter</button></li>
+
+                        <li><button class="btn btn-primary navbar-btn btn-signin">S'inscrire</button></li>
+                    {% endif %}
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
         <div class="container">
             {% block body %}{% endblock %}
         </div>
@@ -17,6 +49,26 @@
         {% block javascripts %}
             <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
             <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+
+            <script>
+                /* Adding links to navbar buttons */
+                $(function(){
+                    console.log($('.btn-logout'));
+                    $('.btn-logout').on('click',function(){
+                        window.location = "{{ url('logout') }}";
+                    });
+
+                    $('.btn-login').on('click',function(){
+                        window.location = "{{ url('login') }}";
+                    });
+
+                    $('.btn-signin').on('click',function(){
+                        window.location = "{{ url('signup') }}";
+                    });
+                });
+
+
+            </script>
         {% endblock %}
 
     </body>

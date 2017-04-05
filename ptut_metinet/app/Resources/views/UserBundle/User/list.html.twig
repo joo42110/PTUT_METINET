@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/global.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+    <div id="header-bottom">
+        <div id="picture"></div>
+        <div id="title-wrapper" class="cojebox-backcolor">
+            <div id="title">
+                <h1>Mes campagnes</h1>
+                <div class="line"></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+{% endblock %}
+
+
+{% block body %}
+<div class="form-group">
+    <a class="btn btn-perso" href="{{ path('user_edit',{'id': app.user.id}) }}">Mon Compte</a>
+</div>
+<table class="table text-center list-table">
+    <thead>
+        <tr>
+            <th class="text-center">N°</th>
+            <th class="text-center">Nom</th>
+            <th class="text-center">Mail</th>
+            <th class="text-center">Téléphone</th>
+            <th class="text-center">Entreprise</th>
+            <th class="text-center">Inscrit depuis</th>
+            <th class="text-center">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.firstname|capitalize }} <b>{{ user.lastname|upper }}</b></td>
+            <td>{{ user.mail }}</td>
+            <td>{{ user.phone }}</td>
+            <td>{{ user.company }}</td>
+            <td>{{ user.created|date("d/m/Y") }}<br>
+            ({{ user.created|date("h : m A") }})</td>
+
+            <td>
+                <a class="btn btn-perso" href="{{ path('user_edit', {'id': user.id}) }}">Modifier</a>
+                <a class="btn btn-perso" href="{{ path('campaign_list_by_user', {'userId': user.id}) }}">Voir les
+                                                                                                     campagnes</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+
+
+
+{% endblock %}

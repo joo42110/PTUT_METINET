@@ -174,6 +174,6 @@ class TournamentController extends Controller
             dump($pool->getTeams()->count());
         }
 
-        return new JsonResponse('le zeub');
+        return new JsonResponse();
     }
 }
