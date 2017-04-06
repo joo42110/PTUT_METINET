@@ -21,7 +21,25 @@
 
         </table>
     {{ form_end(form) }}
-    <div class="btn btn-default playeradd-btn"><span class="glyphicon glyphicon-plus"></span> Ajouter un joueur</div>
+    <div class="bottom-btn-container">
+
+        <div class="col-md-6">
+            <div class="left-btn">
+                <div class="btn btn-success playeradd-btn"><span class="glyphicon glyphicon-plus"></span> Ajouter un joueur</div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+            <div class="right-btn">
+                <div class="btn btn-primary btn-save"><span class="glyphicon glyphicon-save"></span> Sauvegarder</div>
+            </div>
+        </div>
+
+    </div>
+
+
+
 </div>
 
 
@@ -38,6 +56,8 @@
         var addBtn = $('.playeradd-btn');
 
         addBtn.on('click',addPlayer);
+
+        $('div.btn-save').on('click',sendForm);
 
         bindRemoveButtons();
 
@@ -67,6 +87,23 @@
         $(".remove-button").each(function(){
             $(this).on('click',removePlayer);
         })
+    }
+
+    function sendForm(e){
+        var modal = $("#modal-content");
+        var formData = new FormData(modal.find('form')[0]);
+        var teamId = modal.attr('data-teamid');
+        $.ajax({
+            type: 'POST',
+            url : '{{ url('edit_team') }}' + '/' + teamId,
+            data : formData,
+            processData: false,
+            contentType: false,
+            success : function(data,status){
+                hideModal();
+            }
+        });
+
     }
 
 

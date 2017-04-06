@@ -32,7 +32,6 @@
     <div id="modal-blackout" class="modal"></div>
     <div id="modal-body" class="modal">
         <div id="modal-content"></div>
-        <div class="btn btn-primary btn-save">Valider</div>
     </div>
 
     {{  form_start(form) }}
@@ -50,8 +49,30 @@
             </tbody>
 
         </table>
+
+        <div class="bottom-btn-container">
+
+            <div class="col-md-4">
+                <div class="left-btn">
+                    <a class="btn btn-default" href="{{ url('edit_tournament',{'tournamentId':tournament.id}) }}"><span class="glyphicon glyphicon-chevron-left"></span> Précédent</a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="center-btn">
+                    <div class="btn btn-success teamadd-btn"><span class="glyphicon glyphicon-plus"></span> Ajouter une équipe</div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="right-btn">
+                    <button type="submit" class="btn btn-primary">Suivant <span class="glyphicon glyphicon-chevron-right"></span></button>
+                </div>
+            </div>
+
+        </div>
+
     {{ form_end(form) }}
-    <button class="btn btn-default teamadd-btn"><span class="glyphicon glyphicon-plus"></span> Ajouter une équipe</button>
 
 {% endblock %}
 
@@ -73,7 +94,6 @@
             addBtn.on('click',addTeam);
 
             $('#modal-blackout').on('click',hideModal);
-            $('div.btn-save').on('click',sendForm);
 
 
             bindRemoveButtons();
@@ -143,22 +163,7 @@
             modal.attr('data-teamid',teamId);
         }
 
-        function sendForm(e){
-            var modal = $("#modal-content");
-            var formData = new FormData(modal.find('form')[0]);
-            var teamId = modal.attr('data-teamid');
-            $.ajax({
-                type: 'POST',
-                url : '{{ url('edit_team') }}' + '/' + teamId,
-                data : formData,
-                processData: false,
-                contentType: false,
-                success : function(data,status){
-                    hideModal();
-                }
-            });
 
-        }
 
 
     </script>

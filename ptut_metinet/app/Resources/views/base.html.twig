@@ -28,7 +28,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                        <li><p class="navbar-text"><span class="glyphicon glyphicon-user"></span> {{ app.user.firstname }} {{ app.user.lastname }}</p></li>
+                        <a><p class="navbar-text"><a href="{{ url('user_edit',{'userId' : app.user.id}) }}"><span class="glyphicon glyphicon-user"></span>  {{ app.user.firstname }} {{ app.user.lastname }}</p></a></li>
                         <li><button class="btn btn-default navbar-btn btn-logout">Se déconnecter</button></li>
                     {% else %}
                         <li><button class="btn btn-default navbar-btn btn-login">Se connecter</button></li>

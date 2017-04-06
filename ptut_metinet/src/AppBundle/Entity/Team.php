@@ -37,7 +37,7 @@ class Team extends BaseEntity
 
     /**
      * @ORM\ManyToOne(targetEntity="Tournament", inversedBy="teams",cascade={"persist"})
-     * @ORM\JoinColumn(name="tournament_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="tournament_id", referencedColumnName="id",nullable=true, onDelete="SET NULL")
      */
     private $tournament;
 

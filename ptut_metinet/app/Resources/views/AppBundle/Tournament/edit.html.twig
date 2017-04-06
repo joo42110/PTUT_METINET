@@ -1,14 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Bienvenue sur le bon form</h1>
+    {% if tournament is defined %}
+        {% set page_title =  'Édition du tournoi ' ~ tournament.name %}
+    {% else %}
+        {% set page_title = "Création d'un nouveau tournoi" %}
+    {% endif %}
+
+    <h1>{{ page_title }}</h1>
 
     <div class="row">
-    {{  form_start(form) }}
+        {{  form_start(form) }}
         <div>
             {{  form_row(form.name) }}
             {{  form_row(form.teamsNumber) }}
             {{  form_row(form.poolsNumber) }}
+        </div>
+
+        <div class="bottom-btn-container">
+            <div class="right-btn">
+                <button type="submit" class="btn btn-primary">Suivant <span class="glyphicon glyphicon-chevron-right"></span></button>
+            </div>
         </div>
 
 

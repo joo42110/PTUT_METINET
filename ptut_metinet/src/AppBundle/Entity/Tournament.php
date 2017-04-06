@@ -47,7 +47,7 @@ class Tournament extends BaseEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Team", mappedBy="tournament",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Team", mappedBy="tournament",cascade={"persist"},orphanRemoval=true)
      */
     private $teams;
 

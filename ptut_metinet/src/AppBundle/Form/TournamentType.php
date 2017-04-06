@@ -40,14 +40,7 @@ class TournamentType extends AbstractType
                 'class' => 'form-control'
             ),
         ));
-        
 
-
-        $builder->add('submit',SubmitType::class,array(
-            'attr' => array(
-                'class' => 'btn btn-primary'
-            ),
-        ));
 
     }
 

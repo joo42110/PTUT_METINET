@@ -1,23 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link href="{{ asset('css/global.css') }}" rel="stylesheet" />
-{% endblock %}
-
-{% block header %}
-    {{ parent() }}
-    <div id="header-bottom">
-        <div id="picture"></div>
-        <div id="title-wrapper" class="cojebox-backcolor">
-            <div id="title">
-                <h1>Mes campagnes</h1>
-                <div class="line"></div>
-            </div>
-        </div>
-        <div class="clear"></div>
-    </div>
-{% endblock %}
 
 
 {% block body %}
@@ -56,9 +38,5 @@
     {% endfor %}
     </tbody>
 </table>
-
-
-
-
-
+    
 {% endblock %}

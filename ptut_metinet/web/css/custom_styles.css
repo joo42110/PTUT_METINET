@@ -1,4 +1,18 @@
+.bottom-btn-container{
+    margin-top : 20px;
+}
 
+.bottom-btn-container .left-btn{
+    text-align: left;
+}
+
+.bottom-btn-container .center-btn{
+    text-align: center;
+}
+
+.bottom-btn-container .right-btn{
+    text-align: right;
+}
 
 
 .tournament_list_wrapper{
@@ -57,9 +71,4 @@
     padding-right : 5%;
     text-align : center;
     overflow : auto;
-}
-
-div.btn-save{
-    margin-top: 10px;
-    margin-bottom: 20px;
 }

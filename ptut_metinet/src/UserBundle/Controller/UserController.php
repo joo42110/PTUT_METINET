@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $users = $em->getRepository('UserBundle:User')->findBy(array(), array('id' => 'desc'));
+        $users = $em->getRepository('UserBundle:User')->findBy(array(), array('created' => 'desc'));
 
         return $this->render('UserBundle:User:list.html.twig', array(
             'users' => $users
