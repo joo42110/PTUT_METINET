@@ -1,16 +1,12 @@
 <?php
 namespace UserBundle\Controller;
 
-use AppBundle\Entity\GalleryImage;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Form\GalleryImageType;
-use UserBundle\Form\PasswordChangeType;
-use UserBundle\Form\PasswordResetType;
 use UserBundle\Form\UserType;
 use UserBundle\Entity\User;
-use AppBundle\Entity\Campaign;
 use \Doctrine\Common\Util\Debug;
 
 class UserController extends Controller
@@ -22,7 +18,7 @@ class UserController extends Controller
 
         $users = $em->getRepository('UserBundle:User')->findBy(array(), array('created' => 'desc'));
 
-        return $this->render('UserBundle:User:list.html.twig', array(
+        return $this->render('UserBundle/User/list.html.twig', array(
             'users' => $users
         ));
     }

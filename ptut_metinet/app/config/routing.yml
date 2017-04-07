@@ -21,6 +21,10 @@ user_edit:
     path: /user/{userId}/edit
     defaults: {_controller: UserBundle:User:editUser}
 
+user_list:
+    path: /admin/users
+    defaults: {_controller: UserBundle:User:listUser}
+
 create_tournament:
     path:      /admin/createTournament
     defaults:  { _controller: AppBundle:Tournament:create }

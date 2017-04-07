@@ -24,8 +24,15 @@ services:
         tags:
             - { name: form.type }
 
-    user.form.type.user_type:
+    user.form.user_type:
         class: UserBundle\Form\UserType
         arguments: ["@security.authorization_checker"]
         tags:
             - { name: form.type }
+
+
+    user.form.user_roles_type:
+            class: UserBundle\Form\UserRolesType
+            arguments: ["@security.authorization_checker"]
+            tags:
+                - { name: form.type }

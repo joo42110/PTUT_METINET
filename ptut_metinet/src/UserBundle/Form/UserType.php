@@ -8,10 +8,8 @@
 
 namespace UserBundle\Form;
 
-use AppBundle\Entity\Cojebox;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -26,7 +24,7 @@ use Symfony\Component\Form\FormEvents;
 use UserBundle\Entity\User;
 use Doctrine\Common\Util\Debug;
 
-class UserType extends AbstractType
+class UserRolesType extends AbstractType
 {
     private $authorizationChecker;
  
