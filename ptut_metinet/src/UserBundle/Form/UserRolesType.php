@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use UserBundle\Entity\User;
 
-class UserType extends AbstractType
+class UserRolesType extends AbstractType
 {
     private $authorizationChecker;
  

@@ -24,7 +24,7 @@ use Symfony\Component\Form\FormEvents;
 use UserBundle\Entity\User;
 use Doctrine\Common\Util\Debug;
 
-class UserRolesType extends AbstractType
+class UserType extends AbstractType
 {
     private $authorizationChecker;
  
