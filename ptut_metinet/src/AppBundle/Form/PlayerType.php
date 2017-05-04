@@ -39,7 +39,14 @@ class PlayerType extends AbstractType
         ));
 
         $builder->add('licenceNumber', TextType::class, array(
-            'label' => "Nom de l'équipe",
+        'label' => "Nom de l'équipe",
+        'attr' => array(
+            'class' => 'form-control'
+        ),
+    ));
+
+        $builder->add('category', TextType::class, array(
+            'label' => "Catégorie",
             'attr' => array(
                 'class' => 'form-control'
             ),

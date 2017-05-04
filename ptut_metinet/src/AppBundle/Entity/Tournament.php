@@ -11,7 +11,9 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity
@@ -57,6 +59,11 @@ class Tournament extends BaseEntity
      * @ORM\OneToMany(targetEntity="Pool", mappedBy="tournament",cascade={"persist"})
      */
     private $pools;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $teamsOutOfPools;
 
     
     /**
@@ -164,6 +171,25 @@ class Tournament extends BaseEntity
     {
         $this->pools = $pools;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTeamsOutOfPools()
+    {
+        return $this->teamsOutOfPools;
+    }
+
+    /**
+     * @param mixed $teamsOutOfPools
+     */
+    public function setTeamsOutOfPools($teamsOutOfPools)
+    {
+        $this->teamsOutOfPools = $teamsOutOfPools;
+    }
+
+
+
 
 
     

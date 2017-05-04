@@ -49,6 +49,7 @@ class CsvPlayerLoader
                 $player->setName($data[0]);
                 $player->setFirstname($data[1]);
                 $player->setLicenceNumber($data[2]);
+                $player->setCategory($data[3]);
 
                 $collection->add($player);
 

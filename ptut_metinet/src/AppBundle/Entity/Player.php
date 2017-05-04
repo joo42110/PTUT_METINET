@@ -34,6 +34,10 @@ class Player extends BaseEntity
      */
     private $firstname;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $category;
 
     /**
      * @ORM\ManyToOne(targetEntity="Team", inversedBy="players",cascade={"persist"})
@@ -123,6 +127,25 @@ class Player extends BaseEntity
     {
         $this->team = $team;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+    }
+
+
+
 
 
 
