@@ -175,6 +175,7 @@ class TournamentController extends Controller
             dump($pool->getTeams()->count());
         }
 
-        return new JsonResponse();
+        return $this->render('AppBundle/Tournament/organizepools.html.twig', array(
+        ));
     }
 }
