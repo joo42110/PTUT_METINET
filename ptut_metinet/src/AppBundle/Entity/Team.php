@@ -48,6 +48,12 @@ class Team extends BaseEntity
      */
     private $pool;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Match", mappedBy="teams",cascade={"persist"},orphanRemoval=true)
+     */
+    private $matches;
 
     /**
      * @return mixed

@@ -8,8 +8,23 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
-class Match
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="match")
+ */
+class Match extends BaseEntity
 {
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Team", mappedBy="matches",cascade={"persist"},orphanRemoval=true)
+     * @ORM\JoinTable(name="matches_teams")
+     */
+    private $teams;
+
 
 }

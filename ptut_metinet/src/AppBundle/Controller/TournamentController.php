@@ -176,6 +176,7 @@ class TournamentController extends Controller
         }
 
         return $this->render('AppBundle/Tournament/organizepools.html.twig', array(
+            'tournament' => $tournament
         ));
     }
 }
