@@ -2,10 +2,9 @@
 {% form_theme form 'AppBundle/Team/playerfield.html.twig' %}
 
 
-<h2>Edition de l'équipe {{ team.name }}</h2>
-
 <div class="row">
-    {{  form_start(form) }}
+    <div class="col-md-12">
+        {{  form_start(form) }}
         <table id="players_formfields_container" data-prototype="{{ form_widget(form.players.vars.prototype)|e }}" class="table">
             <thead>
             <th>Nom du joueur</th>
@@ -21,26 +20,19 @@
             </tbody>
 
         </table>
-    {{ form_end(form) }}
-    <div class="bottom-btn-container">
+        {{ form_end(form) }}
+    </div>
 
-        <div class="col-md-6">
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="bottom-btn-container">
             <div class="left-btn">
                 <div class="btn btn-success playeradd-btn"><span class="glyphicon glyphicon-plus"></span> Ajouter un joueur</div>
             </div>
         </div>
-
-
-        <div class="col-md-6">
-            <div class="right-btn">
-                <div class="btn btn-primary btn-save"><span class="glyphicon glyphicon-save"></span> Sauvegarder</div>
-            </div>
-        </div>
-
     </div>
-
-
-
 </div>
 
 

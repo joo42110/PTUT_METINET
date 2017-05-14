@@ -29,10 +29,22 @@
 
     <h2>Edition du tournoi {{ tournament.name }}</h2>
 
-    <div id="modal-blackout" class="modal"></div>
-    <div id="modal-body" class="modal">
-        <div id="modal-content"></div>
+    <div class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary btn-save-modal"><span class="glyphicon glyphicon-save"></span> Sauvegarder</button>
+                </div>
+            </div>
+        </div>
     </div>
+
 
     {{  form_start(form) }}
 
@@ -82,6 +94,8 @@
 
     <script>
 
+        var modal = $('.modal');
+
         var maxindex = 0;
 
         $(function(){
@@ -93,8 +107,7 @@
 
             addBtn.on('click',addTeam);
 
-            $('#modal-blackout').on('click',hideModal);
-
+            modal.find('.btn-save-modal').on('click',sendModalForm);
 
             bindRemoveButtons();
 
@@ -106,7 +119,7 @@
             e.preventDefault();
 
             var tableContainer =  $('table#teams_formfields_container');
-            var prototype = tableContainer.attr('data-prototype');
+            var prototype = tableContainer.data('prototype');
             var newTeamForm = prototype.replace(/__index__/g,maxindex ++);
 
             var tableBody =  $(tableContainer.find('tbody'));
@@ -120,12 +133,12 @@
 
         function editTeam(e){
             var formRow = $(e.target).parents('tr.team-input');
-            var teamId = formRow.attr('data-teamid');
+            var teamId = formRow.data('teamid');
             $.ajax({
                 url : '{{ url('edit_team') }}' + '/' + teamId,
-                success : function(data,status){
+                success : function(data){
                     updateModalContent(data,teamId);
-                    showModal();
+                    modal.modal('show');
                 }
             });
 
@@ -149,20 +162,27 @@
             })
         }
 
-        function showModal(){
-            $('.modal').show();
+        function updateModalContent(content,teamId){
+            modal.find('.modal-title').html(content.title);
+            modal.find('.modal-body').html(content.content);
+            modal.data('teamid',teamId);
         }
 
-        function hideModal(){
-            $('.modal').hide();
-        }
+        function sendModalForm(e){
+            var formData = new FormData(modal.find('form')[0]);
+            var teamId = modal.data('teamid');
+            $.ajax({
+                type: 'POST',
+                url : '{{ url('edit_team') }}' + '/' + teamId,
+                data : formData,
+                processData: false,
+                contentType: false,
+                success : function(){
+                    modal.modal('hide');
+                }
+            });
 
-        function updateModalContent($content,teamId){
-            var modal = $("#modal-content");
-            modal.html($content);
-            modal.attr('data-teamid',teamId);
         }
-
 
     </script>
 

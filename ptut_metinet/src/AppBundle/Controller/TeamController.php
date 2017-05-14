@@ -49,10 +49,15 @@ class TeamController extends Controller
             return($this->redirectToRoute('add_teams',array('tournamentId' => $team->getTournament()->getId())));
         }
 
-        return new JsonResponse($this->render('AppBundle/Team/edit.html.twig', array(
-            'form' => $form->createView(),
-            'team' => $team,
-        ))->getContent());
+        $responseContent = array(
+            'title' => "Edition de l'équipe " . $team->getName(),
+            'content' => $this->render('AppBundle/Team/edit.html.twig', array(
+                'form' => $form->createView(),
+                'team' => $team,
+            ))->getContent(),
+        );
+
+        return new JsonResponse($responseContent);
 
 
 
