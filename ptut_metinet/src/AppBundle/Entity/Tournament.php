@@ -65,6 +65,10 @@ class Tournament extends BaseEntity
      */
     private $teamsOutOfPools;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Match", mappedBy="tournament")
+     */
+
     
     /**
      * Tournament constructor.

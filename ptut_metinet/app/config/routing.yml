@@ -45,73 +45,9 @@ organize_pools:
     path:      /admin/organizePools/{tournamentId}
     defaults:  { _controller: AppBundle:Tournament:organizePools }
 
-#---------- Player ----------
+view_match:
+    path:      /match/{matchId}
+    defaults:  { _controller: AppBundle:Match:view }
 
-list_player:
-    path:      /player/
-    defaults:  { _controller: AppBundle:Default:debug }
-
-get_player:
-    path:      /player/{id}
-    defaults:  { _controller: AppBundle:Default:debug }
-
-create_player:
-    path:      /player/create
-    defaults:  { _controller: AppBundle:Default:debug }
-
-update_player:
-    path:      /player/{id}/update
-    defaults:  { _controller: AppBundle:Default:debug }
-
-delete_player:
-    path:      /player/{id}/delete
-    defaults:  { _controller: AppBundle:Default:debug }
-
-
-
-#---------- Team ----------
-
-list_team:
-    path:      /team/
-    defaults:  { _controller: AppBundle:Default:debug }
-
-get_team:
-    path:      /team/{id}
-    defaults:  { _controller: AppBundle:Default:debug }
-
-create_team:
-    path:      /team/create
-    defaults:  { _controller: AppBundle:Default:debug }
-
-update_team:
-    path:      /team/{id}/update
-    defaults:  { _controller: AppBundle:Default:debug }
-
-delete_team:
-    path:      /team/{id}/delete
-    defaults:  { _controller: AppBundle:Default:debug }
-
-
-#---------- Pool ----------
-
-list_pool:
-    path:      /pool/
-    defaults:  { _controller: AppBundle:Default:debug }
-
-get_pool:
-    path:      /pool/{id}
-    defaults:  { _controller: AppBundle:Default:debug }
-
-create_pool:
-    path:      /pool/create
-    defaults:  { _controller: AppBundle:Default:debug }
-
-update_pool:
-    path:      /pool/{id}/update
-    defaults:  { _controller: AppBundle:Default:debug }
-
-delete_pool:
-    path:      /pool/{id}/delete
-    defaults:  { _controller: AppBundle:Default:debug }
 
 

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/match_view.css') }}"/>
+{% endblock %}
+
+{% block body %}
+
+    {{ dump(match) }}
+
+    <h2>{{ match.tournament.name }}</h2>
+
+    <div class=row">
+        {% for team in match.teams %}
+            <div class="col-md-6">
+                <div class="team-container" data-id="{{ team.id }}">
+                    <span class="team-name">{{ team.name }}</span>
+                    <div class="score-container">
+                        {{ dump(team) }}
+                    </div>
+                    <div class="player-list-container">
+                        <table class="table player-list">
+
+                            <thead>
+                                <tr>
+                                    <th>Joueurs</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for player in team.players %}
+                                <tr>
+                                    <td>{{ player.firstname }} <b>{{ player.name }}</b></td>
+                                </tr>
+
+                                {% endfor %}
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}
