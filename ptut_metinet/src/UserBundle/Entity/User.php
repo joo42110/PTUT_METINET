@@ -6,9 +6,6 @@ use AppBundle\Entity\Match;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use AppBundle\Entity\Campaign;
-use AppBundle\Entity\Cojebox;
-use UserBundle\Entity\PasswordResetToken;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -88,7 +85,7 @@ class User extends BaseEntity implements UserInterface, \Serializable
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Match", mappedBy="referee")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Match", mappedBy="referee")
      */
     private $arbitratedMatches;
 

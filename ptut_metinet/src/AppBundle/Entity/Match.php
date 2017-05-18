@@ -10,7 +10,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use UserBundle\Entity\User as User;
+use UserBundle\Entity\User;
 
 /**
  * @ORM\Entity
@@ -54,7 +54,7 @@ class Match extends BaseEntity
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="arbitratedMatches",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="arbitratedMatches",cascade={"persist"})
      * @ORM\JoinColumn(name="referee_id",referencedColumnName="id")
      */
     private $referee;
