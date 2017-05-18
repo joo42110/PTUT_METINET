@@ -2,6 +2,7 @@
 
 namespace UserBundle\Entity;
 
+use AppBundle\Entity\Match;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -82,6 +83,14 @@ class User extends BaseEntity implements UserInterface, \Serializable
      * @ORM\Column(name="roles", type="array")
      */
     private $roles = array();
+
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Match", mappedBy="referee")
+     */
+    private $arbitratedMatches;
 
 
     /**

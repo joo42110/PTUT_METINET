@@ -10,6 +10,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use UserBundle\Entity\User as User;
 
 /**
  * @ORM\Entity
@@ -33,6 +34,33 @@ class Match extends BaseEntity
      * @ORM\JoinColumn(name="tournament_id",referencedColumnName="id")
      */
     private $tournament;
+
+    /**
+     * @var Round
+     *
+     * @ORM\ManyToOne(targetEntity="Round", inversedBy="matches",cascade={"persist"})
+     * @ORM\JoinColumn(name="round_id",referencedColumnName="id")
+     */
+    private $round;
+
+    /**
+     * @var Field
+     *
+     * @ORM\ManyToOne(targetEntity="Field", inversedBy="matches",cascade={"persist"})
+     * @ORM\JoinColumn(name="field_id",referencedColumnName="id")
+     */
+    private $field;
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="arbitratedMatches",cascade={"persist"})
+     * @ORM\JoinColumn(name="referee_id",referencedColumnName="id")
+     */
+    private $referee;
+
+
+
 
     public function addTeam(Team $team){
         $this->teams->add($team);
@@ -66,7 +94,59 @@ class Match extends BaseEntity
         $this->tournament = $tournament;
     }
 
-    
+    /**
+     * @return Round
+     */
+    public function getRound(): Round
+    {
+        return $this->round;
+    }
+
+    /**
+     * @param Round $round
+     */
+    public function setRound(Round $round)
+    {
+        $this->round = $round;
+    }
+
+    /**
+     * @return Field
+     */
+    public function getField(): Field
+    {
+        return $this->field;
+    }
+
+    /**
+     * @param Field $field
+     */
+    public function setField(Field $field)
+    {
+        $this->field = $field;
+    }
+
+    /**
+     * @return User
+     */
+    public function getReferee(): User
+    {
+        return $this->referee;
+    }
+
+    /**
+     * @param User $referee
+     */
+    public function setReferee(User $referee)
+    {
+        $this->referee = $referee;
+    }
+
+
+
+
+
+
 
 
 

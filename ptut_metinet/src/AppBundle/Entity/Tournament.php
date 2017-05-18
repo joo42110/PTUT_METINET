@@ -68,6 +68,15 @@ class Tournament extends BaseEntity
     /**
      * @ORM\OneToMany(targetEntity="Match", mappedBy="tournament")
      */
+    private $matches;
+
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Round", mappedBy="tournament")
+     */
+    private $rounds;
 
     
     /**
@@ -190,6 +199,38 @@ class Tournament extends BaseEntity
     public function setTeamsOutOfPools($teamsOutOfPools)
     {
         $this->teamsOutOfPools = $teamsOutOfPools;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMatches()
+    {
+        return $this->matches;
+    }
+
+    /**
+     * @param mixed $matches
+     */
+    public function setMatches($matches)
+    {
+        $this->matches = $matches;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getRounds(): ArrayCollection
+    {
+        return $this->rounds;
+    }
+
+    /**
+     * @param ArrayCollection $rounds
+     */
+    public function setRounds(ArrayCollection $rounds)
+    {
+        $this->rounds = $rounds;
     }
 
 
