@@ -1,3 +1,9 @@
+body{
+    /* Thème sombre pour bosser dans le noir  */
+    background-color: #2F303D;
+    color: #D3DBC5;
+}
+
 .bottom-btn-container{
     margin-top : 20px;
 }

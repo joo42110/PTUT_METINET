@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Pool;
 use AppBundle\Entity\Tournament;
+use AppBundle\Form\AddFieldsType;
 use AppBundle\Form\AddTeamsType;
 use AppBundle\Form\TournamentType;
 use Doctrine\Common\Util\Debug;
@@ -118,8 +119,6 @@ class TournamentController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $tournament = $form->getData();
-
             // Doctrine is not injecting reference in the objects so we do it manually
             foreach($tournament->getTeams() as $team){
                 $team->setTournament($tournament);
@@ -157,7 +156,7 @@ class TournamentController extends Controller
             throw $this->createNotFoundException("Ce tournoi n'existe pas.");
         }
 
-        $form = $this->createForm(AddTeamsType::class, $tournament, array(
+        $form = $this->createForm(AddFieldsType::class, $tournament, array(
             'method' => 'POST',
         ));
 
@@ -166,16 +165,9 @@ class TournamentController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $tournament = $form->getData();
-
             // Doctrine is not injecting reference in the objects so we do it manually
-            foreach($tournament->getTeams() as $team){
-                $team->setTournament($tournament);
-                if($team->getPlayers() !== null){
-                    foreach($team->getPlayers() as $player){
-                        $player->setTeam($team);
-                    }
-                }
+            foreach($tournament->getFields() as $field){
+                $field->setTournament($tournament);
 
             }
 
@@ -183,12 +175,12 @@ class TournamentController extends Controller
             $em->persist($tournament);
             $em->flush();
 
-            return($this->redirectToRoute('organize_pools',array('tournamentId' => $tournament->getId())));
+            return($this->redirectToRoute('validate_tournament',array('tournamentId' => $tournament->getId())));
 
 
         }
 
-        return $this->render('AppBundle/Tournament/addteams.html.twig', array(
+        return $this->render('AppBundle/Tournament/addfields.html.twig', array(
             'form' => $form->createView(),
             'tournament' => $tournament,
         ));

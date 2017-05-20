@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form _self %}
+
+{% block field_widget %}
+
+    <tr class="field-input">
+        <td>{{ form_widget(form.name) }}</td>
+        <td>
+            <div class="btn btn-danger remove-button"><span class="glyphicon glyphicon-remove"></span></div>
+        </td>
+    </tr>
+
+{% endblock %}
+
+{% block body %}
+
+    <h2>Edition du tournoi {{ tournament.name }}</h2>
+
+
+    {{  form_start(form) }}
+
+    <table id="fields_formfields_container" data-prototype="{{ form_widget(form.fields.vars.prototype)|e }}" class="table">
+        <thead>
+        <th>Intitulé du terrain</th>
+        <th>Supprimer</th>
+        </thead>
+        <tbody>
+        {% for field in form.fields %}
+            {{ form_widget(field) }}
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+    <div class="bottom-btn-container">
+
+        <div class="col-md-4">
+            <div class="left-btn">
+                <a class="btn btn-default" href="{{ url('add_teams',{'tournamentId':tournament.id}) }}"><span class="glyphicon glyphicon-chevron-left"></span> Précédent</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="center-btn">
+                <div class="btn btn-success fieldadd-btn"><span class="glyphicon glyphicon-plus"></span> Ajouter un terrain</div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="right-btn">
+                <button type="submit" class="btn btn-primary">Suivant <span class="glyphicon glyphicon-chevron-right"></span></button>
+            </div>
+        </div>
+
+    </div>
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script>
+
+
+        var maxindex = 0;
+
+        $(function(){
+            var form = $('form');
+
+            maxindex = form.find('.field-input').length;
+
+            var addBtn = $('.fieldadd-btn');
+
+            addBtn.on('click',addField);
+
+            bindRemoveButtons();
+
+        });
+
+        function addField(e){
+            e.preventDefault();
+
+            var tableContainer =  $('table#fields_formfields_container');
+            var prototype = tableContainer.data('prototype');
+            var newFieldForm = prototype.replace(/__index__/g,maxindex ++);
+
+            var tableBody =  $(tableContainer.find('tbody'));
+
+            tableBody.append(newFieldForm);
+
+            bindRemoveButtons();
+
+        }
+
+        function removeField(e){
+            var button = $(e.target);
+            var formRow = button.parents('tr.field-input');
+            formRow.remove();
+        }
+
+        function bindRemoveButtons(){
+            $(".remove-button").each(function(){
+                $(this).on('click',removeField);
+            })
+        }
+
+
+    </script>
+
+{% endblock %}

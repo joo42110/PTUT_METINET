@@ -15,14 +15,14 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
-class AddTeamsType extends AbstractType
+class AddFieldsType extends AbstractType
 {
 
     public function buildForm(FormBuilderInterface $builder,array $options)
     {
 
-        $builder->add('teams', CollectionType::class, array(
-            'entry_type'   => TeamType::class,
+        $builder->add('fields', CollectionType::class, array(
+            'entry_type'   => FieldType::class,
             'prototype_name' => "__index__",
             'entry_options'  => array(
                 'label' => false,

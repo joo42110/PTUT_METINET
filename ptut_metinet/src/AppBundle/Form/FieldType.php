@@ -3,33 +3,30 @@
  * Created by PhpStorm.
  * User: lp
  * Date: 27/03/2017
- * Time: 11:07
+ * Time: 09:56
  */
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\Tournament;
+
+use AppBundle\Entity\Field;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
-class AddTeamsType extends AbstractType
+class FieldType extends AbstractType
 {
 
     public function buildForm(FormBuilderInterface $builder,array $options)
     {
 
-        $builder->add('teams', CollectionType::class, array(
-            'entry_type'   => TeamType::class,
-            'prototype_name' => "__index__",
-            'entry_options'  => array(
-                'label' => false,
+        $builder->add('name', TextType::class, array(
+            'label' => "Intitulé du terrain",
+            'attr' => array(
+                'class' => 'form-control'
             ),
-            'allow_add' => true,
-            'allow_delete' => true,
-
         ));
 
     }
@@ -37,7 +34,7 @@ class AddTeamsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Tournament::class,
+            'data_class' => Field::class,
         ));
     }
 

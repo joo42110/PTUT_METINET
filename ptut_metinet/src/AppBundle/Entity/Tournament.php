@@ -78,6 +78,13 @@ class Tournament extends BaseEntity
      */
     private $rounds;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Field", mappedBy="tournament",cascade={"persist"})
+     */
+    private $fields;
+
     
     /**
      * Tournament constructor.
@@ -232,6 +239,23 @@ class Tournament extends BaseEntity
     {
         $this->rounds = $rounds;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getFields()
+    {
+        return $this->fields;
+    }
+
+    /**
+     * @param ArrayCollection $fields
+     */
+    public function setFields(ArrayCollection $fields)
+    {
+        $this->fields = $fields;
+    }
+
 
 
 

@@ -34,9 +34,19 @@ class Field extends BaseEntity
     private $matches;
 
     /**
+     * @var Tournament
+     *
+     * @ORM\ManyToOne(targetEntity="Tournament", inversedBy="fields",cascade={"persist"})
+     * @ORM\JoinColumn(name="tournament_id",referencedColumnName="id")
+     */
+    private $tournament;
+
+    /**
+
+    /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -52,7 +62,7 @@ class Field extends BaseEntity
     /**
      * @return ArrayCollection
      */
-    public function getMatches(): ArrayCollection
+    public function getMatches()
     {
         return $this->matches;
     }
@@ -64,6 +74,23 @@ class Field extends BaseEntity
     {
         $this->matches = $matches;
     }
+
+    /**
+     * @return Tournament
+     */
+    public function getTournament()
+    {
+        return $this->tournament;
+    }
+
+    /**
+     * @param Tournament $tournament
+     */
+    public function setTournament(Tournament $tournament)
+    {
+        $this->tournament = $tournament;
+    }
+
 
 
 }
