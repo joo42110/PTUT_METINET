@@ -50,8 +50,6 @@
 
         addBtn.on('click',addPlayer);
 
-        $('div.btn-save').on('click',sendForm);
-
         bindRemoveButtons();
 
     });
@@ -82,22 +80,7 @@
         })
     }
 
-    function sendForm(e){
-        var modal = $("#modal-content");
-        var formData = new FormData(modal.find('form')[0]);
-        var teamId = modal.attr('data-teamid');
-        $.ajax({
-            type: 'POST',
-            url : '{{ url('edit_team') }}' + '/' + teamId,
-            data : formData,
-            processData: false,
-            contentType: false,
-            success : function(data,status){
-                hideModal();
-            }
-        });
 
-    }
 
 
 </script>

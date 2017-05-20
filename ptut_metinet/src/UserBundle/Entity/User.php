@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * User
  *
  * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
+ * @ORM\Entity()
  * @UniqueEntity(fields="mail", message="Cet adresse email est déjà utilisée")
  */
 class User extends BaseEntity implements UserInterface, \Serializable
@@ -68,7 +68,7 @@ class User extends BaseEntity implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=255)
+     * @ORM\Column(name="phone", type="string", nullable=true)
      *
      */
     private $phone;

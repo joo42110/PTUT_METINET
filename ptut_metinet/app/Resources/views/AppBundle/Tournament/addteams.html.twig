@@ -135,7 +135,8 @@
             var formRow = $(e.target).parents('tr.team-input');
             var teamId = formRow.data('teamid');
             $.ajax({
-                url : '{{ url('edit_team') }}' + '/' + teamId,
+                type: 'GET',
+                url : '{{ url('edit_team', {"teamId": "__id__"}) }}'.replace('__id__', teamId),
                 success : function(data){
                     updateModalContent(data,teamId);
                     modal.modal('show');
@@ -173,7 +174,7 @@
             var teamId = modal.data('teamid');
             $.ajax({
                 type: 'POST',
-                url : '{{ url('edit_team') }}' + '/' + teamId,
+                url : '{{ url('edit_team', {"teamId": "__id__"}) }}'.replace('__id__', teamId),
                 data : formData,
                 processData: false,
                 contentType: false,

@@ -25,7 +25,7 @@ class TournamentController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $tournaments = $em->getRepository('AppBundle:Tournament')->findAll();
+        $tournaments = $em->getRepository(Tournament::class)->findAll();
 
 
         return $this->render('AppBundle/Tournament/list.html.twig', array(
@@ -68,7 +68,7 @@ class TournamentController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $tournament =  $em->getRepository('AppBundle:Tournament')->findOneById($tournamentId);
+        $tournament =  $em->getRepository(Tournament::class)->findOneById($tournamentId);
 
         if (!$tournament) {
             throw $this->createNotFoundException("Ce tournoi n'existe pas.");
@@ -103,7 +103,55 @@ class TournamentController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $tournament =  $em->getRepository('AppBundle:Tournament')->findOneById($tournamentId);
+        $tournament =  $em->getRepository(Tournament::class)->findOneById($tournamentId);
+
+        if (!$tournament) {
+            throw $this->createNotFoundException("Ce tournoi n'existe pas.");
+        }
+
+        $form = $this->createForm(AddTeamsType::class, $tournament, array(
+            'method' => 'POST',
+        ));
+
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $tournament = $form->getData();
+
+            // Doctrine is not injecting reference in the objects so we do it manually
+            foreach($tournament->getTeams() as $team){
+                $team->setTournament($tournament);
+                if($team->getPlayers() !== null){
+                    foreach($team->getPlayers() as $player){
+                        $player->setTeam($team);
+                    }
+                }
+
+            }
+
+
+            $em->persist($tournament);
+            $em->flush();
+
+            return($this->redirectToRoute('add_fields',array('tournamentId' => $tournament->getId())));
+
+            
+        }
+
+        return $this->render('AppBundle/Tournament/addteams.html.twig', array(
+            'form' => $form->createView(),
+            'tournament' => $tournament,
+        ));
+
+    }
+
+    public function addFieldsAction(Request $request,$tournamentId){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $tournament =  $em->getRepository(Tournament::class)->findOneById($tournamentId);
 
         if (!$tournament) {
             throw $this->createNotFoundException("Ce tournoi n'existe pas.");
@@ -137,7 +185,7 @@ class TournamentController extends Controller
 
             return($this->redirectToRoute('organize_pools',array('tournamentId' => $tournament->getId())));
 
-            
+
         }
 
         return $this->render('AppBundle/Tournament/addteams.html.twig', array(
@@ -147,11 +195,11 @@ class TournamentController extends Controller
 
     }
 
-    public function organizePoolsAction($tournamentId){
+    public function validateAction($tournamentId){
 
         $em = $this->getDoctrine()->getManager();
 
-        $tournament =  $em->getRepository('AppBundle:Tournament')->findOneById($tournamentId);
+        $tournament =  $em->getRepository(Tournament::class)->findOneById($tournamentId);
 
         if (!$tournament) {
             throw $this->createNotFoundException("Ce tournoi n'existe pas.");
@@ -175,7 +223,7 @@ class TournamentController extends Controller
             dump($pool->getTeams()->count());
         }
 
-        return $this->render('AppBundle/Tournament/organizepools.html.twig', array(
+        return $this->render('AppBundle/Tournament/validate.html.twig', array(
             'tournament' => $tournament
         ));
     }
