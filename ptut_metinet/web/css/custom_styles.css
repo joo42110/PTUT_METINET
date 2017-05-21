@@ -31,7 +31,7 @@ body{
     display : inline-block;
     height : 200px;
     width : 200px;
-    background-color: #2F6F99;
+    background-color: #0080B2;
     margin-top : 20px;
     margin-right : 20px;
     text-align : center;
@@ -47,7 +47,7 @@ body{
 }
 
 .enabled_tile{
-    background-color: #0080B2;
+    background-color: #4F805D;
 }
 
 .disabled_tile{

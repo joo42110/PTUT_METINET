@@ -5,6 +5,7 @@
 {% block team_widget %}
 
     <tr class="team-input" {% if form.vars.data.id is defined %}data-teamid="{{ form.vars.data.id }}"{% endif %}>
+        <td class="index-col"></td>
         <td>{{ form_widget(form.name) }}</td>
         <td>
             {% if form.vars.data.players is defined %}
@@ -50,6 +51,7 @@
 
         <table id="teams_formfields_container" data-prototype="{{ form_widget(form.teams.vars.prototype)|e }}" class="table">
             <thead>
+                <th></th>
                 <th>Nom de l'équipe</th>
                 <th>Joueurs</th>
                 <th>Actions</th>
@@ -113,6 +115,8 @@
 
             bindEditButtons();
 
+            updateIndexCol();
+
         });
 
         function addTeam(e){
@@ -128,6 +132,7 @@
 
             bindRemoveButtons();
             bindEditButtons();
+            updateIndexCol();
 
         }
 
@@ -149,6 +154,7 @@
             var button = $(e.target);
             var formRow = button.parents('tr.team-input');
             formRow.remove();
+            updateIndexCol();
         }
 
         function bindRemoveButtons(){
@@ -185,6 +191,11 @@
 
         }
 
+        function updateIndexCol(){
+            $(".index-col").each(function(index,elem){
+                $(elem).text(index+1);
+            })
+        }
     </script>
 
 {% endblock %}

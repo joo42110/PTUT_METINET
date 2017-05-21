@@ -197,24 +197,6 @@ class TournamentController extends Controller
             throw $this->createNotFoundException("Ce tournoi n'existe pas.");
         }
 
-        for($i=0;$i<$tournament->getPoolsNumber();$i++){
-            $tournament->getPools()->add(new Pool());
-        }
-
-        $teams = $tournament->getTeams();
-        $i = 0;
-        foreach($teams as $team){
-            $tournament->getPools()->get($i)->addTeam($team);
-            $i++;
-            if($i>=$tournament->getPools()->count()){
-                $i=0;
-            }
-        }
-
-        foreach($tournament->getPools() as $pool){
-            dump($pool->getTeams()->count());
-        }
-
         return $this->render('AppBundle/Tournament/validate.html.twig', array(
             'tournament' => $tournament
         ));
@@ -238,7 +220,27 @@ class TournamentController extends Controller
             return new JsonResponse($errors,500);
         }
         else {
+
             $tournament->setEnabled(true);
+
+            // Création des Poules
+            for($i=0;$i<$tournament->getPoolsNumber();$i++){
+                $pool = new Pool();
+                $pool->setTournament($tournament);
+                $tournament->getPools()->add($pool);
+            }
+
+            $teams = $tournament->getTeams();
+            $i = 0;
+            foreach($teams as $team){
+                $tournament->getPools()->get($i)->addTeam($team);
+                $i++;
+                if($i>=$tournament->getPools()->count()){
+                    $i=0;
+                }
+            }
+
+
             $em->persist($tournament);
             $em->flush();
             return new JsonResponse();

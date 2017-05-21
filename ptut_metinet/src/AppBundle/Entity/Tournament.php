@@ -56,7 +56,7 @@ class Tournament extends BaseEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Pool", mappedBy="tournament",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Pool", mappedBy="tournament",cascade={"persist"},orphanRemoval=true)
      */
     private $pools;
 
@@ -266,6 +266,11 @@ class Tournament extends BaseEntity
         //On verifie que le nombre d'équipes configurées dans le tournoi et le nombre d'équipes ajoutées correspondent
         if($registeredTeams !== $this->getTeamsNumber()){
             $errors[] = "Nombre d'équipes incorrect: le tournoi devrait comporter " . $this->getTeamsNumber() . " équipes mais " . $registeredTeams . " on été renseignées";
+        }
+
+        //On vérifie qu'il y ai au moins autant d'équipes dans le tournoi que d'équipes supposées sortir des phases de poules
+        if($this->getTeamsNumber() < $this->getTeamsOutOfPools()){
+            $errors[] = "Il n'y a pas assez d'équipes dans le tournoi pour satisfaire la configuration de sortie des poules actuelle";
         }
 
         //On verifie que le tournoi a au moins un terrain

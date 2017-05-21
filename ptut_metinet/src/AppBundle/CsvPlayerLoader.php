@@ -46,8 +46,8 @@ class CsvPlayerLoader
 
                 //$player = new Player($data[0],$data[1],$data[2]);
                 $player = new Player();
-                $player->setName($data[0]);
-                $player->setFirstname($data[1]);
+                $player->setFirstname($data[0]);
+                $player->setName($data[1]);
                 $player->setLicenceNumber($data[2]);
                 $player->setCategory($data[3]);
 
