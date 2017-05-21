@@ -81,7 +81,7 @@ class Tournament extends BaseEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Field", mappedBy="tournament",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Field", mappedBy="tournament",cascade={"persist"},orphanRemoval=true)
      */
     private $fields;
 
@@ -257,7 +257,30 @@ class Tournament extends BaseEntity
     }
 
 
+    public function validate(){
 
+        $errors = [];
+
+        $registeredTeams = $this->getTeams()->count();
+
+        //On verifie que le nombre d'équipes configurées dans le tournoi et le nombre d'équipes ajoutées correspondent
+        if($registeredTeams !== $this->getTeamsNumber()){
+            $errors[] = "Nombre d'équipes incorrect: le tournoi devrait comporter " . $this->getTeamsNumber() . " équipes mais " . $registeredTeams . " on été renseignées";
+        }
+
+        //On verifie que le tournoi a au moins un terrain
+        if($this->getFields()->count() <= 0){
+            $errors[] = "Aucun terrain n'a été ajouté. Vous devez ajouter au minimum 1 terrain";
+        }
+
+        //On valide également les équipes du tournoi
+        foreach($this->getTeams()->toArray() as $team){
+            $errors = array_merge($errors, $team->validate());
+        }
+
+        return $errors;
+
+    }
 
 
 

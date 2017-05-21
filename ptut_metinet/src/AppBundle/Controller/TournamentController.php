@@ -219,4 +219,32 @@ class TournamentController extends Controller
             'tournament' => $tournament
         ));
     }
+
+
+    public function validationStatusAction($tournamentId){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $tournament =  $em->getRepository(Tournament::class)->findOneById($tournamentId);
+
+        if (!$tournament) {
+            return new JsonResponse("Ce tournoi n'existe pas",404);
+        }
+
+        $errors = $tournament->validate();
+
+        //Si la validation a renvoyé des erreurs
+        if(!empty($errors)){
+            return new JsonResponse($errors,500);
+        }
+        else {
+            $tournament->setEnabled(true);
+            $em->persist($tournament);
+            $em->flush();
+            return new JsonResponse();
+        }
+
+
+
+    }
 }

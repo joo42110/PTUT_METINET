@@ -25,6 +25,10 @@ user_list:
     path: /admin/users
     defaults: {_controller: UserBundle:User:listUser}
 
+tournament_list:
+    path:      /tournament/list
+    defaults:  { _controller: AppBundle:Tournament:list }
+
 create_tournament:
     path:      /admin/tournament/create
     defaults:  { _controller: AppBundle:Tournament:create }
@@ -32,6 +36,15 @@ create_tournament:
 edit_tournament:
     path:      /admin/tournament/{tournamentId}/edit
     defaults:  { _controller: AppBundle:Tournament:edit }
+
+validate_tournament:
+    path:      /admin/tournament/{tournamentId}/validate
+    defaults:  { _controller: AppBundle:Tournament:validate }
+
+tournament_validation_status:
+    path:      /admin/tournament/{tournamentId}/validationstatus
+    defaults:  { _controller: AppBundle:Tournament:validationstatus }
+
 
 add_teams:
     path:      /admin/tournament/{tournamentId}/teams
@@ -45,9 +58,6 @@ edit_team:
     path:      /admin/team/{teamId}/edit
     defaults:  { _controller: AppBundle:Team:edit }
 
-validate_tournament:
-    path:      /admin/tournament/{tournamentId}/validate
-    defaults:  { _controller: AppBundle:Tournament:validate }
 
 view_match:
     path:      /match/{matchId}

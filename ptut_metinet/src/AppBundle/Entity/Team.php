@@ -120,7 +120,15 @@ class Team extends BaseEntity
     }
 
 
-    
+    public function validate(){
+        $errors = [];
+
+        if($this->getPlayers()->count() < 10){
+            $errors[] = "L'équipe " . $this->getName() . " contient moins de 10 joueurs";
+        }
+
+        return $errors;
+    }
 
 
 

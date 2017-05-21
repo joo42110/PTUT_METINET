@@ -2,21 +2,100 @@
 
 {% block body %}
 
-    <div class="row">
-        <div class="col-md-12">
-            <button class="btn btn-success center-block">Valider le tournoi</button>
-        </div>
-    </div>
-
-    <div class="bottom-btn-container">
-
-        <div class="col-md-4">
-            <div class="left-btn">
-                <a class="btn btn-default" href="{{ url('add_fields',{'tournamentId':tournament.id}) }}"><span class="glyphicon glyphicon-chevron-left"></span> Précédent</a>
+    <div class="pre-validation-content">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="alert alert-danger error-container hidden">
+                    <ul class="errors-list"></ul>
+                </div>
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-success btn-validate center-block">Valider le tournoi</button>
+            </div>
+        </div>
 
+        <div class="bottom-btn-container">
+
+            <div class="col-md-4">
+                <div class="left-btn">
+                    <a class="btn btn-default" href="{{ url('add_fields',{'tournamentId':tournament.id}) }}"><span class="glyphicon glyphicon-chevron-left"></span> Précédent</a>
+                </div>
+            </div>
+
+
+        </div>
     </div>
+
+    <div class="post-validation-content hidden">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="alert alert-success">
+                    <h2>Le tournoi a bien été validé</h2>
+                    <p>
+                        Vous allez être redirigé vers la page de sélection des tournois
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script>
+
+        $(function(){
+
+            $(".btn-validate").on('click',validateTournament);
+
+        });
+
+        function validateTournament(){
+
+            $.ajax({
+                type: 'GET',
+                url: '{{ url('tournament_validation_status', {'tournamentId': tournament.id}) }}',
+                processData: false,
+                contentType: false
+            })
+                .done(function(){
+                    $('.pre-validation-content').addClass('hidden');
+                    $('.post-validation-content').removeClass('hidden');
+                    setTimeout(function(){
+                        location.href = "{{ url('tournament_list') }}";
+                    },2000);
+                })
+                .fail(function(data){
+                    resetErrors();
+                    var errors = JSON.parse(data.responseText);
+                    errors.forEach(function(error){
+                        addError(error);
+                    });
+                    $('.error-container').removeClass('hidden');
+                });
+
+        }
+
+        function resetErrors(){
+            $('.error-container').html = '';
+        }
+
+        function addError(text){
+            var error = $('<li>' + text + '</li>');
+            $('.error-container').append(error);
+        }
+
+
+
+
+    </script>
 
 {% endblock %}
