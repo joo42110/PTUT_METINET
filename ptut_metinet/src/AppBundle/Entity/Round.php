@@ -26,12 +26,12 @@ class Round extends BaseEntity
 {
 
     /**
-     * @var Tournament
+     * @var Day
      *
-     * @ORM\ManyToOne(targetEntity="Tournament", inversedBy="rounds",cascade={"persist"})
-     * @ORM\JoinColumn(name="tournament_id",referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Day", inversedBy="rounds",cascade={"persist"})
+     * @ORM\JoinColumn(name="day_id",referencedColumnName="id")
      */
-    private $tournament;
+    private $day;
 
     /**
      * @var ArrayCollection
@@ -43,24 +43,26 @@ class Round extends BaseEntity
     /**
      * @var DateTime
      *
-     * @ORM\Column(name="scheduled_time", type="datetime")
+     * @ORM\Column(name="scheduled_time", type="time")
      */
     private $scheduledTime;
 
+
+
     /**
-     * @return Tournament
+     * @return Day
      */
-    public function getTournament(): Tournament
+    public function getDay(): Day
     {
-        return $this->tournament;
+        return $this->day;
     }
 
     /**
-     * @param Tournament $tournament
+     * @param Day $day
      */
-    public function setTournament(Tournament $tournament)
+    public function setDay(Day $day)
     {
-        $this->tournament = $tournament;
+        $this->day = $day;
     }
 
     /**

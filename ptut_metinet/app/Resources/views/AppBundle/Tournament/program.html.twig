@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Programmer les matchs du tournoi {{ tournament.name }}</h1>
+
+    {% if tournament.finalsOngoing %}
+        {% set phaseName = 'finale' %}
+    {%  else %}
+        {% set phaseName = 'de poules' %}
+    {% endif %}
+
+    <h4>Ce tournoi est actuellement en phase {{ phaseName }}</h4>
+
+    <div class="row">
+
+        {% for pool in tournament.pools %}
+            <div class="col-md-6">
+                <h3 class="text-center">Poule {{ loop.index }}</h3>
+                <table class="table table-bordered pool-container">
+                    <tbody>
+                        {% for match in pool.matches %}
+                            <tr>
+                                <td>{{ match.name }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}

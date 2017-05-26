@@ -18,6 +18,7 @@ use Doctrine\Common\Util\Debug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TournamentController extends Controller
 {
@@ -221,32 +222,34 @@ class TournamentController extends Controller
         }
         else {
 
-            $tournament->setEnabled(true);
-
-            // Création des Poules
-            for($i=0;$i<$tournament->getPoolsNumber();$i++){
-                $pool = new Pool();
-                $pool->setTournament($tournament);
-                $tournament->getPools()->add($pool);
-            }
-
-            $teams = $tournament->getTeams();
-            $i = 0;
-            foreach($teams as $team){
-                $tournament->getPools()->get($i)->addTeam($team);
-                $i++;
-                if($i>=$tournament->getPools()->count()){
-                    $i=0;
-                }
-            }
+            $tournament->initialize();
 
 
             $em->persist($tournament);
             $em->flush();
+
             return new JsonResponse();
         }
 
+    }
 
+    public function programMatchesAction($tournamentId){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $tournament =  $em->getRepository(Tournament::class)->findOneById($tournamentId);
+
+        if (!$tournament) {
+            throw $this->createNotFoundException("Ce tournoi n'existe pas.");
+        }
+
+
+
+
+
+        return $this->render(':AppBundle/Tournament:program.html.twig',array(
+            'tournament' => $tournament
+        ));
 
     }
 }

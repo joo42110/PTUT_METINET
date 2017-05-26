@@ -74,9 +74,9 @@ class Tournament extends BaseEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Round", mappedBy="tournament")
+     * @ORM\OneToMany(targetEntity="Day", mappedBy="tournament")
      */
-    private $rounds;
+    private $days;
 
     /**
      * @var ArrayCollection
@@ -84,6 +84,12 @@ class Tournament extends BaseEntity
      * @ORM\OneToMany(targetEntity="Field", mappedBy="tournament",cascade={"persist"},orphanRemoval=true)
      */
     private $fields;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * Le tournoi est il en phase de poules ou en phase finale ?
+     */
+    private $finalsOngoing = false;
 
     
     /**
@@ -227,18 +233,19 @@ class Tournament extends BaseEntity
     /**
      * @return ArrayCollection
      */
-    public function getRounds(): ArrayCollection
+    public function getDays(): ArrayCollection
     {
-        return $this->rounds;
+        return $this->days;
     }
 
     /**
-     * @param ArrayCollection $rounds
+     * @param ArrayCollection $days
      */
-    public function setRounds(ArrayCollection $rounds)
+    public function setDays(ArrayCollection $days)
     {
-        $this->rounds = $rounds;
+        $this->days = $days;
     }
+
 
     /**
      * @return ArrayCollection
@@ -255,6 +262,24 @@ class Tournament extends BaseEntity
     {
         $this->fields = $fields;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFinalsOngoing()
+    {
+        return $this->finalsOngoing;
+    }
+
+    /**
+     * @param mixed $finalsOngoing
+     */
+    public function setFinalsOngoing($finalsOngoing)
+    {
+        $this->finalsOngoing = $finalsOngoing;
+    }
+
+
 
 
     public function validate(){
@@ -284,6 +309,35 @@ class Tournament extends BaseEntity
         }
 
         return $errors;
+
+    }
+
+    public function initialize(){
+
+        $this->setEnabled(true);
+
+        // Création des Poules
+        for($i=0;$i<$this->getPoolsNumber();$i++){
+            $pool = new Pool();
+            $pool->setTournament($this);
+            $this->getPools()->add($pool);
+        }
+
+        // Répartition des équipes dans les poules
+        $teams = $this->getTeams();
+        $i = 0;
+        foreach($teams as $team){
+            $this->getPools()->get($i)->addTeam($team);
+            $i++;
+            if($i>=$this->getPools()->count()){
+                $i=0;
+            }
+        }
+
+        // Création des matches des poules
+        foreach($this->getPools() as $pool){
+            $pool->initialize();
+        }
 
     }
 

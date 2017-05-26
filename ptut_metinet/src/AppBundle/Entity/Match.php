@@ -59,7 +59,14 @@ class Match extends BaseEntity
      */
     private $referee;
 
-
+    /**
+     * Match constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->teams = new ArrayCollection();
+    }
 
 
     public function addTeam(Team $team){
@@ -142,10 +149,21 @@ class Match extends BaseEntity
         $this->referee = $referee;
     }
 
+    public function getName(){
 
+        $name = '';
+        $first = true;
+        foreach($this->getTeams()->toArray() as $team){
+            $name .= $team->getName();
+            if($first){
+              $name .= " vs ";
+              $first = false;
+            }
+        }
 
+        return $name;
 
-
+    }
 
 
 

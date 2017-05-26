@@ -8,6 +8,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Util\Debug;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -32,12 +33,22 @@ class Pool extends BaseEntity
     private $teams;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Match",cascade={"persist"})
+     * @ORM\JoinTable(name="pools_matches",
+     *      joinColumns={@ORM\JoinColumn(name="pool_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="match_id", referencedColumnName="id", unique=true)}
+     *      )
+     */
+    private $matches;
+
+    /**
      * Pool constructor.
      */
     public function __construct()
     {
         parent::__construct();
         $this->teams = new ArrayCollection();
+        $this->matches = new ArrayCollection();
     }
 
 
@@ -75,6 +86,63 @@ class Pool extends BaseEntity
 
     public function addTeam(Team $team){
         $this->teams->add($team);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMatches()
+    {
+        return $this->matches;
+    }
+
+    /**
+     * @param mixed $matches
+     */
+    public function setMatches($matches)
+    {
+        $this->matches = $matches;
+    }
+
+    public function addMatch(Match $match){
+        $this->matches->add($match);
+    }
+
+
+    public function initialize(){
+
+        $teams = $this->getTeams();
+        // On crée les matches de la poules (chaque équipe joue contre toute les autres)
+
+        /* Chaque équipe doit jouer une fois contre chaque autre équipe :
+        On doit donc faire la liste des combinaisons uniques des équipes de la poule
+        Pour celà on boucle sur chaque équipe, et on lui crée une combinaison (= un match) avec chaque équipe de la poule
+        SAUF si :
+        - Cette équipe est elle même
+        - Cette équipe a déjà toute ses combinaisons réalisées (= cette équipe est passée dans une boucle précédente)
+
+        Pour pouvoir tester la deuxième condition, on utilise un tableau contenant les IDs des équipes sur lesquelles on a déjà bouclé
+        */
+
+        $alreadyCombinedTeams = [];
+
+        $tournament = $this->getTournament();
+
+        //On boucle sur toute les équipes de la poule
+        foreach($teams as $team){
+            //On re-boucle sur les équipes pour constituer les combinaisons
+            foreach($teams as $otherTeam){
+                if($team->getId() !== $otherTeam->getId() && !in_array($team->getId(),$alreadyCombinedTeams)){
+                    $match = new Match();
+                    $match->addTeam($team);
+                    $match->addTeam($otherTeam);
+                    $this->addMatch($match);
+                    $match->setTournament($tournament);
+                }
+            }
+
+            $alreadyCombinedTeams[] = $team->getId();
+        }
     }
 
 
