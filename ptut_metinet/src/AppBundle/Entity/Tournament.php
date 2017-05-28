@@ -233,7 +233,7 @@ class Tournament extends BaseEntity
     /**
      * @return ArrayCollection
      */
-    public function getDays(): ArrayCollection
+    public function getDays()
     {
         return $this->days;
     }

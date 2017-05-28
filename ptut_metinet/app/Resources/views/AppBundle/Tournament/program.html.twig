@@ -1,6 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+    <div class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary btn-save-modal"><span class="glyphicon glyphicon-save"></span> Sauvegarder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <h1>Programmer les matchs du tournoi {{ tournament.name }}</h1>
 
     {% if tournament.finalsOngoing %}
@@ -11,32 +29,56 @@
 
     <h4>Ce tournoi est actuellement en phase {{ phaseName }}</h4>
 
-    <div class="row">
+    <div>
 
-        {% for pool in tournament.pools %}
-            <div class="col-md-6">
-                <h3 class="text-center">Poule {{ loop.index }}</h3>
-                <table class="table table-bordered pool-container">
-                    <tbody>
-                        {% for match in pool.matches %}
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#matches" aria-controls="matches" role="tab" data-toggle="tab">Matches</a></li>
+            <li role="presentation"><a href="#rounds" aria-controls="rounds" role="tab" data-toggle="tab">Créneaux horaires</a></li>
+        </ul>
 
-                            {% if match.programed %}
-                                {% set class = "match-row programed" %}
-                            {% else %}
-                                {% set class = "match-row unprogramed" %}
-                            {% endif %}
-
-                            <tr class="{{ class }}" data-id="{{ match.id }}">
-                                <td  {% if not match.programed %}colspan="2"{% endif %}>{{ match.name }}</td>
-                                {% if match.programed %}
-                                    <td> TODO : Afficher date et créneau horaire programmé </td>
-                                {% endif %}
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="matches">
+                {% include ':AppBundle/Tournament:programMatches.html.twig' %}
             </div>
-        {% endfor %}
+
+            <div role="tabpanel" class="tab-pane" id="rounds">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="btn btn-success btn-add-day"><span class="glyphicon glyphicon-plus"></span> Ajouter un jour de tournoi</div>
+                    </div>
+                </div>
+                {% include ':AppBundle/Tournament:programRounds.html.twig' %}
+            </div>
+        </div>
 
     </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script>
+
+        var tournamentId = "{{ tournament.id }}";
+
+        $(function(){
+
+            $('.btn-add-day').on('click',function(){
+                showModal('Ajouter un jour de tournoi','Hop le form');
+            })
+
+        });
+
+        function showModal(title,body){
+            var modal = $('.modal');
+            modal.find('.modal-title').html(title);
+            modal.find('.modal-body').html(body);
+            modal.modal('show');
+
+        }
+
+    </script>
+
 {% endblock %}

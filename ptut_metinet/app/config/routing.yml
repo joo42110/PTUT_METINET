@@ -47,7 +47,7 @@ tournament_validation_status:
 
 program_tournament_matches:
     path: admin/tournament/{tournamentId}/program
-    defaults: { _controller: AppBundle:Tournament:programMatches }
+    defaults: { _controller: AppBundle:Tournament:program }
 
 add_teams:
     path:      /admin/tournament/{tournamentId}/teams

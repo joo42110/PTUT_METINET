@@ -1,0 +1,19 @@
+
+
+<div class="row">
+    <ul class="nav nav-pills" role="tablist">
+        {% for day in tournament.days %}
+            <li role="presentation" {% if loop.first %}class="active"{% endif %}><a href="#day-{{ loop.index }}" aria-controls="day-{{ loop.index }}" role="tab" data-toggle="tab">Home</a></li>
+        {% endfor %}
+    </ul>
+
+
+    <div class="tab-content">
+        {% for day in tournament.days %}
+            <div role="tabpanel" class="tab-pane {% if loop.first %}active{% endif %}" id="day-{{ loop.index }}">
+
+            </div>
+        {% endfor %}
+    </div>
+
+</div>

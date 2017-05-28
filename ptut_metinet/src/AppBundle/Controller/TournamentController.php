@@ -233,7 +233,7 @@ class TournamentController extends Controller
 
     }
 
-    public function programMatchesAction($tournamentId){
+    public function programAction($tournamentId){
 
         $em = $this->getDoctrine()->getManager();
 
@@ -243,13 +243,27 @@ class TournamentController extends Controller
             throw $this->createNotFoundException("Ce tournoi n'existe pas.");
         }
 
-
-
-
-
         return $this->render(':AppBundle/Tournament:program.html.twig',array(
             'tournament' => $tournament
         ));
 
     }
+
+    public function programRoundsAction($tournamentId){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $tournament =  $em->getRepository(Tournament::class)->findOneById($tournamentId);
+
+        if (!$tournament) {
+            return new JsonResponse("Ce tournoi n'existe pas.",404);
+        }
+
+        return new JsonResponse($this->render(':AppBundle/Tournament:programRounds.html.twig',array(
+            'tournament' => $tournament
+        ))->getContent());
+
+    }
+
+
 }
