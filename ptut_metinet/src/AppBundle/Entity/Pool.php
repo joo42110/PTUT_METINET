@@ -41,6 +41,7 @@ class Pool extends BaseEntity
      */
     private $matches;
 
+
     /**
      * Pool constructor.
      */
@@ -86,6 +87,7 @@ class Pool extends BaseEntity
 
     public function addTeam(Team $team){
         $this->teams->add($team);
+        $team->setPool($this);
     }
 
     /**
@@ -107,6 +109,7 @@ class Pool extends BaseEntity
     public function addMatch(Match $match){
         $this->matches->add($match);
     }
+
 
 
     public function initialize(){
@@ -132,7 +135,8 @@ class Pool extends BaseEntity
         foreach($teams as $team){
             //On re-boucle sur les équipes pour constituer les combinaisons
             foreach($teams as $otherTeam){
-                if($team->getId() !== $otherTeam->getId() && !in_array($team->getId(),$alreadyCombinedTeams)){
+
+                if($team->getId() !== $otherTeam->getId() && !in_array($otherTeam->getId(),$alreadyCombinedTeams)){
                     $match = new Match();
                     $match->addTeam($team);
                     $match->addTeam($otherTeam);
@@ -142,6 +146,7 @@ class Pool extends BaseEntity
             }
 
             $alreadyCombinedTeams[] = $team->getId();
+
         }
     }
 

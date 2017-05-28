@@ -19,8 +19,18 @@
                 <table class="table table-bordered pool-container">
                     <tbody>
                         {% for match in pool.matches %}
-                            <tr>
-                                <td>{{ match.name }}</td>
+
+                            {% if match.programed %}
+                                {% set class = "match-row programed" %}
+                            {% else %}
+                                {% set class = "match-row unprogramed" %}
+                            {% endif %}
+
+                            <tr class="{{ class }}" data-id="{{ match.id }}">
+                                <td  {% if not match.programed %}colspan="2"{% endif %}>{{ match.name }}</td>
+                                {% if match.programed %}
+                                    <td> TODO : Afficher date et créneau horaire programmé </td>
+                                {% endif %}
                             </tr>
                         {% endfor %}
                     </tbody>

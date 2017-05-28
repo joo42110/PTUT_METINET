@@ -60,6 +60,13 @@ class Match extends BaseEntity
     private $referee;
 
     /**
+     * @ORM\Column(type="boolean")
+     * Le match a-t-il été programmé ?
+     */
+    private $programed = false;
+
+
+    /**
      * Match constructor.
      */
     public function __construct()
@@ -148,6 +155,24 @@ class Match extends BaseEntity
     {
         $this->referee = $referee;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getProgramed()
+    {
+        return $this->programed;
+    }
+
+    /**
+     * @param mixed $programed
+     */
+    public function setProgramed($programed)
+    {
+        $this->programed = $programed;
+    }
+
+
 
     public function getName(){
 

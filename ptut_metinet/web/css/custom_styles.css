@@ -2,6 +2,11 @@ body{
     /* Thème sombre pour bosser dans le noir  */
     background-color: #2F303D;
     color: #D3DBC5;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-weight: 300;
 }
 
 .bottom-btn-container{
@@ -52,5 +57,33 @@ body{
 
 .disabled_tile{
     background-color: #FF9A2A;
+}
+
+.pool-container{
+    text-align: center;
+    color: #ffffff;
+    font-weight: 900;
+    text-shadow: 1px 1px 5px #000000;
+}
+
+.match-row:hover{
+    cursor: pointer;
+}
+
+
+.match-row.programed{
+    background-color: #1EB251;
+}
+
+.match-row.programed:hover{
+    background-color: #00B23D;
+}
+
+.match-row.unprogramed{
+    background-color: #FF362F;
+}
+
+.match-row.unprogramed:hover{
+    background-color: #CD0700;
 }
 
