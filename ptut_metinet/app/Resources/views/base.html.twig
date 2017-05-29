@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel = "stylesheet" href= "{{ asset('bootstrap/css/bootstrap.min.css') }}"/>
+        <link rel = "stylesheet" href= "{{ asset('jquery/css/jquery-ui.min.css') }}"/>
         <link rel = "stylesheet" href= "{{ asset('css/custom_styles.css') }}"/>
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,900" rel="stylesheet">
         {% block stylesheets %}{% endblock %}
@@ -47,7 +48,9 @@
         </div>
 
         {% block javascripts %}
-            <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+            <script src="{{ asset('jquery/js/jquery-3.1.1.min.js') }}"></script>
+            <script src="{{ asset('jquery/js/jquery-ui.min.js') }}"></script>
+            <script src="{{ asset('jquery/js/datepicker-fr.js') }}"></script>
             <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 
             <script>

@@ -9,10 +9,12 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Entity\Day;
 use AppBundle\Entity\Pool;
 use AppBundle\Entity\Tournament;
 use AppBundle\Form\AddFieldsType;
 use AppBundle\Form\AddTeamsType;
+use AppBundle\Form\DayType;
 use AppBundle\Form\TournamentType;
 use Doctrine\Common\Util\Debug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -261,6 +263,40 @@ class TournamentController extends Controller
 
         return new JsonResponse($this->render(':AppBundle/Tournament:programRounds.html.twig',array(
             'tournament' => $tournament
+        ))->getContent());
+
+    }
+
+    public function addDayAction(Request $request,$tournamentId){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $tournament =  $em->getRepository(Tournament::class)->findOneById($tournamentId);
+
+        if (!$tournament) {
+            return new JsonResponse("Ce tournoi n'existe pas.",404);
+        }
+
+        $day = new Day();
+
+        $form = $this->createForm(DayType::class, $day, array(
+            'method' => 'POST',
+        ));
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $tournament->addDay($day);
+
+            $em->persist($day);
+            $em->flush();
+
+            return($this->redirectToRoute('add_teams',array('tournamentId' => $team->getTournament()->getId())));
+        }
+
+        return new JsonResponse($this->render(':AppBundle/Tournament:addDay.html.twig',array(
+            'form' => $form->createView()
         ))->getContent());
 
     }

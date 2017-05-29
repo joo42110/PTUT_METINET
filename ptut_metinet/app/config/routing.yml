@@ -57,6 +57,10 @@ add_fields:
     path:      /admin/tournament/{tournamentId}/fields
     defaults:  { _controller: AppBundle:Tournament:addFields }
 
+add_day:
+    path:      /admin/tournament/{tournamentId}/day
+    defaults:  { _controller: AppBundle:Tournament:addDay }
+
 edit_team:
     path:      /admin/team/{teamId}/edit
     defaults:  { _controller: AppBundle:Team:edit }

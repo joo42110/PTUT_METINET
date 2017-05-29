@@ -1,0 +1,16 @@
+{{  form_start(form) }}
+    <div class="datepicker"></div>
+    {{ form_widget(form.date) }}
+{{ form_end(form) }}
+
+<script>
+
+    $.datepicker.setDefaults( $.datepicker.regional[ "fr" ] );
+
+    $(function(){
+        $('.datepicker').datepicker({
+            altField: ".datepicker-data",
+            altFormat: 'yy-mm-dd'
+        });
+    });
+</script>

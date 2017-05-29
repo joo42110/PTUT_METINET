@@ -10,6 +10,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity
@@ -33,6 +34,13 @@ class Day extends BaseEntity
      * @ORM\OneToMany(targetEntity="Round", mappedBy="days")
      */
     private $rounds;
+
+    /**
+     * @var DateTime
+     *
+     * @ORM\Column(name="date",type="date")
+     */
+    private $date;
 
     /**
      * @return Tournament
@@ -65,6 +73,24 @@ class Day extends BaseEntity
     {
         $this->rounds = $rounds;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param mixed $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+
 
 
 

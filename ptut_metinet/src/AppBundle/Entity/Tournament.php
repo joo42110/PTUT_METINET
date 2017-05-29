@@ -246,6 +246,15 @@ class Tournament extends BaseEntity
         $this->days = $days;
     }
 
+    /**
+     * @param Day $day
+     */
+    public function addDays(Day $day)
+    {
+        $this->days->add($day);
+        $day->setTournament($this);
+    }
+
 
     /**
      * @return ArrayCollection
