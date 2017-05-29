@@ -56,7 +56,6 @@
             <script>
                 /* Adding links to navbar buttons */
                 $(function(){
-                    console.log($('.btn-logout'));
                     $('.btn-logout').on('click',function(){
                         window.location = "{{ url('logout') }}";
                     });

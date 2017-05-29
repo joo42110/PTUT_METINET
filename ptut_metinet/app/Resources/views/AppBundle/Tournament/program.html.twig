@@ -62,15 +62,18 @@
     <script>
 
         var tournamentId = "{{ tournament.id }}";
+        var modal = $('.modal');
+        var modalSaveBtn = $('.btn-save-modal');
 
         $(function(){
 
             $('.btn-add-day').on('click',addDay);
 
+
+
         });
 
         function showModal(title,body,size){
-            var modal = $('.modal');
             var dialog = modal.find('.modal-dialog');
             //Reset modal dialog size
             dialog.removeClass('modal-sm');
@@ -88,6 +91,10 @@
 
         }
 
+        function hideModal(){
+            modal.modal('hide');
+        }
+
         function addDay(){
             $.ajax({
                 type: 'GET',
@@ -96,9 +103,31 @@
                 contentType: false
             })
                 .done(function(data){
+                    modalSaveBtn.off(); //Retrait des listners qui pouvaient précédement se trouver sur le boutton
+                    modalSaveBtn.on('click',saveAddDayModal);
                     showModal("Ajout d'un jour de tournoi",data,"sm")
                 })
-                .fail(function(data) {
+                .fail(function(data){
+                })
+        }
+
+        function saveAddDayModal(){
+
+            var form = modal.find('form')[0];
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ url('add_day', {'tournamentId': tournament.id}) }}',
+                data: new FormData(form),
+                processData: false,
+                contentType: false
+
+            })
+                .done(function(data){
+                    hideModal();
+                })
+                .fail(function(data){
+                    console.log(data.responseJSON);
                 })
         }
 

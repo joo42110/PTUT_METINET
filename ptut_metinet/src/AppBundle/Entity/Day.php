@@ -10,11 +10,13 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="day")
+ *
  * Représente un jour lors duquel se déroule des mathces du tournoi
  */
 class Day extends BaseEntity
@@ -22,7 +24,6 @@ class Day extends BaseEntity
 
     /**
      * @var Tournament
-     *
      * @ORM\ManyToOne(targetEntity="Tournament", inversedBy="days",cascade={"persist"})
      * @ORM\JoinColumn(name="tournament_id",referencedColumnName="id")
      */

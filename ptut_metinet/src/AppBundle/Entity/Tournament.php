@@ -249,7 +249,7 @@ class Tournament extends BaseEntity
     /**
      * @param Day $day
      */
-    public function addDays(Day $day)
+    public function addDay(Day $day)
     {
         $this->days->add($day);
         $day->setTournament($this);

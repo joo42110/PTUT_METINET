@@ -285,15 +285,27 @@ class TournamentController extends Controller
 
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //Verficiation que le jour n'existe pas déjà dans le tournoi
+
+            foreach($tournament->getDays()->toArray() as $existingDay){
+                if($existingDay->getDate() == $day->getDate()){
+                    return new JsonResponse('Ce jour a déjà été ajouté',500);
+                }
+            }
 
             $tournament->addDay($day);
 
             $em->persist($day);
             $em->flush();
 
-            return($this->redirectToRoute('add_teams',array('tournamentId' => $team->getTournament()->getId())));
+            return new JsonResponse();
         }
+
+
+        if($request->getMethod() === "POST"){Debug::dump($form->getErrors());};
 
         return new JsonResponse($this->render(':AppBundle/Tournament:addDay.html.twig',array(
             'form' => $form->createView()
