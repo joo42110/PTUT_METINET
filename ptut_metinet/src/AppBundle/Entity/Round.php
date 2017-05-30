@@ -41,9 +41,9 @@ class Round extends BaseEntity
     private $matches;
 
     /**
-     * @var DateTime
+     * @var string
      *
-     * @ORM\Column(name="scheduled_time", type="time")
+     * @ORM\Column(name="scheduled_time", type="string")
      */
     private $scheduledTime;
 
@@ -82,20 +82,22 @@ class Round extends BaseEntity
     }
 
     /**
-     * @return DateTime
+     * @return string
      */
-    public function getScheduledTime(): DateTime
+    public function getScheduledTime(): string
     {
         return $this->scheduledTime;
     }
 
     /**
-     * @param DateTime $scheduledTime
+     * @param string $scheduledTime
      */
-    public function setScheduledTime(DateTime $scheduledTime)
+    public function setScheduledTime(string $scheduledTime)
     {
         $this->scheduledTime = $scheduledTime;
     }
+
+
 
 
 

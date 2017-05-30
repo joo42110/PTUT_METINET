@@ -9,6 +9,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title"></h4>
                 </div>
+                <div class="modal-error alert alert-danger hidden"></div>
                 <div class="modal-body"></div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
@@ -31,7 +32,7 @@
 
     <div>
 
-        <ul class="nav nav-tabs" role="tablist">
+        <ul class="nav nav-tabs nav-justified" role="tablist">
             <li role="presentation" class="active"><a href="#matches" aria-controls="matches" role="tab" data-toggle="tab">Matches</a></li>
             <li role="presentation"><a href="#rounds" aria-controls="rounds" role="tab" data-toggle="tab">Créneaux horaires</a></li>
         </ul>
@@ -47,7 +48,10 @@
                         <div class="btn btn-success btn-add-day"><span class="glyphicon glyphicon-plus"></span> Ajouter un jour de tournoi</div>
                     </div>
                 </div>
-                {% include ':AppBundle/Tournament:programRounds.html.twig' %}
+                <div id="program-rounds-containter">
+                    {% include ':AppBundle/Tournament:programRounds.html.twig' %}
+                </div>
+
             </div>
         </div>
 
@@ -74,6 +78,10 @@
         });
 
         function showModal(title,body,size){
+
+            //Retrait des erreurs qui peuvent provenir d'une modal précédente
+            modal.find('.modal-error').addClass('hidden');
+
             var dialog = modal.find('.modal-dialog');
             //Reset modal dialog size
             dialog.removeClass('modal-sm');
@@ -93,6 +101,12 @@
 
         function hideModal(){
             modal.modal('hide');
+        }
+
+        function addModalError(error){
+            var errorContainer = modal.find('.modal-error');
+            errorContainer.html(error);
+            errorContainer.removeClass('hidden');
         }
 
         function addDay(){
@@ -125,11 +139,29 @@
             })
                 .done(function(data){
                     hideModal();
+                    reloadProgramRounds();
                 })
                 .fail(function(data){
-                    console.log(data.responseJSON);
+                    addModalError(data.responseJSON);
                 })
         }
+
+        function reloadProgramRounds(){
+            $.ajax({
+                type: 'GET',
+                url: '{{ url('program_tournament_rounds', {'tournamentId': tournament.id}) }}',
+                processData: false,
+                contentType: false
+
+            })
+                .done(function(data){
+                    $('#program-rounds-containter').html(data)
+                })
+                .fail(function(data){
+                })
+        }
+
+        
 
     </script>
 
