@@ -8,25 +8,24 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\Day;
-use Symfony\Component\Form\AbstractType;
+use AppBundle\Entity\Tournament;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DayRoundsType extends AbstractType
+class TournamentDaysType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder,array $options)
     {
 
-        $builder->add('rounds', CollectionType::class, array(
-            'entry_type'   => RoundType::class,
-            'prototype_name' => "__index__",
+        $builder->add('days', CollectionType::class, array(
+            'entry_type'   => DayRoundsType::class,
             'entry_options'  => array(
                 'label' => false,
             ),
-            'allow_add' => true,
-            'allow_delete' => true,
+            'allow_add' => false,
+            'allow_delete' => false,
 
         ));
 
@@ -36,7 +35,7 @@ class DayRoundsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Day::class,
+            'data_class' => Tournament::class,
         ));
     }
 }

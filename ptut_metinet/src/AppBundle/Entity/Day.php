@@ -32,7 +32,7 @@ class Day extends BaseEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Round", mappedBy="days")
+     * @ORM\OneToMany(targetEntity="Round", mappedBy="day")
      */
     private $rounds;
 
@@ -62,7 +62,7 @@ class Day extends BaseEntity
     /**
      * @return ArrayCollection
      */
-    public function getRounds(): ArrayCollection
+    public function getRounds()
     {
         return $this->rounds;
     }

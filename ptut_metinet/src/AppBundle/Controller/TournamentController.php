@@ -15,6 +15,7 @@ use AppBundle\Entity\Tournament;
 use AppBundle\Form\AddFieldsType;
 use AppBundle\Form\AddTeamsType;
 use AppBundle\Form\DayType;
+use AppBundle\Form\TournamentDaysType;
 use AppBundle\Form\TournamentType;
 use Doctrine\Common\Util\Debug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -261,8 +262,13 @@ class TournamentController extends Controller
             return new JsonResponse("Ce tournoi n'existe pas.",404);
         }
 
+        $form = $this->createForm(TournamentDaysType::class, $tournament, array(
+            'method' => 'POST',
+        ));
+
         return new JsonResponse($this->render(':AppBundle/Tournament:programRounds.html.twig',array(
-            'tournament' => $tournament
+            'tournament' => $tournament,
+            'form' => $form->createView()
         ))->getContent());
 
     }

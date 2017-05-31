@@ -49,7 +49,6 @@
                     </div>
                 </div>
                 <div id="program-rounds-containter">
-                    {% include ':AppBundle/Tournament:programRounds.html.twig' %}
                 </div>
 
             </div>
@@ -72,6 +71,8 @@
         $(function(){
 
             $('.btn-add-day').on('click',addDay);
+
+            loadProgramRounds();
 
 
 
@@ -139,14 +140,14 @@
             })
                 .done(function(data){
                     hideModal();
-                    reloadProgramRounds();
+                    loadProgramRounds();
                 })
                 .fail(function(data){
                     addModalError(data.responseJSON);
                 })
         }
 
-        function reloadProgramRounds(){
+        function loadProgramRounds(){
             $.ajax({
                 type: 'GET',
                 url: '{{ url('program_tournament_rounds', {'tournamentId': tournament.id}) }}',
