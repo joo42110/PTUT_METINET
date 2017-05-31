@@ -53,6 +53,11 @@ program_tournament_rounds:
     path: admin/tournament/{tournamentId}/programRounds
     defaults: { _controller: AppBundle:Tournament:programRounds }
 
+edit_day:
+    path:      /admin/day/{dayId}/edit
+    defaults:  { _controller: AppBundle:Day:edit }
+
+
 add_teams:
     path:      /admin/tournament/{tournamentId}/teams
     defaults:  { _controller: AppBundle:Tournament:addTeams }

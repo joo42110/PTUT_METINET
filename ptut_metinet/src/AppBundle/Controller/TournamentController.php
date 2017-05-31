@@ -262,13 +262,9 @@ class TournamentController extends Controller
             return new JsonResponse("Ce tournoi n'existe pas.",404);
         }
 
-        $form = $this->createForm(TournamentDaysType::class, $tournament, array(
-            'method' => 'POST',
-        ));
 
         return new JsonResponse($this->render(':AppBundle/Tournament:programRounds.html.twig',array(
             'tournament' => $tournament,
-            'form' => $form->createView()
         ))->getContent());
 
     }

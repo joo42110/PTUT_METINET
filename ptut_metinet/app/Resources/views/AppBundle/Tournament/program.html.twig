@@ -49,6 +49,7 @@
                     </div>
                 </div>
                 <div id="program-rounds-containter">
+                    {% include ':AppBundle/Tournament:programRounds.html.twig' %}
                 </div>
 
             </div>
@@ -71,10 +72,7 @@
         $(function(){
 
             $('.btn-add-day').on('click',addDay);
-
-            loadProgramRounds();
-
-
+            bindDayEdit();
 
         });
 
@@ -140,14 +138,14 @@
             })
                 .done(function(data){
                     hideModal();
-                    loadProgramRounds();
+                    reloadProgramRounds();
                 })
                 .fail(function(data){
                     addModalError(data.responseJSON);
                 })
         }
 
-        function loadProgramRounds(){
+        function reloadProgramRounds(){
             $.ajax({
                 type: 'GET',
                 url: '{{ url('program_tournament_rounds', {'tournamentId': tournament.id}) }}',
@@ -157,8 +155,34 @@
             })
                 .done(function(data){
                     $('#program-rounds-containter').html(data)
+                    bindDayEdit();
                 })
                 .fail(function(data){
+                })
+        }
+
+        function bindDayEdit(){
+            $('.day-row').on('click',function(e){
+
+                var dayId = $(e.target).data('id');
+                getDayEditForm(dayId);
+
+            });
+        }
+
+        function getDayEditForm(dayId){
+            $.ajax({
+                type: 'GET',
+                url: '{{ url('edit_day', {'dayId': '__dayId__'}) }}'.replace('__dayId__',dayId),
+                processData: false,
+                contentType: false
+
+            })
+                .done(function(data){
+                    showModal('Ajout de créneaux pour le ' + data.dayDate,data.renderedView,null);
+                })
+                .fail(function(data){
+                    console.log(data.responseJSON)
                 })
         }
 
