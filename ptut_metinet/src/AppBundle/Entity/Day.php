@@ -32,7 +32,7 @@ class Day extends BaseEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Round", mappedBy="day",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Round", mappedBy="day",cascade={"persist"},orphanRemoval=true)
      */
     private $rounds;
 
