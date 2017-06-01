@@ -33,10 +33,10 @@
                         <div class="div_into_tournament_title">
                             <p>{{ tournament.name }}</p>
                             {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                <a class="btn btn-xs btn-danger btn-delete-tournament" data-name="{{ tournament.name }}"
+                                <button class="btn btn-xs btn-danger btn-delete-tournament" data-name="{{ tournament.name }}"
                                    data-idtournament="{{ tournament.id }}">
                                     <span class="glyphicon glyphicon-trash"></span>
-                                </a>
+                                </button>
                             {% endif %}
                         </div>
                     </div>
@@ -86,6 +86,7 @@
 
             modal.find('.modal-title').html(title);
             modal.find('.modal-body').html(body);
+            $('.modal-footer').show();
             modal.modal('show');
 
         }
@@ -108,6 +109,8 @@
                 //On ajoute l'id du tournoi au modal
                 $('#id-tournament-modal').val(_id_tournament);
                 showModal('Supprimer le tournoi', '<div class="bg-danger text-danger" style="padding:20px;"> Voulez vous vraiment supprimer le tournoi <strong>' + _name_tournament + '</strong>?</div>');
+
+                return false;
             });
 
 
