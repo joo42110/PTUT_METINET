@@ -74,7 +74,7 @@ class Tournament extends BaseEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Day", mappedBy="tournament")
+     * @ORM\OneToMany(targetEntity="Day", mappedBy="tournament",orphanRemoval=true)
      */
     private $days;
 
