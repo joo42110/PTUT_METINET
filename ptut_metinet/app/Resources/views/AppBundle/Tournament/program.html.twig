@@ -73,6 +73,7 @@
 
             $('.btn-add-day').on('click',addDay);
             bindDayEdit();
+            bindMatchEdit();
 
         });
 
@@ -106,6 +107,29 @@
             var errorContainer = modal.find('.modal-error');
             errorContainer.html(error);
             errorContainer.removeClass('hidden');
+        }
+
+        function bindMatchEdit(){
+            $('.match-row').on('click',function(e){
+                var matchId = $(e.target).parents('.match-row').data('id');
+                getMatchEditForm(matchId);
+            })
+        }
+
+        function getMatchEditForm(matchId){
+            $.ajax({
+                type: 'GET',
+                url: '{{ url('edit_match', {'matchId': '__matchId__'}) }}'.replace('__matchId__',matchId),
+                processData: false,
+                contentType: false
+            })
+                .done(function(data){
+                    modalSaveBtn.off(); //Retrait des listners qui pouvaient précédement se trouver sur le boutton
+                    modalSaveBtn.on('click',saveAddDayModal);
+                    showModal("Programmation du match",data,null)
+                })
+                .fail(function(data){
+                })
         }
 
         function addDay(){
@@ -179,10 +203,34 @@
 
             })
                 .done(function(data){
+                    modalSaveBtn.off(); //Retrait des listners qui pouvaient précédement se trouver sur le boutton
+                    modalSaveBtn.on('click',function(){
+                        saveDayRoundsModal(dayId)
+                    });
                     showModal('Ajout de créneaux pour le ' + data.dayDate,data.renderedView,null);
                 })
                 .fail(function(data){
                     console.log(data.responseJSON)
+                })
+        }
+
+        function saveDayRoundsModal(dayId){
+
+            var form = modal.find('form')[0];
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ url('edit_day', {'dayId': '__dayId__'}) }}'.replace('__dayId__',dayId),
+                data: new FormData(form),
+                processData: false,
+                contentType: false
+
+            })
+                .done(function(data){
+                    hideModal();
+                })
+                .fail(function(data){
+                    addModalError(data.responseJSON);
                 })
         }
 

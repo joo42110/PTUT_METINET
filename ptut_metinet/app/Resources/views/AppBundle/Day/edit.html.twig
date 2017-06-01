@@ -1,3 +1,67 @@
-{{ form_start(form) }}
-    {{ form_widget(form.rounds) }}
-{{ form_end(form) }}
+{% form_theme form ':AppBundle:fields.html.twig' %}
+
+<div class="row">
+    <div class="col-md-12">
+        {{  form_start(form) }}
+
+        <table id="rounds_formfields_container" data-prototype="{{ form_widget(form.rounds.vars.prototype)|e }}" class="table">
+            <thead>
+            <th>Horaire</th>
+            <th>Supprimer</th>
+            </thead>
+            <tbody>
+            {% for round in form.rounds %}
+                {{ form_widget(round) }}
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {{  form_end(form) }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="btn btn-success btn-add-round"><span class="glyphicon glyphicon-plus"></span> Ajouter un créneau horaire</div>
+    </div>
+</div>
+
+
+<script>
+
+    var maxindex = 0;
+
+
+    $(function(){
+
+
+        maxindex = $('#rounds_formfields_container').find('.round-input').length;
+
+        $('.btn-add-round').on('click',addRound)
+    });
+
+
+
+    function addRound(e){
+        e.preventDefault();
+
+        var tableContainer =  $('table#rounds_formfields_container');
+        var prototype = tableContainer.data('prototype');
+        var newRound = prototype.replace(/__index__/g,maxindex ++);
+
+        var tableBody =  $(tableContainer.find('tbody'));
+
+        tableBody.append(newRound);
+
+        bindRemoveButtons();
+
+    }
+
+    function bindRemoveButtons(){
+        $('#rounds_formfields_container').find('.remove-button').on('click',function(e){
+           $(e.target).parents('.round-input').remove();
+        });
+    }
+
+
+</script>

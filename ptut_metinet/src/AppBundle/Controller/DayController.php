@@ -10,13 +10,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Day;
-use AppBundle\Entity\Tournament;
-use AppBundle\Form\AddFieldsType;
-use AppBundle\Form\AddTeamsType;
 use AppBundle\Form\DayRoundsType;
-use AppBundle\Form\DayType;
-use AppBundle\Form\TournamentType;
-use Doctrine\Common\Util\Debug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,6 +37,10 @@ class DayController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            foreach($day->getRounds()->toArray() as $round){
+                $round->setDay($day);
+            }
+
             $em->persist($day);
             $em->flush();
 
@@ -60,7 +58,6 @@ class DayController extends Controller
         ];
 
         return new JsonResponse($responseData);
-
     }
 
 

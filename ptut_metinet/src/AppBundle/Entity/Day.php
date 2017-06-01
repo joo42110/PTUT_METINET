@@ -32,7 +32,7 @@ class Day extends BaseEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Round", mappedBy="day")
+     * @ORM\OneToMany(targetEntity="Round", mappedBy="day",cascade={"persist"})
      */
     private $rounds;
 
@@ -46,7 +46,7 @@ class Day extends BaseEntity
     /**
      * @return Tournament
      */
-    public function getTournament(): Tournament
+    public function getTournament()
     {
         return $this->tournament;
     }

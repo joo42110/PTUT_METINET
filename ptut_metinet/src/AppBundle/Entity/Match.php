@@ -95,7 +95,7 @@ class Match extends BaseEntity
     /**
      * @return Tournament
      */
-    public function getTournament(): Tournament
+    public function getTournament()
     {
         return $this->tournament;
     }
@@ -111,7 +111,7 @@ class Match extends BaseEntity
     /**
      * @return Round
      */
-    public function getRound(): Round
+    public function getRound()
     {
         return $this->round;
     }
@@ -127,7 +127,7 @@ class Match extends BaseEntity
     /**
      * @return Field
      */
-    public function getField(): Field
+    public function getField()
     {
         return $this->field;
     }
@@ -143,7 +143,7 @@ class Match extends BaseEntity
     /**
      * @return User
      */
-    public function getReferee(): User
+    public function getReferee()
     {
         return $this->referee;
     }

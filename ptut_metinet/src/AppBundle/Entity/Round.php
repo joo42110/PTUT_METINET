@@ -52,7 +52,7 @@ class Round extends BaseEntity
     /**
      * @return Day
      */
-    public function getDay(): Day
+    public function getDay()
     {
         return $this->day;
     }
@@ -84,7 +84,7 @@ class Round extends BaseEntity
     /**
      * @return string
      */
-    public function getScheduledTime(): string
+    public function getScheduledTime()
     {
         return $this->scheduledTime;
     }

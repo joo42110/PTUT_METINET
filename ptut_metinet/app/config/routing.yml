@@ -79,5 +79,8 @@ view_match:
     path:      /match/{matchId}
     defaults:  { _controller: AppBundle:Match:view }
 
+edit_match:
+    path:      /admin/match/{matchId}/edit
+    defaults:  { _controller: AppBundle:Match:edit }
 
 
