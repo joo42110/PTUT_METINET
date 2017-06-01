@@ -70,6 +70,10 @@ add_day:
     path:      /admin/tournament/{tournamentId}/day
     defaults:  { _controller: AppBundle:Tournament:addDay }
 
+day_rounds_selector:
+    path:      /admin/day/{dayId}/roundsSelector
+    defaults:  { _controller: AppBundle:Day:roundsSelector }
+
 edit_team:
     path:      /admin/team/{teamId}/edit
     defaults:  { _controller: AppBundle:Team:edit }

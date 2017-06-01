@@ -183,6 +183,14 @@ class User extends BaseEntity implements UserInterface, \Serializable
     {
         return $this->lastname;
     }
+
+    /**
+     * @return string
+     */
+    public function getPrintableName()
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
     
     /**
      * @param string $lastname

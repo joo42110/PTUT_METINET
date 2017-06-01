@@ -53,11 +53,26 @@ class DayController extends Controller
             "dayDate" => $day->getDate()->format('d/m/Y'),
             "renderedView" => $this->render('AppBundle/Day/edit.html.twig', array(
                 'form' => $form->createView(),
-                'tournament' => $day,
+                'day' => $day,
             ))->getContent()
         ];
 
         return new JsonResponse($responseData);
+    }
+
+    function roundsSelectorAction($dayId){
+        $em = $this->getDoctrine()->getManager();
+
+        $day =  $em->getRepository(Day::class)->findOneById($dayId);
+
+        if (!$day) {
+            return new JsonResponse("Ce jour de tournoi n'existe pas.",500);
+        }
+
+        return new JsonResponse( $this->render('AppBundle/Day/roundsSelector.html.twig', array(
+            'day' => $day,
+        ))->getContent());
+
     }
 
 

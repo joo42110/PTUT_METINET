@@ -84,6 +84,14 @@ class Day extends BaseEntity
     }
 
     /**
+     * @return mixed
+     */
+    public function getStringDate()
+    {
+        return $this->date->format('d/m/Y');
+    }
+
+    /**
      * @param mixed $date
      */
     public function setDate($date)

@@ -1,0 +1,5 @@
+<select id="match_day" class="form-control" name="match[round]">
+    {% for round in day.rounds %}
+        <option value="{{ round.id }}">{{ round.scheduledTime }}</option>
+    {% endfor %}
+</select>

@@ -1,10 +1,74 @@
+{{  form_start(form) }}
+<div class="row">
+    <div class="col-md-12">
+        <fieldset>
+            <legend>Horaire du match</legend>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <label for='match_day'>Jour</label>
+                    {{ form_widget(form.day) }}
+                </div>
+
+                <div class="col-md-6">
+                    <label for='match-round'>Créneau Horaire</label>
+                    <div class="day-rounds-wrapper">
+                        {{ form_widget(form.round) }}
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-md-12">
-        {{  form_start(form) }}
-
-        {{ form_widget(form) }}
-
-        {{  form_end(form) }}
+        <fieldset>
+            <legend>Arbitre</legend>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    {{ form_widget(form.referee) }}
+                </div>
+            </div>
+        </fieldset>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-12">
+        <fieldset>
+            <legend>Terrain</legend>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    {{ form_widget(form.field) }}
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+{{  form_end(form) }}
+
+<script>
+    $(function(){
+       $('#match_day').on('change',function(e){
+           var dayId = $(e.target).val();
+           loadRoundsSelector(dayId)
+       })
+    });
+
+    function loadRoundsSelector(dayId){
+        $.ajax({
+            type: 'GET',
+            url: '{{ url('day_rounds_selector', {'dayId': '__dayId__'}) }}'.replace('__dayId__',dayId),
+            processData: false,
+            contentType: false
+        })
+            .done(function(data){
+                $('.day-rounds-wrapper').html(data);
+            })
+            .fail(function(data){
+            })
+    }
+
+</script>
