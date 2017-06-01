@@ -104,6 +104,22 @@ class TournamentController extends Controller
         ));
     }
 
+    public function deleteAction(Request $request,$tournamentId){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $tournament =  $em->getRepository(Tournament::class)->findOneById($tournamentId);
+
+        if (!$tournament) {
+            return new JsonResponse("Ce tournoi n'existe pas.",404);
+        }
+
+        $em->remove($tournament);
+        $em->flush();
+
+        return new JsonResponse();
+    }
+
     public function addTeamsAction(Request $request,$tournamentId){
 
         $em = $this->getDoctrine()->getManager();
@@ -205,7 +221,6 @@ class TournamentController extends Controller
             'tournament' => $tournament
         ));
     }
-
 
     public function validationStatusAction($tournamentId){
 

@@ -2,22 +2,48 @@
 
 {% block body %}
 
+    <div class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-error alert alert-danger hidden"></div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id_tournament" id="id-tournament-modal"/>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-danger btn-delete-modal"><span
+                                class="glyphicon glyphicon-trash"></span> Supprimer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row text-center">
         <h1>Bienvenue sur notre page d'accueil</h1>
         <div class="tournament_list_wrapper ">
             {% for tournament in tournaments if tournament.enabled or is_granted('ROLE_SUPER_ADMIN') %}
                 {#<a href="{{ path('edit_tournament',{'tournamentId': tournament.id })}}">#}
-                <a href="{% if tournament.enabled %}{{ path('program_tournament',{'tournamentId': tournament.id })}}{% else %}{{ path('edit_tournament',{'tournamentId': tournament.id })}}{% endif %}">
+                <a href="{% if tournament.enabled %}{{ path('program_tournament',{'tournamentId': tournament.id }) }}{% else %}{{ path('edit_tournament',{'tournamentId': tournament.id }) }}{% endif %}">
                     <div class="tournament_tile {% if tournament.enabled %}enabled_tile{% else %}disabled_tile{% endif %}">
                         <div class="div_into_tournament_title">
-                            {{ tournament.name }}
+                            <p>{{ tournament.name }}</p>
+                            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                <a class="btn btn-xs btn-danger btn-delete-tournament" data-name="{{ tournament.name }}"
+                                   data-idtournament="{{ tournament.id }}">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 </a>
             {% endfor %}
             {% if is_granted('ROLE_SUPER_ADMIN') %}
-
-                <a href="{{ path('create_tournament')}}">
+                <a href="{{ path('create_tournament') }}">
                     <div class="tournament_tile add-tile">
                         <div class="div_into_tournament_title">
                             <span class="glyphicon glyphicon-plus-sign"></span>
@@ -28,4 +54,85 @@
             {% endif %}
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script>
+
+        var modal = $('.modal');
+
+        $(function () {
+            initDeleteTournament();
+        });
+
+        function showModal(title, body, size) {
+
+            //Retrait des erreurs qui peuvent provenir d'une modal précédente
+            modal.find('.modal-error').addClass('hidden');
+
+            var dialog = modal.find('.modal-dialog');
+            //Reset modal dialog size
+            dialog.removeClass('modal-sm');
+            dialog.removeClass('modal-lg');
+            if (size === "sm") {
+                dialog.addClass('modal-sm');
+            }
+            if (size === "lg") {
+                dialog.addClass('modal-lg');
+            }
+
+            modal.find('.modal-title').html(title);
+            modal.find('.modal-body').html(body);
+            modal.modal('show');
+
+        }
+
+        function hideModal() {
+            modal.modal('hide');
+        }
+
+        function addModalError(error) {
+            var errorContainer = modal.find('.modal-error');
+            errorContainer.html(error);
+            errorContainer.removeClass('hidden');
+        }
+
+        function initDeleteTournament() {
+            $('.btn-delete-tournament').on("click", function () {
+                var _id_tournament = $(this).data('idtournament');
+                var _name_tournament = $(this).data('name');
+
+                //On ajoute l'id du tournoi au modal
+                $('#id-tournament-modal').val(_id_tournament);
+                showModal('Supprimer le tournoi', '<div class="bg-danger text-danger" style="padding:20px;"> Voulez vous vraiment supprimer le tournoi <strong>' + _name_tournament + '</strong>?</div>');
+            });
+
+
+            $('.btn-delete-modal').click(function () {
+
+                var _id_tournament = $('#id-tournament-modal').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ url('delete_tournament', {'tournamentId': '__tournamentId__'}) }}'.replace('__tournamentId__',_id_tournament),
+                    processData: false,
+                    contentType: false
+                })
+                    .done(function (data) {
+                        showModal('Information tournoi', '<div class="bg-success text-success" style="padding:20px;"> Le tournoi a bien été supprimé !</div>');
+                        $('.modal-footer').hide();
+                        document.location = '{{ url('tournament_list') }}';
+                    })
+                    .fail(function (data) {
+                        showModal('Information tournoi', '<div class="bg-danger text-danger" style="padding:20px;"> Un problème est survenu lors de la suppression du tournoi !</div>');
+                        $('.modal-footer').hide();
+                    })
+            });
+
+        }
+    </script>
+
 {% endblock %}

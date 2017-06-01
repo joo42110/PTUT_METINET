@@ -65,6 +65,14 @@ h1,h2,h3,h4,h5,h6{
     text-align:center;
 }
 
+.tournament_tile .div_into_tournament_title p{
+    color:white;
+}
+
+.tournament_tile .div_into_tournament_title a:hover{
+    text-decoration: none;
+}
+
 .add-tile{
     font-size : 1.7em;
 }

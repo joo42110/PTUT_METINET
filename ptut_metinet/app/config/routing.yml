@@ -37,6 +37,10 @@ edit_tournament:
     path:      /admin/tournament/{tournamentId}/edit
     defaults:  { _controller: AppBundle:Tournament:edit }
 
+delete_tournament:
+    path:      /admin/tournament/{tournamentId}/delete
+    defaults:  { _controller: AppBundle:Tournament:delete }
+
 validate_tournament:
     path:      /admin/tournament/{tournamentId}/validate
     defaults:  { _controller: AppBundle:Tournament:validate }

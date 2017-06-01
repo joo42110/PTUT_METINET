@@ -66,7 +66,7 @@ class Tournament extends BaseEntity
     private $teamsOutOfPools;
 
     /**
-     * @ORM\OneToMany(targetEntity="Match", mappedBy="tournament")
+     * @ORM\OneToMany(targetEntity="Match", mappedBy="tournament",orphanRemoval=true)
      */
     private $matches;
 
