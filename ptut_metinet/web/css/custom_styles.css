@@ -56,8 +56,17 @@ h1,h2,h3,h4,h5,h6{
     font-family: 'Roboto', sans-serif;
 }
 
+.tournament_tile .div_into_tournament_title{
+    width:200px;
+    padding:10px; /* aération interne du bloc */
+    vertical-align:middle;
+    display:inline-block;
+    line-height:1.2; /* on rétablit le line-height */
+    text-align:center;
+}
+
 .add-tile{
-    font-size : 2em;
+    font-size : 1.7em;
 }
 
 .enabled_tile{

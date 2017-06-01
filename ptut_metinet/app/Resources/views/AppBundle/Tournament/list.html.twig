@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Bienvenue sur notre page d'accueil</h1>
-    <div class="row">
-        <div class="tournament_list_wrapper">
+
+    <div class="row text-center">
+        <h1>Bienvenue sur notre page d'accueil</h1>
+        <div class="tournament_list_wrapper ">
             {% for tournament in tournaments if tournament.enabled or is_granted('ROLE_SUPER_ADMIN') %}
                 <a href="{{ path('edit_tournament',{'tournamentId': tournament.id })}}">
                     <div class="tournament_tile {% if tournament.enabled %}enabled_tile{% else %}disabled_tile{% endif %}">
-                        {{ tournament.name }}
+
+                        <div class="div_into_tournament_title">
+                            {{ tournament.name }}
+                        </div>
                     </div>
                 </a>
             {% endfor %}
@@ -15,7 +19,9 @@
 
                 <a href="{{ path('create_tournament')}}">
                     <div class="tournament_tile add-tile">
-                        <span class="glyphicon glyphicon-plus-sign"></span>
+                        <div class="div_into_tournament_title">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                        </div>
                     </div>
                 </a>
 
