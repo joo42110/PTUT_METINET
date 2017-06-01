@@ -42,6 +42,14 @@ class Field extends BaseEntity
     private $tournament;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Round", inversedBy="referees")
+     * @ORM\JoinTable(name="field_rounds")
+     */
+    private $rounds;
+
+
 
     /**
      * @return string
@@ -90,6 +98,33 @@ class Field extends BaseEntity
     {
         $this->tournament = $tournament;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getRounds()
+    {
+        return $this->rounds;
+    }
+
+    /**
+     * @param ArrayCollection $rounds
+     */
+    public function setRounds(ArrayCollection $rounds)
+    {
+        $this->rounds = $rounds;
+    }
+
+    /**
+     * @param Round $round
+     */
+    public function addRound(Round $round)
+    {
+        $this->rounds->add($round);
+        $round->addField($this);
+    }
+
+
 
 
 

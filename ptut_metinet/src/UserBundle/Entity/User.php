@@ -3,6 +3,7 @@
 namespace UserBundle\Entity;
 
 use AppBundle\Entity\Match;
+use AppBundle\Entity\Round;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -88,6 +89,14 @@ class User extends BaseEntity implements UserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Match", mappedBy="referee")
      */
     private $arbitratedMatches;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Round", inversedBy="referees")
+     * @ORM\JoinTable(name="referee_rounds")
+     */
+    private $rounds;
 
 
     /**
@@ -231,6 +240,57 @@ class User extends BaseEntity implements UserInterface, \Serializable
     {
         $this->phone = $phone;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getArbitratedMatches()
+    {
+        return $this->arbitratedMatches;
+    }
+
+    /**
+     * @param ArrayCollection $arbitratedMatches
+     */
+    public function setArbitratedMatches(ArrayCollection $arbitratedMatches)
+    {
+        $this->arbitratedMatches = $arbitratedMatches;
+    }
+
+    /**
+     * @param Match $arbitratedMatch
+     */
+    public function addArbitratedMatches(Match $arbitratedMatch)
+    {
+        $this->arbitratedMatches->add($arbitratedMatch);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getRounds()
+    {
+        return $this->rounds;
+    }
+
+    /**
+     * @param ArrayCollection $rounds
+     */
+    public function setRounds(ArrayCollection $rounds)
+    {
+        $this->rounds = $rounds;
+    }
+
+    /**
+     * @param Round $round
+     */
+    public function addRound(Round $round)
+    {
+        $this->rounds->add($round);
+        $round->addReferee($this);
+    }
+
+
     
     
     public function getSalt(){

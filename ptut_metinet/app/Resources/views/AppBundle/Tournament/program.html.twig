@@ -125,10 +125,32 @@
             })
                 .done(function(data){
                     modalSaveBtn.off(); //Retrait des listners qui pouvaient précédement se trouver sur le boutton
-                    modalSaveBtn.on('click',saveAddDayModal);
-                    showModal("Programmation du match",data,null)
+                    modalSaveBtn.on('click',function(){
+                        saveMatchEditModal(matchId);
+                    });
+                    showModal("Programmation du match",data,null);
                 })
                 .fail(function(data){
+                })
+        }
+
+        function saveMatchEditModal(matchId){
+
+            var form = modal.find('form')[0];
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ url('edit_match', {'matchId': '__matchId__'}) }}'.replace('__matchId__',matchId),
+                data: new FormData(form),
+                processData: false,
+                contentType: false
+
+            })
+                .done(function(data){
+                    hideModal();
+                })
+                .fail(function(data){
+                    addModalError(data.responseJSON);
                 })
         }
 

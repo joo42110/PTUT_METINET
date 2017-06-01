@@ -57,6 +57,25 @@ class MatchController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            //Gestion du conflit arbitre/horaire
+            if($match->getRound()->getReferees()->contains($match->getReferee())){
+                //Si l'arbitre a déjà un match sur cet horaire
+                return new JsonResponse('Cet arbitre a déjà un match programmé sur ce créneau horaire',500);
+            }
+            else{
+                $match->getReferee()->addRound($match->getRound());
+            }
+
+            //Gestion du conflit terrain/horaire
+            if($match->getRound()->getFields()->contains($match->getField())){
+                //Si le terrain accueille déjà un match sur cet horaire
+                return new JsonResponse('Ce terrain a déjà un match programmé sur ce créneau horaire',500);
+            }
+            else{
+                $match->getField()->addRound($match->getRound());
+            }
+
+            $match->setProgramed(true);
 
             $em->persist($match);
             $em->flush();
