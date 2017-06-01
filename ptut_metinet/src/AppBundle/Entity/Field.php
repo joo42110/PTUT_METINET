@@ -9,6 +9,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Util\Debug;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -49,6 +50,15 @@ class Field extends BaseEntity
      */
     private $rounds;
 
+    /**
+     * Field constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->rounds = new ArrayCollection();
+    }
 
 
     /**

@@ -52,7 +52,7 @@ class Round extends BaseEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", mappedBy="rounds")
+     * @ORM\ManyToMany(targetEntity="Field", mappedBy="rounds")
      */
 
     private $fields;
@@ -63,16 +63,6 @@ class Round extends BaseEntity
      * @ORM\Column(name="scheduled_time", type="string")
      */
     private $scheduledTime;
-
-    /**
-     * Round constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->fields = new ArrayCollection();
-    }
 
 
     /**

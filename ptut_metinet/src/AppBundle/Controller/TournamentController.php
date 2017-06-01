@@ -267,6 +267,23 @@ class TournamentController extends Controller
 
     }
 
+    public function programMatchesAction($tournamentId){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $tournament =  $em->getRepository(Tournament::class)->findOneById($tournamentId);
+
+        if (!$tournament) {
+            return new JsonResponse("Ce tournoi n'existe pas.",404);
+        }
+
+
+        return new JsonResponse($this->render(':AppBundle/Tournament:programMatches.html.twig',array(
+            'tournament' => $tournament,
+        ))->getContent());
+
+    }
+
     public function programRoundsAction($tournamentId){
 
         $em = $this->getDoctrine()->getManager();

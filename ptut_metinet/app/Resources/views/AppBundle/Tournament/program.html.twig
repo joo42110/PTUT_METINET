@@ -147,6 +147,7 @@
 
             })
                 .done(function(data){
+                    reloadProgramMatches()
                     hideModal();
                 })
                 .fail(function(data){
@@ -191,6 +192,22 @@
                 })
         }
 
+        function reloadProgramMatches(){
+            $.ajax({
+                type: 'GET',
+                url: '{{ url('program_tournament_matches', {'tournamentId': tournament.id}) }}',
+                processData: false,
+                contentType: false
+
+            })
+                .done(function(data){
+                    $('#matches').html(data);
+                })
+                .fail(function(data){
+                })
+        }
+
+
         function reloadProgramRounds(){
             $.ajax({
                 type: 'GET',
@@ -200,7 +217,7 @@
 
             })
                 .done(function(data){
-                    $('#program-rounds-containter').html(data)
+                    $('#program-rounds-containter').html(data);
                     bindDayEdit();
                 })
                 .fail(function(data){

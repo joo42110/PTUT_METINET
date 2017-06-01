@@ -48,6 +48,24 @@ class MatchController extends Controller
             return new JsonResponse("Ce match n'existe pas.",404);
         }
 
+        $errorNoRound = false;
+        if ($match->getTournament()->getDays()->count() > 0) {
+            foreach($match->getTournament()->getDays()->toArray() as $day){
+                if($day->getRounds()->count() <= 0){
+                    $errorNoRound = true;
+                }
+            }
+        }
+        else{
+            $errorNoRound = true;
+        }
+
+
+        if($errorNoRound){
+            return new JsonResponse("Vous devez ajouter des créneaux horaire aux jours de ce tounroi avant de pouvoir commencer a programmer les matchs",500);
+        }
+
+
         $form = $this->createForm(MatchType::class, $match, array(
             'method' => 'POST',
         ));

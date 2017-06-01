@@ -14,7 +14,7 @@
                     {% endif %}
 
                     <tr class="{{ class }}" data-id="{{ match.id }}">
-                        <td>{{ match.name }}  {% if match.programed %} (05/03/2017 - 19:00){% endif %}</td>
+                        <td>{{ match.name }}  {% if match.programed %} ({{ match.round.day.stringDate }} - {{ match.round.scheduledTime }}) {% endif %}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
