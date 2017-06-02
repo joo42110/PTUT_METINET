@@ -13,6 +13,10 @@ h1,h2,h3,h4,h5,h6{
     color: #000000;
 }
 
+.score-container{
+    font-size: 10em;
+}
+
 .day-row:hover{
     color: #000000;
     cursor: pointer;

@@ -19,11 +19,78 @@ class Score extends BaseEntity
     /**
      * @var Team
      *
-     * @ORM\OneToMany(targetEntity="Team", mappedBy="matches",cascade={"persist"},orphanRemoval=true)
-     * @ORM\JoinTable(name="matches_teams")
+     * @ORM\ManyToOne(targetEntity="Team", inversedBy="scores",cascade={"persist"})
+     * @ORM\JoinColumn(name="team_id",referencedColumnName="id")
      */
     private $team;
 
+    /**
+     * @var Match
+     *
+     * @ORM\ManyToOne(targetEntity="Match", inversedBy="scores",cascade={"persist"})
+     * @ORM\JoinColumn(name="match_id",referencedColumnName="id")
+     */
+    private $match;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="goals",type="integer")
+     */
+    private $goals = 0;
+
+    /**
+     * @return Team
+     */
+    public function getTeam()
+    {
+        return $this->team;
+    }
+
+    /**
+     * @param Team $team
+     */
+    public function setTeam(Team $team)
+    {
+        $this->team = $team;
+    }
+
+    /**
+     * @return Match
+     */
+    public function getMatch()
+    {
+        return $this->match;
+    }
+
+    /**
+     * @param Match $match
+     */
+    public function setMatch(Match $match)
+    {
+        $this->match = $match;
+    }
+
+    /**
+     * @return int
+     */
+    public function getGoals()
+    {
+        return $this->goals;
+    }
+
+    /**
+     * @param int $goals
+     */
+    public function setGoals(int $goals)
+    {
+        $this->goals = $goals;
+    }
+
+    public function __toString()
+    {
+        return '' . $this->team->getName();
+    }
 
 
 }

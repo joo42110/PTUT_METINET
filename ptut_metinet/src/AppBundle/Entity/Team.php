@@ -56,6 +56,13 @@ class Team extends BaseEntity
     private $matches;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Score", mappedBy="team",cascade={"persist"},orphanRemoval=true)
+     */
+    private $scores;
+
+    /**
      * @return mixed
      */
     public function getName()
@@ -129,6 +136,48 @@ class Team extends BaseEntity
 
         return $errors;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getMatches()
+    {
+        return $this->matches;
+    }
+
+    /**
+     * @param ArrayCollection $matches
+     */
+    public function setMatches(ArrayCollection $matches)
+    {
+        $this->matches = $matches;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getScores()
+    {
+        return $this->scores;
+    }
+
+    /**
+     * @param ArrayCollection $scores
+     */
+    public function setScores(ArrayCollection $scores)
+    {
+        $this->scores = $scores;
+    }
+
+    /**
+     * @param Score $score
+     */
+    public function addScore(Score $score)
+    {
+        $this->scores->add($score);
+        $score->setTeam($this);
+    }
+
 
 
 

@@ -136,10 +136,17 @@ class Pool extends BaseEntity
             //On re-boucle sur les équipes pour constituer les combinaisons
             foreach($teams as $otherTeam){
 
+                //Création du match
                 if($team->getId() !== $otherTeam->getId() && !in_array($otherTeam->getId(),$alreadyCombinedTeams)){
                     $match = new Match();
                     $match->addTeam($team);
                     $match->addTeam($otherTeam);
+                    //Création des scores
+                    foreach($match->getTeams()->toArray() as $leTeam){
+                        $score = new Score();
+                        $score->setTeam($leTeam);
+                        $match->addScore($score);
+                    }
                     $this->addMatch($match);
                     $match->setTournament($tournament);
                 }

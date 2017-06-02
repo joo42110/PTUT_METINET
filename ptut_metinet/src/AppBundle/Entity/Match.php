@@ -65,6 +65,13 @@ class Match extends BaseEntity
      */
     private $programed = false;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Score", mappedBy="match",cascade={"persist"},orphanRemoval=true)
+     */
+    private $scores;
+
 
     /**
      * Match constructor.
@@ -73,6 +80,7 @@ class Match extends BaseEntity
     {
         parent::__construct();
         $this->teams = new ArrayCollection();
+        $this->scores = new ArrayCollection();
     }
 
 
@@ -189,6 +197,34 @@ class Match extends BaseEntity
         return $name;
 
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getScores()
+    {
+        return $this->scores;
+    }
+
+    /**
+     * @param ArrayCollection $scores
+     */
+    public function setScores(ArrayCollection $scores)
+    {
+        $this->scores = $scores;
+    }
+
+    /**
+     * @param Score $score
+     */
+    public function addScore(Score $score)
+    {
+        $this->scores->add($score);
+        $score->setMatch($this);
+    }
+
+
+
 
 
 

@@ -45,7 +45,7 @@ class Field extends BaseEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Round", inversedBy="referees")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Round", inversedBy="fields")
      * @ORM\JoinTable(name="field_rounds")
      */
     private $rounds;
