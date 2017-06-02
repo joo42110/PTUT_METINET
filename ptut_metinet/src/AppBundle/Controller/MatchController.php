@@ -10,6 +10,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Match;
+use AppBundle\Entity\Team;
 use AppBundle\Form\MatchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -110,4 +111,69 @@ class MatchController extends Controller
         ));
 
     }
+
+
+    // ------------ API RELATED ACTIONS ------------
+
+    public function addGoalAction($matchId,$teamId){
+        return $this->goalChange($matchId,$teamId,"add");
+    }
+
+    public function removeGoalAction($matchId,$teamId){
+        return $this->goalChange($matchId,$teamId,"remove");
+    }
+
+    // ------------ FONCTIONS NON ROUTABLES (Factorisation du code) ------------
+
+    /* Appeler la fonction avec
+     *  $action = "add" | Ajouter un but
+     *  $action = "remove" | Retirer un but
+     */
+    public function goalChange($matchId,$teamId,$action){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $match =  $em->getRepository(Match::class)->findOneById($matchId);
+        if (!$match) {
+            return new JsonResponse("Ce match n'existe pas.",404);
+        }
+
+        if ($this->getUser() != $match->getReferee()) {
+            return new JsonResponse("Vous n'êtes pas l'arbitre de ce match.",403);
+        }
+
+        $team =  $em->getRepository(Team::class)->findOneById($teamId);
+        if (!$team){
+            return new JsonResponse("Cette équipe n'existe pas.",404);
+        }
+
+        if(!$match->getTeams()->contains($team)){
+            return new JsonResponse("Cette équipe n'appartient pas a ce match.",500);
+        }
+
+        foreach($match->getScores() as $score){
+            if($score->getTeam() == $team){
+
+                if($action == "add"){
+                    $score->addGoal();
+                }
+                else if($action == "remove"){
+                    $score->removeGoal();
+                }
+                else{
+                    throw new \Exception('Valeur du paramètre $action invalide : la valeur devrait être "add" ou "remove"');
+                }
+
+                $em->persist($score);
+                $em->flush();
+
+                return new JsonResponse($score->getGoals());
+            }
+        }
+
+        return new JsonResponse("Erreur interne : aucun objet Score associé a cette équipe pour ce match.",500);
+
+    }
+
+
 }

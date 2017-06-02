@@ -2,8 +2,22 @@
     text-align: center;
 }
 
+.score-container{
+    font-size: 10em;
+}
+
+.score-btn{
+    line-height: 1em;
+    font-size: 0.2em;
+    cursor: pointer;
+}
+
 .team-name{
     font-size: 2.5em;
     font-weight: 900;
+}
 
+.match-infos{
+    text-align: center;
+    font-size : 1.5em;
 }

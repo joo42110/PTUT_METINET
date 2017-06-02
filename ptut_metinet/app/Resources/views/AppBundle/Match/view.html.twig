@@ -3,6 +3,7 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/match_view.css') }}"/>
+
 {% endblock %}
 
 {% block body %}
@@ -10,18 +11,44 @@
 
     <h4>{{ match.tournament.name }} > {{ match.name }}</h4>
 
+
+    <div class=row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="match-infos">
+                <b>{{ match.round.day.stringDate }}</b> - {{ match.round.scheduledTime }}<br/>
+                <b>Terrain</b> : {{ match.field.name }}<br/>
+                <b>Arbitre</b> : {{ match.referee.firstname }} {{ match.referee.lastname }}
+            </div>
+        </div>
+    </div>
+
+    <div class=row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="errors">
+            </div>
+        </div>
+    </div>
+
+
     <div class=row">
         {% for team in match.teams %}
-
-
-
             <div class="col-md-6">
                 <div class="team-container" data-id="{{ team.id }}">
                     <span class="team-name">{{ team.name }}</span>
-                    <div class="score-container">
-                        {% for score in match.scores if score.team == team %}
-                            {{ score.goals }}
-                        {% endfor %}
+
+                    <div class="row score-container">
+
+                        <span class="glyphicon glyphicon-minus-sign referee-control score-btn remove-goal-btn"></span>
+
+                        <span class="score">
+                             {% for score in match.scores if score.team == team %}
+                                 {{ score.goals }}
+                             {% endfor %}
+                        </span>
+
+
+                        <span class="glyphicon glyphicon-plus-sign referee-control score-btn add-goal-btn"></span>
+
                     </div>
                     <div class="player-list-container">
                         <table class="table player-list">
@@ -48,5 +75,63 @@
         {% endfor %}
     </div>
 
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    {% if app.user == match.referee %}
+        <script>
+            $(function(){
+                $('.add-goal-btn').on('click',function(e){
+                    goalChange(e,"add");
+                });
+                $('.remove-goal-btn').on('click',function(e){
+                    goalChange(e,"remove");
+                });
+
+            });
+
+            function addError(message){
+                var alert = $("<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><span class='alert-content'></span></div>");
+                alert.find('.alert-content').text(message);
+                $('.errors').append(alert);
+            }
+
+            function goalChange(e,action){
+                var target = $(e.target);
+                var teamId = target.parents('.team-container').data('id');
+                var scoreWrapper = target.parents('.score-container').find('.score');
+
+                var url;
+                if(action === "add"){
+                    url = '{{ url('api_match_add_goal', {'matchId': match.id, 'teamId': "__teamId__"}) }}';
+                }
+                else if(action === "remove"){
+                    url = '{{ url('api_match_remove_goal', {'matchId': match.id, 'teamId': "__teamId__"}) }}';
+                }
+                else{
+                    throw new Error('Incorrect value for "action" parameter');
+                }
+
+                $.ajax({
+                    type: 'GET',
+                    url: url.replace('__teamId__',teamId),
+                    processData: false,
+                    contentType: false
+                })
+                    .done(function(data) {
+                        scoreWrapper.text(data);
+                    })
+                    .fail(function(data) {
+                        addError(data.responseJSON);
+                    })
+            }
+
+
+        </script>
+    {% endif %}
 
 {% endblock %}

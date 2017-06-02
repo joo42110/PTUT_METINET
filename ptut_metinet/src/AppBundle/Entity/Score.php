@@ -87,9 +87,17 @@ class Score extends BaseEntity
         $this->goals = $goals;
     }
 
-    public function __toString()
+    public function addGoal()
     {
-        return '' . $this->team->getName();
+        $this->goals++;
+    }
+
+    public function removeGoal()
+    {
+        if($this->goals > 0){
+            $this->goals--;
+        }
+
     }
 
 

@@ -95,4 +95,12 @@ edit_match:
     path:      /admin/match/{matchId}/edit
     defaults:  { _controller: AppBundle:Match:edit }
 
+api_match_add_goal:
+    path:       /api/match/{matchId}/addGoal/{teamId}
+    defaults:  { _controller: AppBundle:Match:addGoal }
+
+api_match_remove_goal:
+    path:       /api/match/{matchId}/removeGoal/{teamId}
+    defaults:  { _controller: AppBundle:Match:removeGoal }
+
 
