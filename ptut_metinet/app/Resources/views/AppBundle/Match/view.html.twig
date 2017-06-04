@@ -1,8 +1,22 @@
 {% extends 'base.html.twig' %}
 
+{% if app.user and match.referee == app.user %}
+    {% set refereeing = true %}
+{% else %}
+    {% set refereeing = false %}
+{% endif %}
+
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/match_view.css') }}"/>
+
+    <style>
+        .timer{
+        {% if not refereeing %}
+            display: none;
+        {% endif %}
+        }
+    </style>
 
 {% endblock %}
 
@@ -29,6 +43,24 @@
         </div>
     </div>
 
+    <div class=row">
+        <div class="col-md-12">
+            <div class="timer">
+                <h3>Chronomètre</h3>
+
+                <div class="time">
+                    <span class="timer-minutes">00</span> : <span class="timer-seconds">00</span>
+                </div>
+
+                <div class="time-controls">
+                    <button class="btn btn-primary btn-start-timer"><span class="glyphicon glyphicon-play"></span> Démarrer</button>
+                    <button class="btn btn-warning btn-pause-timer"><span class="glyphicon glyphicon-pause"></span> Pause</button>
+                    <button class="btn btn-danger btn-stop-timer"><span class="glyphicon glyphicon-stop"></span> Fin du match</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class=row">
         {% for team in match.teams %}
@@ -50,6 +82,31 @@
                         <span class="glyphicon glyphicon-plus-sign referee-control score-btn add-goal-btn"></span>
 
                     </div>
+
+                    <div class="row cards-container">
+
+                        {% for cards in match.cards if cards.team == team %}
+
+                        <div class="col-md-4 col-md-offset-2 yellow-card-container">
+                            <span class="glyphicon glyphicon-minus-sign referee-control card-btn remove-card-btn"></span>
+
+                            <div class="card yellow-card">{{ cards.yellow }}</div>
+
+                            <span class="glyphicon glyphicon-plus-sign referee-control card-btn add-card-btn"></span>
+                        </div>
+
+                        <div class="col-md-4 red-card-container">
+                            <span class="glyphicon glyphicon-minus-sign referee-control card-btn remove-card-btn"></span>
+
+                            <div class="card red-card">{{ cards.red }}</div>
+
+                            <span class="glyphicon glyphicon-plus-sign referee-control card-btn add-card-btn"></span>
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
                     <div class="player-list-container">
                         <table class="table player-list">
 
@@ -70,6 +127,7 @@
 
                         </table>
                     </div>
+
                 </div>
             </div>
         {% endfor %}
@@ -82,17 +140,103 @@
 
     {{ parent() }}
 
-    {% if app.user == match.referee %}
+    {% if refereeing %}
+
         <script>
+
+            // Gestion du timer
+            var timer = {
+                seconds: 0,
+                minutes: 0,
+                running: false,
+                intervalId: 0,
+                NumberFormater: new Intl.NumberFormat('fr-FR',{minimumIntegerDigits: 2}),
+
+                start: function(){
+                    $('.referee-control').show();
+                    if(!this.running){ // On ne peut démarrer le compteur que s'il n'est pas en train de tourner
+                        this.update(this); //On exécute la fonction une première fois pour démarrer instantanément
+                        this.intervalId = setInterval(this.update,1000,this); //On passe la référence de l'objet en paramètre car setInterval apelle la callback avec un contexte erroné
+                        this.running = true;
+                    }
+                },
+
+                pause: function(){
+                    if(this.running){
+                        this.intervalId = clearInterval(this.intervalId);
+                        this.running = false;
+                    }
+                },
+
+                stop: function(){
+                    this.pause();
+                    $('.referee-control').hide();
+                    $('.timer').remove();
+                    endMatch();
+
+                },
+
+                // La fonction est appelée par setInterval qui l'apelle avec le contexte window, il faut donc passer manuellement une référence vers l'objet timer
+                update: function(selfReference){
+                    selfReference.seconds++;
+                    if(selfReference.seconds >= 60){
+                        selfReference.minutes++;
+                        selfReference.seconds = 0;
+                    }
+                    $('.timer-seconds').text(selfReference.NumberFormater.format(selfReference.seconds));
+                    $('.timer-minutes').text(selfReference.NumberFormater.format(selfReference.minutes));
+                }
+
+            };
+
+
             $(function(){
+
+
+
                 $('.add-goal-btn').on('click',function(e){
                     goalChange(e,"add");
                 });
+
                 $('.remove-goal-btn').on('click',function(e){
                     goalChange(e,"remove");
                 });
 
+                $('.yellow-card-container .add-card-btn').on('click',function(e){
+                    cardChange(e,"add","yellow");
+                });
+
+                $('.red-card-container .add-card-btn').on('click',function(e){
+                    cardChange(e,"add","red");
+                });
+
+                $('.yellow-card-container .remove-card-btn').on('click',function(e){
+                    cardChange(e,"remove","yellow");
+                });
+
+                $('.red-card-container .remove-card-btn').on('click',function(e){
+                    cardChange(e,"remove","red");
+                });
+
+                $('.btn-start-timer').on('click',function(){
+                    timer.start();
+                });
+
+                $('.btn-pause-timer').on('click',function(){
+                    timer.pause();
+                });
+
+                $('.btn-stop-timer').on('click',function(){
+                    timer.stop();
+                });
+
+
+
+
+
             });
+
+
 
             function addError(message){
                 var alert = $("<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><span class='alert-content'></span></div>");
@@ -124,6 +268,51 @@
                 })
                     .done(function(data) {
                         scoreWrapper.text(data);
+                    })
+                    .fail(function(data) {
+                        addError(data.responseJSON);
+                    })
+            }
+
+
+            function cardChange(e,action,color){
+                var target = $(e.target);
+                var teamId = target.parents('.team-container').data('id');
+                var card = target.parents('.'+color+'-card-container').find('.card');
+
+                var url;
+                if(action === "add"){
+                    url = '{{ url('api_match_add_card', {'matchId': match.id, 'teamId': "__teamId__", 'color': "__color__"}) }}';
+                }
+                else if(action === "remove"){
+                    url = '{{ url('api_match_remove_card', {'matchId': match.id, 'teamId': "__teamId__", 'color': "__color__"}) }}';
+                }
+                else{
+                    throw new Error('Incorrect value for "action" parameter');
+                }
+
+                $.ajax({
+                    type: 'GET',
+                    url: url.replace('__teamId__',teamId).replace('__color__',color),
+                    processData: false,
+                    contentType: false
+                })
+                    .done(function(data) {
+                        card.text(data);
+                    })
+                    .fail(function(data) {
+                        addError(data.responseJSON);
+                    })
+            }
+
+            function endMatch(){
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ url('api_match_end', {'matchId': match.id}) }}',
+                    processData: false,
+                    contentType: false
+                })
+                    .done(function(data) {
                     })
                     .fail(function(data) {
                         addError(data.responseJSON);

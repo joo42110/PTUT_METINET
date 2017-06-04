@@ -72,6 +72,23 @@ class Match extends BaseEntity
      */
     private $scores;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Cards", mappedBy="match",cascade={"persist"},orphanRemoval=true)
+     */
+    private $cards;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="played",type="boolean")
+     */
+    private $played = false;
+
+
+
+
 
     /**
      * Match constructor.
@@ -81,6 +98,7 @@ class Match extends BaseEntity
         parent::__construct();
         $this->teams = new ArrayCollection();
         $this->scores = new ArrayCollection();
+        $this->cards = new ArrayCollection();
     }
 
 
@@ -221,6 +239,61 @@ class Match extends BaseEntity
     {
         $this->scores->add($score);
         $score->setMatch($this);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCards()
+    {
+        return $this->cards;
+    }
+
+    /**
+     * @param ArrayCollection $cards
+     */
+    public function setCards(ArrayCollection $cards)
+    {
+        $this->cards = $cards;
+    }
+
+    /**
+     * @param Cards $cards
+     */
+    public function addCards(Cards $cards)
+    {
+        $this->cards->add($cards);
+        $cards->setMatch($this);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPlayed(): bool
+    {
+        return $this->played;
+    }
+
+    /**
+     * @param bool $played
+     */
+    public function setPlayed(bool $played)
+    {
+        $this->played = $played;
+    }
+
+
+
+    public function initialize(){
+        //Création des scores && conteneurs de cartons
+        foreach($this->getTeams()->toArray() as $team){
+            $score = new Score();
+            $score->setTeam($team);
+            $this->addScore($score);
+            $cards = new Cards();
+            $cards->setTeam($team);
+            $this->addCards($cards);
+        }
     }
 
 

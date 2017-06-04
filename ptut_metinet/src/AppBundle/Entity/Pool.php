@@ -141,12 +141,7 @@ class Pool extends BaseEntity
                     $match = new Match();
                     $match->addTeam($team);
                     $match->addTeam($otherTeam);
-                    //Création des scores
-                    foreach($match->getTeams()->toArray() as $leTeam){
-                        $score = new Score();
-                        $score->setTeam($leTeam);
-                        $match->addScore($score);
-                    }
+                    $match->initialize();
                     $this->addMatch($match);
                     $match->setTournament($tournament);
                 }

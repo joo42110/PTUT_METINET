@@ -30,31 +30,39 @@
 
     <h4>Ce tournoi est actuellement en phase {{ phaseName }}</h4>
 
-    <div>
-
-        <ul class="nav nav-tabs nav-justified" role="tablist">
-            <li role="presentation" class="active"><a href="#matches" aria-controls="matches" role="tab" data-toggle="tab">Matches</a></li>
-            <li role="presentation"><a href="#rounds" aria-controls="rounds" role="tab" data-toggle="tab">Créneaux horaires</a></li>
-        </ul>
-
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="matches">
-                {% include ':AppBundle/Tournament:programMatches.html.twig' %}
-            </div>
-
-            <div role="tabpanel" class="tab-pane" id="rounds">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="btn btn-success btn-add-day"><span class="glyphicon glyphicon-plus"></span> Ajouter un jour de tournoi</div>
-                    </div>
-                </div>
-                <div id="program-rounds-containter">
-                    {% include ':AppBundle/Tournament:programRounds.html.twig' %}
-                </div>
-
+    <div class=row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="errors">
             </div>
         </div>
+    </div>
 
+    <div class=row">
+        <div class="col-md-12">
+
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+                <li role="presentation" class="active"><a href="#matches" aria-controls="matches" role="tab" data-toggle="tab">Matches</a></li>
+                <li role="presentation"><a href="#rounds" aria-controls="rounds" role="tab" data-toggle="tab">Créneaux horaires</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="matches">
+                    {% include ':AppBundle/Tournament:programMatches.html.twig' %}
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="rounds">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn btn-success btn-add-day"><span class="glyphicon glyphicon-plus"></span> Ajouter un jour de tournoi</div>
+                        </div>
+                    </div>
+                    <div id="program-rounds-containter">
+                        {% include ':AppBundle/Tournament:programRounds.html.twig' %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 
 {% endblock %}
@@ -76,6 +84,12 @@
             bindMatchEdit();
 
         });
+
+        function addError(message){
+            var alert = $("<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><span class='alert-content'></span></div>");
+            alert.find('.alert-content').text(message);
+            $('.errors').append(alert);
+        }
 
         function showModal(title,body,size){
 
@@ -131,6 +145,7 @@
                     showModal("Programmation du match",data,null);
                 })
                 .fail(function(data){
+                    addError(data.responseJSON);
                 })
         }
 
@@ -168,6 +183,7 @@
                     showModal("Ajout d'un jour de tournoi",data,"sm")
                 })
                 .fail(function(data){
+                    addError(data.responseJSON);
                 })
         }
 
@@ -205,6 +221,7 @@
                     bindMatchEdit();
                 })
                 .fail(function(data){
+                    addError(responseJSON);
                 })
         }
 
@@ -222,6 +239,7 @@
                     bindDayEdit();
                 })
                 .fail(function(data){
+                    addError(responseJSON);
                 })
         }
 
@@ -250,7 +268,7 @@
                     showModal('Ajout de créneaux pour le ' + data.dayDate,data.renderedView,null);
                 })
                 .fail(function(data){
-                    console.log(data.responseJSON)
+                    addError(data.responseJSON);
                 })
         }
 

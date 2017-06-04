@@ -123,6 +123,39 @@ class MatchController extends Controller
         return $this->goalChange($matchId,$teamId,"remove");
     }
 
+    public function addCardAction($matchId,$teamId,$color){
+        return $this->cardChange($matchId,$teamId,"add",$color);
+    }
+
+    public function removeCardAction($matchId,$teamId,$color){
+        return $this->cardChange($matchId,$teamId,"remove",$color);
+    }
+
+    public function endAction($matchId){
+        $em = $this->getDoctrine()->getManager();
+
+        $match =  $em->getRepository(Match::class)->findOneById($matchId);
+        if (!$match) {
+            return new JsonResponse("Ce match n'existe pas.",404);
+        }
+
+        if ($this->getUser() != $match->getReferee()) {
+            return new JsonResponse("Vous n'êtes pas l'arbitre de ce match.",403);
+        }
+
+
+        if ($match->isPlayed()) {
+            return new JsonResponse("Ce match a déjà été joué.",500);
+        }
+
+        $match->setPlayed(true);
+
+        $em->persist($match);
+        $em->flush();
+
+        return new JsonResponse();
+    }
+
     // ------------ FONCTIONS NON ROUTABLES (Factorisation du code) ------------
 
     /* Appeler la fonction avec
@@ -140,6 +173,10 @@ class MatchController extends Controller
 
         if ($this->getUser() != $match->getReferee()) {
             return new JsonResponse("Vous n'êtes pas l'arbitre de ce match.",403);
+        }
+
+        if ($match->isPlayed()) {
+            return new JsonResponse("Ce match a déjà été joué.",500);
         }
 
         $team =  $em->getRepository(Team::class)->findOneById($teamId);
@@ -172,6 +209,73 @@ class MatchController extends Controller
         }
 
         return new JsonResponse("Erreur interne : aucun objet Score associé a cette équipe pour ce match.",500);
+
+    }
+
+    /* Appeler la fonction avec
+     *  $action = "add" | Ajouter un carton
+     *  $action = "remove" | Retirer un carton
+     * --------------------------
+     *  $color = "yellow" | Carton jaune
+     *  $color = "red" | Carton rouge
+     */
+    public function cardChange($matchId,$teamId,$action,$color){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $match =  $em->getRepository(Match::class)->findOneById($matchId);
+        if (!$match) {
+            return new JsonResponse("Ce match n'existe pas.",404);
+        }
+
+        if ($this->getUser() != $match->getReferee()) {
+            return new JsonResponse("Vous n'êtes pas l'arbitre de ce match.",403);
+        }
+
+        if ($match->isPlayed()) {
+            return new JsonResponse("Ce match a déjà été joué.",500);
+        }
+
+        $team =  $em->getRepository(Team::class)->findOneById($teamId);
+        if (!$team){
+            return new JsonResponse("Cette équipe n'existe pas.",404);
+        }
+
+        if(!$match->getTeams()->contains($team)){
+            return new JsonResponse("Cette équipe n'appartient pas a ce match.",500);
+        }
+
+        foreach($match->getCards() as $cards){
+            if($cards->getTeam() == $team){
+
+                if($color == "yellow" || $color == "red"){
+                    if($action == "add"){
+                        $functionName = "add" . ucfirst($color);
+                        $cards->$functionName();
+                    }
+                    else if($action == "remove"){
+                        $functionName = "remove" . ucfirst($color);
+                        $cards->$functionName();
+                    }
+                    else{
+                        throw new \Exception('Valeur du paramètre $action invalide : la valeur devrait être "add" ou "remove"');
+                    }
+                }
+                else{
+                    return new JsonResponse('Couleur du carton invalide : la valeur devrait être "red" ou "yellow"',500);
+                }
+
+
+                $em->persist($cards);
+                $em->flush();
+
+                $getterName = "get" . ucfirst($color);
+                $return = $cards->$getterName();
+                return new JsonResponse($return);
+            }
+        }
+
+        return new JsonResponse("Erreur interne : aucun objet Cards associé a cette équipe pour ce match.",500);
 
     }
 

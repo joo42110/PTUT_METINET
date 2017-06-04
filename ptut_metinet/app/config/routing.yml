@@ -103,4 +103,16 @@ api_match_remove_goal:
     path:       /api/match/{matchId}/removeGoal/{teamId}
     defaults:  { _controller: AppBundle:Match:removeGoal }
 
+api_match_add_card:
+    path:       /api/match/{matchId}/addCard/{color}/{teamId}
+    defaults:  { _controller: AppBundle:Match:addCard }
+
+api_match_remove_card:
+    path:       /api/match/{matchId}/removeCard/{color}/{teamId}
+    defaults:  { _controller: AppBundle:Match:removeCard }
+
+api_match_end:
+    path:       /api/match/{matchId}/end
+    defaults:  { _controller: AppBundle:Match:end }
+
 
