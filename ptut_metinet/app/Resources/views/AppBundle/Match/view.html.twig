@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% if app.user and match.referee == app.user %}
+{% if app.user and match.referee == app.user and not match.played %}
     {% set refereeing = true %}
 {% else %}
     {% set refereeing = false %}
@@ -9,15 +9,6 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/match_view.css') }}"/>
-
-    <style>
-        .timer{
-        {% if not refereeing %}
-            display: none;
-        {% endif %}
-        }
-    </style>
-
 {% endblock %}
 
 {% block body %}
@@ -43,6 +34,8 @@
         </div>
     </div>
 
+
+    {% if refereeing  %}
     <div class=row">
         <div class="col-md-12">
             <div class="timer">
@@ -60,6 +53,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
 
 
     <div class=row">

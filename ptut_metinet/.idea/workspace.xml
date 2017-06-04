@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="791cd93a-ad03-4527-9c36-0e57195b4d89" name="Default" comment="Gros avancement sur l'arbitrage d'un match ! Incroyable ! Mais d'où lui viens toute cette motivation ?">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Cards.php" />
+    <list default="true" id="791cd93a-ad03-4527-9c36-0e57195b4d89" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/AppBundle/Match/view.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/AppBundle/Match/view.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/program.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/program.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/MatchController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/MatchController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Match.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Match.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Pool.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Pool.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Team.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Team.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/css/match_view.css" afterPath="$PROJECT_DIR$/web/css/match_view.css" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -38,14 +30,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="view.html.twig" pinned="false" current-in-tab="false">
+      <file leaf-file-name="view.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Match/view.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="172" column="49" lean-forward="false" selection-start-line="172" selection-start-column="49" selection-end-line="172" selection-end-column="49" />
+            <state relative-caret-position="170">
+              <caret line="10" column="69" lean-forward="false" selection-start-line="10" selection-start-column="69" selection-end-line="10" selection-end-column="69" />
               <folding>
-                <element signature="e#10874#10887#0#Twig" expanded="true" />
-                <marker date="1496539446619" expanded="true" signature="8102:8109" ph="×" />
+                <element signature="e#10805#10818#0#Twig" expanded="true" />
+                <marker date="1496539658024" expanded="true" signature="8033:8040" ph="×" />
               </folding>
             </state>
           </provider>
@@ -94,7 +86,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Match.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Match.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Match.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="340">
@@ -190,8 +182,8 @@
         <option value="$PROJECT_DIR$/web/css/match_view.css" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/MatchController.php" />
         <option value="$PROJECT_DIR$/app/config/routing.yml" />
-        <option value="$PROJECT_DIR$/app/Resources/views/AppBundle/Match/view.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Match.php" />
+        <option value="$PROJECT_DIR$/app/Resources/views/AppBundle/Match/view.html.twig" />
       </list>
     </option>
   </component>
@@ -657,7 +649,7 @@
       <workItem from="1496342318348" duration="4312000" />
       <workItem from="1496407364191" duration="12860000" />
       <workItem from="1496494740754" duration="12962000" />
-      <workItem from="1496534169276" duration="5080000" />
+      <workItem from="1496534169276" duration="5252000" />
     </task>
     <task id="LOCAL-00001" summary="lel">
       <created>1496326216068</created>
@@ -680,14 +672,22 @@
       <option name="project" value="LOCAL" />
       <updated>1496443586468</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fin de l'arbitrage du match featuring LE MAGNIFICIENT TIMER JAVASCRIPT EN OBJECT QUI DECHIRE SES MORTS">
+      <created>1496539549945</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1496539549945</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39617000" />
+    <option name="totallyTimeSpent" value="39789000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26705757" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -696,7 +696,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26218852" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26218852" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -718,7 +718,8 @@
     <MESSAGE value="lel" />
     <MESSAGE value="Yes jui trop fort" />
     <MESSAGE value="Gros avancement sur l'arbitrage d'un match ! Incroyable ! Mais d'où lui viens toute cette motivation ?" />
-    <option name="LAST_COMMIT_MESSAGE" value="Gros avancement sur l'arbitrage d'un match ! Incroyable ! Mais d'où lui viens toute cette motivation ?" />
+    <MESSAGE value="Fin de l'arbitrage du match featuring LE MAGNIFICIENT TIMER JAVASCRIPT EN OBJECT QUI DECHIRE SES MORTS" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fin de l'arbitrage du match featuring LE MAGNIFICIENT TIMER JAVASCRIPT EN OBJECT QUI DECHIRE SES MORTS" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1123,14 +1124,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/css/match_view.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="17" lean-forward="false" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/MatchController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="307">
@@ -1149,22 +1142,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Match/view.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="172" column="49" lean-forward="false" selection-start-line="172" selection-start-column="49" selection-end-line="172" selection-end-column="49" />
-          <folding>
-            <element signature="e#10874#10887#0#Twig" expanded="true" />
-            <marker date="1496539446619" expanded="true" signature="8102:8109" ph="×" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Match.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="84" column="31" lean-forward="false" selection-start-line="84" selection-start-column="31" selection-end-line="84" selection-end-column="31" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/match_view.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="17" lean-forward="false" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Match/view.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="69" lean-forward="false" selection-start-line="10" selection-start-column="69" selection-end-line="10" selection-end-column="69" />
+          <folding>
+            <element signature="e#10805#10818#0#Twig" expanded="true" />
+            <marker date="1496539658024" expanded="true" signature="8033:8040" ph="×" />
+          </folding>
         </state>
       </provider>
     </entry>
