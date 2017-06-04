@@ -290,6 +290,15 @@ class User extends BaseEntity implements UserInterface, \Serializable
         $round->addReferee($this);
     }
 
+    /**
+     * @param Round $round
+     */
+    public function removeRound(Round $round)
+    {
+        $this->rounds->removeElement($round);
+        $round->removeReferee($this);
+    }
+
 
     
     

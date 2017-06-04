@@ -13,6 +13,11 @@ h1,h2,h3,h4,h5,h6{
     color: #000000;
 }
 
+.add-day-btn-container{
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
 
 .day-row:hover{
     color: #000000;

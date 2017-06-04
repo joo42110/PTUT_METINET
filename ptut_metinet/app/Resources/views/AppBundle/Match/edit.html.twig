@@ -51,7 +51,14 @@
 
 <script>
     $(function(){
-       $('#match_day').on('change',function(e){
+
+        var daysSelector = $('#match_day');
+
+        //Initilalisation du choix des créneaux avec seulement ceux du jour séléctionné par défaut
+        var dayId = daysSelector.val();
+        loadRoundsSelector(dayId);
+
+       daysSelector.on('change',function(e){
            var dayId = $(e.target).val();
            loadRoundsSelector(dayId)
        })

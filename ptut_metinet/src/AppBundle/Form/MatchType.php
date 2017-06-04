@@ -41,11 +41,17 @@ class MatchType extends AbstractType
 
             ));
 
+            $tournamentRounds = [];
+            foreach($match->getTournament()->getDays() as $day){ //On génère une liste de tout les créneaux horaires de ce tournoi
+                $tournamentRounds = array_merge($tournamentRounds,$day->getRounds()->toArray());
+            }
+
+
             $form->add('round', EntityType::class, array(
                 'label' => false,
                 'class' => Round::class,
                 'choice_label' => 'scheduledTime',
-                'choices' => $match->getTournament()->getDays()[0]->getRounds(),
+                'choices' => $tournamentRounds,
                 'attr' => array(
                     'class' => 'form-control'
                 )

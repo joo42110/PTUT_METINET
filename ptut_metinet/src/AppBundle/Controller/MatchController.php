@@ -12,6 +12,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Match;
 use AppBundle\Entity\Team;
 use AppBundle\Form\MatchType;
+use Doctrine\Common\Util\Debug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -50,8 +51,8 @@ class MatchController extends Controller
         }
 
         $errorNoRound = false;
-        if ($match->getTournament()->getDays()->count() > 0) {
-            foreach($match->getTournament()->getDays()->toArray() as $day){
+        if ($match->getTournament()->getDays()->count() > 0) { //Y'a-t-il des jours de tournoi ?
+            foreach($match->getTournament()->getDays()->toArray() as $day){ //Si oui, ses jours on-t-ils tous au moins 1 créneau horaire ?
                 if($day->getRounds()->count() <= 0){
                     $errorNoRound = true;
                 }
@@ -71,6 +72,10 @@ class MatchController extends Controller
             'method' => 'POST',
         ));
 
+        //Sauvegarde de la référence vers l'ancien arbitre et terrain pour les libérer sur ce créneau si ils sont changés
+        $oldReferee = $match->getReferee();
+        $oldField = $match->getField();
+        $oldRound = $match->getRound();
 
         $form->handleRequest($request);
 
@@ -82,6 +87,9 @@ class MatchController extends Controller
                 return new JsonResponse('Cet arbitre a déjà un match programmé sur ce créneau horaire',500);
             }
             else{
+                if($oldReferee !== null &&  $oldRound !== null){ //Retrait des anciennes associations arbitre/créneau
+                    $oldReferee->removeRound($oldRound);
+                }
                 $match->getReferee()->addRound($match->getRound());
             }
 
@@ -91,6 +99,9 @@ class MatchController extends Controller
                 return new JsonResponse('Ce terrain a déjà un match programmé sur ce créneau horaire',500);
             }
             else{
+                if($oldField !== null &&  $oldRound !== null){ //Retrait des anciennes associations terrain/créneau
+                    $oldField->removeRound($oldRound);
+                }
                 $match->getField()->addRound($match->getRound());
             }
 
@@ -103,6 +114,10 @@ class MatchController extends Controller
 
 
         }
+        else if($form->isSubmitted() && !$form->isValid()){
+            return new JsonResponse("Erreur : données du formulaire non valides",500);
+        }
+
 
 
         return $this->render('AppBundle/Match/edit.html.twig', array(

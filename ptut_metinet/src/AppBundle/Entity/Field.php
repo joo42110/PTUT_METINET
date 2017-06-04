@@ -134,6 +134,15 @@ class Field extends BaseEntity
         $round->addField($this);
     }
 
+    /**
+     * @param Round $round
+     */
+    public function removeRound(Round $round)
+    {
+        $this->rounds->removeElement($round);
+        $round->removeField($this);
+    }
+
 
 
 

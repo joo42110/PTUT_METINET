@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="791cd93a-ad03-4527-9c36-0e57195b4d89" name="Default" comment="">
+    <list default="true" id="791cd93a-ad03-4527-9c36-0e57195b4d89" name="Default" comment="Fin de l'arbitrage du match featuring LE MAGNIFICIENT TIMER JAVASCRIPT EN OBJECT QUI DECHIRE SES MORTS">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/AppBundle/Match/view.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/AppBundle/Match/view.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/AppBundle/Match/edit.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/AppBundle/Match/edit.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/program.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/program.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/MatchController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/MatchController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Field.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Field.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Round.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Round.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Form/MatchType.php" afterPath="$PROJECT_DIR$/src/AppBundle/Form/MatchType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/UserBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/UserBundle/Entity/User.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/css/custom_styles.css" afterPath="$PROJECT_DIR$/web/css/custom_styles.css" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,48 +37,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="view.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Match/view.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="69" lean-forward="false" selection-start-line="10" selection-start-column="69" selection-end-line="10" selection-end-column="69" />
-              <folding>
-                <element signature="e#10805#10818#0#Twig" expanded="true" />
-                <marker date="1496539658024" expanded="true" signature="8033:8040" ph="×" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="match_view.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/css/match_view.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="17" lean-forward="false" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="program.html.twig" pinned="false" current-in-tab="false">
+      <file leaf-file-name="program.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/program.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="241" column="43" lean-forward="false" selection-start-line="241" selection-start-column="43" selection-end-line="241" selection-end-column="43" />
+            <state relative-caret-position="255">
+              <caret line="54" column="67" lean-forward="false" selection-start-line="54" selection-start-column="67" selection-end-line="54" selection-end-column="67" />
               <folding>
-                <element signature="e#12#26#0#Twig" expanded="false" />
-                <element signature="e#1956#2002#0#Twig" expanded="false" />
-                <element signature="e#2484#2529#0#Twig" expanded="false" />
-                <element signature="e#4706#4716#0#Twig" expanded="false" />
-                <element signature="e#5533#5543#0#Twig" expanded="false" />
-                <element signature="e#6101#6108#0#Twig" expanded="false" />
-                <element signature="e#6821#6828#0#Twig" expanded="false" />
-                <element signature="e#7374#7400#0#Twig" expanded="false" />
-                <element signature="e#7901#7926#0#Twig" expanded="false" />
-                <element signature="e#8644#8652#0#Twig" expanded="false" />
-                <element signature="e#9489#9497#0#Twig" expanded="false" />
-                <marker date="1496526419490" expanded="true" signature="3209:3216" ph="×" />
+                <marker date="1496586277393" expanded="true" signature="3231:3238" ph="×" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="programMatches.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/programMatches.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="156" lean-forward="false" selection-start-line="16" selection-start-column="156" selection-end-line="16" selection-end-column="156" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -79,8 +62,8 @@
       <file leaf-file-name="custom_styles.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/css/custom_styles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="2" column="29" lean-forward="false" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="29" />
+            <state relative-caret-position="306">
+              <caret line="18" column="19" lean-forward="false" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -89,34 +72,29 @@
       <file leaf-file-name="Match.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Match.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
+            <state relative-caret-position="17">
               <caret line="84" column="31" lean-forward="false" selection-start-line="84" selection-start-column="31" selection-end-line="84" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Pool.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Pool.php">
+      <file leaf-file-name="Round.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Round.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2329">
-              <caret line="144" column="44" lean-forward="false" selection-start-line="144" selection-start-column="44" selection-end-line="144" selection-end-column="44" />
-              <folding>
-                <element signature="e#6#84#0#PHP" expanded="false" />
-                <element signature="e#115#146#0#PHP" expanded="false" />
-              </folding>
+            <state relative-caret-position="477">
+              <caret line="176" column="45" lean-forward="false" selection-start-line="176" selection-start-column="45" selection-end-line="176" selection-end-column="45" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Cards.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Cards.php">
+      <file leaf-file-name="Field.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Field.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2006">
-              <caret line="123" column="0" lean-forward="false" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
-              <folding>
-                <element signature="e#6#91#0#PHP" expanded="false" />
-              </folding>
+            <state relative-caret-position="460">
+              <caret line="139" column="45" lean-forward="false" selection-start-line="139" selection-start-column="45" selection-end-line="139" selection-end-column="45" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -124,11 +102,20 @@
       <file leaf-file-name="Team.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Team.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3111">
+            <state relative-caret-position="1021">
               <caret line="190" column="30" lean-forward="false" selection-start-line="190" selection-start-column="30" selection-end-line="190" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/UserBundle/Entity/User.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="443">
+              <caret line="298" column="37" lean-forward="false" selection-start-line="298" selection-start-column="37" selection-end-line="298" selection-end-column="37" />
               <folding>
-                <element signature="e#6#84#0#PHP" expanded="false" />
-                <element signature="e#117#165#0#PHP" expanded="false" />
+                <element signature="e#37#64#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -137,8 +124,8 @@
       <file leaf-file-name="MatchController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/MatchController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
+            <state relative-caret-position="511">
+              <caret line="102" column="54" lean-forward="false" selection-start-line="102" selection-start-column="54" selection-end-line="102" selection-end-column="54" />
               <folding>
                 <element signature="e#127#154#0#PHP" expanded="true" />
               </folding>
@@ -146,11 +133,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routing.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
+      <file leaf-file-name="MatchType.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Form/MatchType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="545">
-              <caret line="115" column="51" lean-forward="false" selection-start-line="115" selection-start-column="51" selection-end-line="115" selection-end-column="51" />
+            <state relative-caret-position="493">
+              <caret line="53" column="47" lean-forward="false" selection-start-line="53" selection-start-column="47" selection-end-line="53" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -166,24 +153,26 @@
       <list>
         <option value="$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/list.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Day.php" />
-        <option value="$PROJECT_DIR$/src/UserBundle/Entity/User.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Round.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Field.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/programMatches.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/AppBundle/Day/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/TournamentController.php" />
-        <option value="$PROJECT_DIR$/web/css/custom_styles.css" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Score.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Cards.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Team.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Pool.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/program.html.twig" />
         <option value="$PROJECT_DIR$/web/css/match_view.css" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/MatchController.php" />
         <option value="$PROJECT_DIR$/app/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Match.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/AppBundle/Match/view.html.twig" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Form/MatchType.php" />
+        <option value="$PROJECT_DIR$/app/Resources/views/AppBundle/Match/edit.html.twig" />
+        <option value="$PROJECT_DIR$/src/UserBundle/Entity/User.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Round.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Field.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/MatchController.php" />
+        <option value="$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/program.html.twig" />
+        <option value="$PROJECT_DIR$/web/css/custom_styles.css" />
       </list>
     </option>
   </component>
@@ -215,6 +204,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -346,7 +336,51 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="UserBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ptut_metinet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ptut_metinet" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="AppBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ptut_metinet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ptut_metinet" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AppBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Form" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -536,7 +570,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -649,7 +682,8 @@
       <workItem from="1496342318348" duration="4312000" />
       <workItem from="1496407364191" duration="12860000" />
       <workItem from="1496494740754" duration="12962000" />
-      <workItem from="1496534169276" duration="5252000" />
+      <workItem from="1496534169276" duration="5315000" />
+      <workItem from="1496583089415" duration="3850000" />
     </task>
     <task id="LOCAL-00001" summary="lel">
       <created>1496326216068</created>
@@ -679,17 +713,24 @@
       <option name="project" value="LOCAL" />
       <updated>1496539549945</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Fin de l'arbitrage du match featuring LE MAGNIFICIENT TIMER JAVASCRIPT EN OBJECT QUI DECHIRE SES MORTS">
+      <created>1496539689881</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1496539689881</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39789000" />
+    <option name="totallyTimeSpent" value="43702000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26705757" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26972282" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -728,25 +769,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Day.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="34" column="27" lean-forward="false" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
-          <folding>
-            <element signature="e#6#91#0#PHP" expanded="false" />
-            <element signature="e#122#154#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/css/match_view.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="19" lean-forward="false" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Round.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="867">
@@ -798,18 +820,7 @@
         <state relative-caret-position="1411">
           <caret line="83" column="14" lean-forward="true" selection-start-line="83" selection-start-column="14" selection-end-line="83" selection-end-column="14" />
           <folding>
-            <element signature="e#12#26#0#Twig" expanded="false" />
-            <element signature="e#1956#2002#0#Twig" expanded="false" />
-            <element signature="e#2484#2529#0#Twig" expanded="false" />
-            <element signature="e#4706#4716#0#Twig" expanded="false" />
-            <element signature="e#5533#5543#0#Twig" expanded="false" />
-            <element signature="e#6101#6108#0#Twig" expanded="false" />
-            <element signature="e#6821#6828#0#Twig" expanded="false" />
-            <element signature="e#7374#7400#0#Twig" expanded="false" />
-            <element signature="e#7901#7926#0#Twig" expanded="false" />
-            <element signature="e#8644#8652#0#Twig" expanded="false" />
-            <element signature="e#9489#9497#0#Twig" expanded="false" />
-            <marker date="1496526419490" expanded="true" signature="3209:3216" ph="×" />
+            <marker date="1496586277393" expanded="true" signature="3231:3238" ph="×" />
           </folding>
         </state>
       </provider>
@@ -873,18 +884,7 @@
         <state relative-caret-position="2210">
           <caret line="130" column="66" lean-forward="false" selection-start-line="130" selection-start-column="66" selection-end-line="130" selection-end-column="66" />
           <folding>
-            <element signature="e#12#26#0#Twig" expanded="false" />
-            <element signature="e#1956#2002#0#Twig" expanded="false" />
-            <element signature="e#2484#2529#0#Twig" expanded="false" />
-            <element signature="e#4706#4716#0#Twig" expanded="false" />
-            <element signature="e#5533#5543#0#Twig" expanded="false" />
-            <element signature="e#6101#6108#0#Twig" expanded="false" />
-            <element signature="e#6821#6828#0#Twig" expanded="false" />
-            <element signature="e#7374#7400#0#Twig" expanded="false" />
-            <element signature="e#7901#7926#0#Twig" expanded="false" />
-            <element signature="e#8644#8652#0#Twig" expanded="false" />
-            <element signature="e#9489#9497#0#Twig" expanded="false" />
-            <marker date="1496526419490" expanded="true" signature="3209:3216" ph="×" />
+            <marker date="1496586277393" expanded="true" signature="3231:3238" ph="×" />
           </folding>
         </state>
       </provider>
@@ -942,14 +942,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/UserBundle/Entity/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="27" lean-forward="false" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/addDay.html.twig" />
     <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/addfields.html.twig">
       <provider selected="true" editor-type-id="text-editor">
@@ -968,7 +960,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Day/edit.html.twig" />
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Match/edit.html.twig" />
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/TournamentController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4318">
@@ -976,21 +967,6 @@
           <folding>
             <marker date="1496346460269" expanded="false" signature="124:141" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/programMatches.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="156" lean-forward="false" selection-start-line="16" selection-start-column="156" selection-end-line="16" selection-end-column="156" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Field.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="770">
-          <caret line="140" column="1" lean-forward="false" selection-start-line="140" selection-start-column="1" selection-end-line="140" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1025,17 +1001,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Round.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="59" column="7" lean-forward="false" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="7" />
-          <folding>
-            <element signature="e#6#91#0#PHP" expanded="false" />
-            <element signature="e#122#170#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Day.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
@@ -1063,25 +1028,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Team.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3111">
-          <caret line="190" column="30" lean-forward="false" selection-start-line="190" selection-start-column="30" selection-end-line="190" selection-end-column="30" />
-          <folding>
-            <element signature="e#6#84#0#PHP" expanded="false" />
-            <element signature="e#117#165#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Pool.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2329">
           <caret line="144" column="44" lean-forward="false" selection-start-line="144" selection-start-column="44" selection-end-line="144" selection-end-column="44" />
-          <folding>
-            <element signature="e#6#84#0#PHP" expanded="false" />
-            <element signature="e#115#146#0#PHP" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1089,63 +1040,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2006">
           <caret line="123" column="0" lean-forward="false" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
-          <folding>
-            <element signature="e#6#91#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/css/custom_styles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="2" column="29" lean-forward="false" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="29" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/program.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="241" column="43" lean-forward="false" selection-start-line="241" selection-start-column="43" selection-end-line="241" selection-end-column="43" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="false" />
-            <element signature="e#1956#2002#0#Twig" expanded="false" />
-            <element signature="e#2484#2529#0#Twig" expanded="false" />
-            <element signature="e#4706#4716#0#Twig" expanded="false" />
-            <element signature="e#5533#5543#0#Twig" expanded="false" />
-            <element signature="e#6101#6108#0#Twig" expanded="false" />
-            <element signature="e#6821#6828#0#Twig" expanded="false" />
-            <element signature="e#7374#7400#0#Twig" expanded="false" />
-            <element signature="e#7901#7926#0#Twig" expanded="false" />
-            <element signature="e#8644#8652#0#Twig" expanded="false" />
-            <element signature="e#9489#9497#0#Twig" expanded="false" />
-            <marker date="1496526419490" expanded="true" signature="3209:3216" ph="×" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/MatchController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
-          <folding>
-            <element signature="e#127#154#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="545">
+        <state relative-caret-position="1955">
           <caret line="115" column="51" lean-forward="false" selection-start-line="115" selection-start-column="51" selection-end-line="115" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Match.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="84" column="31" lean-forward="false" selection-start-line="84" selection-start-column="31" selection-end-line="84" selection-end-column="31" />
           <folding />
         </state>
       </provider>
@@ -1160,11 +1062,120 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Match/view.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="69" lean-forward="false" selection-start-line="10" selection-start-column="69" selection-end-line="10" selection-end-column="69" />
+        <state relative-caret-position="85">
+          <caret line="26" column="14" lean-forward="false" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
           <folding>
-            <element signature="e#10805#10818#0#Twig" expanded="true" />
+            <element signature="e#12#26#0#Twig" expanded="false" />
+            <element signature="e#8565#8583#0#Twig" expanded="false" />
+            <element signature="e#8737#8758#0#Twig" expanded="false" />
+            <element signature="e#9767#9785#0#Twig" expanded="false" />
+            <element signature="e#9961#9982#0#Twig" expanded="false" />
+            <element signature="e#10805#10818#0#Twig" expanded="false" />
             <marker date="1496539658024" expanded="true" signature="8033:8040" ph="×" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Match/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="443">
+          <caret line="62" column="36" lean-forward="false" selection-start-line="62" selection-start-column="36" selection-end-line="62" selection-end-column="36" />
+          <folding>
+            <element signature="e#1816#1835#0#Twig" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Player.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Match.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="84" column="31" lean-forward="false" selection-start-line="84" selection-start-column="31" selection-end-line="84" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Team.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1021">
+          <caret line="190" column="30" lean-forward="false" selection-start-line="190" selection-start-column="30" selection-end-line="190" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UserBundle/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="443">
+          <caret line="298" column="37" lean-forward="false" selection-start-line="298" selection-start-column="37" selection-end-line="298" selection-end-column="37" />
+          <folding>
+            <element signature="e#37#64#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Round.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="477">
+          <caret line="176" column="45" lean-forward="false" selection-start-line="176" selection-start-column="45" selection-end-line="176" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Field.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="139" column="45" lean-forward="false" selection-start-line="139" selection-start-column="45" selection-end-line="139" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/MatchController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="511">
+          <caret line="102" column="54" lean-forward="false" selection-start-line="102" selection-start-column="54" selection-end-line="102" selection-end-column="54" />
+          <folding>
+            <element signature="e#127#154#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Form/MatchType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="53" column="47" lean-forward="false" selection-start-line="53" selection-start-column="47" selection-end-line="53" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/programMatches.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="156" lean-forward="false" selection-start-line="16" selection-start-column="156" selection-end-line="16" selection-end-column="156" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/custom_styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="19" lean-forward="false" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/program.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="54" column="67" lean-forward="false" selection-start-line="54" selection-start-column="67" selection-end-line="54" selection-end-column="67" />
+          <folding>
+            <marker date="1496586277393" expanded="true" signature="3231:3238" ph="×" />
           </folding>
         </state>
       </provider>

@@ -138,6 +138,14 @@ class Round extends BaseEntity
     }
 
     /**
+     * @param User $referee
+     */
+    public function removeReferee(User $referee)
+    {
+        $this->referees->removeElement($referee);
+    }
+
+    /**
      * @return ArrayCollection
      */
     public function getFields()
@@ -159,6 +167,14 @@ class Round extends BaseEntity
     public function addField(Field $field)
     {
         $this->fields->add($field);
+    }
+
+    /**
+     * @param Field $field
+     */
+    public function removeField(Field $field)
+    {
+        $this->fields->removeElement($field);
     }
 
 
