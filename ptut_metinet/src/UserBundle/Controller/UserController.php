@@ -173,5 +173,19 @@ class UserController extends Controller
 
     }
 
+    public function refereeMatchListAction($userId){
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('UserBundle:User')->findOneById($userId);
+
+        if(!$user){
+            throw $this->createNotFoundException("Cet utlisateur n'existe pas");
+        }
+
+        return $this->render(':UserBundle/User:refereeMatchList.html.twig',array(
+            'referee' => $user
+        ));
+    }
+
 }
     

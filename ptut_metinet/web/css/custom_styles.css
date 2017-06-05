@@ -95,7 +95,7 @@ h1,h2,h3,h4,h5,h6{
     background-color: #FF9A2A;
 }
 
-.pool-container{
+.pool-container, .referee-matches-container{
     text-align: center;
     color: #ffffff;
     font-weight: 900;
@@ -123,3 +123,25 @@ h1,h2,h3,h4,h5,h6{
     background-color: #CD0700;
 }
 
+.tournament-name a{
+    color: inherit;
+    font-weight: 700;
+}
+
+.tournament-name a:hover{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.vert-spacer{
+    height: 5em;
+}
+
+.match-details{
+    display: none;
+}
+
+.match-details-list{
+    border: 1px solid #dddddd;
+    padding: 2em;
+}

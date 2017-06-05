@@ -26,9 +26,8 @@
     <div class="row text-center">
         <h1>Bienvenue sur notre page d'accueil</h1>
         <div class="tournament_list_wrapper ">
-            {% for tournament in tournaments if tournament.enabled or is_granted('ROLE_SUPER_ADMIN') %}
-                {#<a href="{{ path('edit_tournament',{'tournamentId': tournament.id })}}">#}
-                <a href="{% if tournament.enabled %}{{ path('program_tournament',{'tournamentId': tournament.id }) }}{% else %}{{ path('edit_tournament',{'tournamentId': tournament.id }) }}{% endif %}">
+            {% for tournament in tournaments if tournament.enabled or is_granted('ROLE_ADMIN') %}
+                <a href="{% if tournament.enabled %}{{ path('view_tournament',{'tournamentId': tournament.id }) }}{% else %}{{ path('edit_tournament',{'tournamentId': tournament.id }) }}{% endif %}">
                     <div class="tournament_tile {% if tournament.enabled %}enabled_tile{% else %}disabled_tile{% endif %}">
                         <div class="div_into_tournament_title">
                             <p>{{ tournament.name }}</p>

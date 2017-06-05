@@ -1,13 +1,22 @@
 .tie{
-    background-color: #ffffff;
+    background-color: grey;
+    background-image: url('assets/smiley_tie_white.png');
 }
 
 .win{
     background-color: green;
+    background-image: url('assets/smiley_win_white.png');
 }
 
 .loose{
     background-color: red;
+    background-image: url('assets/smiley_loose_white.png');
+}
+
+.win, .loose, .tie{
+    background-size: 3.8em;
+    background-position: 90% center;
+    background-repeat: no-repeat;
 }
 
 .played-matches{
@@ -15,4 +24,13 @@
     color: #ffffff;
     font-weight: 900;
     text-shadow: 1px 1px 5px #000000;
+}
+
+.played-match-row{
+    cursor: pointer;
+    height: 4em;
+}
+
+.played-match-result{
+    line-height: 4em!important;
 }

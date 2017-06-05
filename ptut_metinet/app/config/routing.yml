@@ -29,10 +29,13 @@ user_change_role:
     path: /admin/user/{userId}/changeRole
     defaults: {_controller: UserBundle:User:changeRole}
 
+referee_match_list:
+    path: /referee/{userId}/matchs
+    defaults: {_controller: UserBundle:User:refereeMatchList}
+
 tournament_list:
     path:      /tournament/list
     defaults:  { _controller: AppBundle:Tournament:list }
-
 
 view_tournament:
     path:      /tournament/{tournamentId}
@@ -47,33 +50,32 @@ edit_tournament:
     defaults:  { _controller: AppBundle:Tournament:edit }
 
 delete_tournament:
-    path:      /admin/tournament/{tournamentId}/delete
-    defaults:  { _controller: AppBundle:Tournament:delete }
+    path:       /admin/tournament/{tournamentId}/delete
+    defaults:   { _controller: AppBundle:Tournament:delete }
 
 validate_tournament:
-    path:      /admin/tournament/{tournamentId}/validate
-    defaults:  { _controller: AppBundle:Tournament:validate }
+    path:       /admin/tournament/{tournamentId}/validate
+    defaults:   { _controller: AppBundle:Tournament:validate }
 
 tournament_validation_status:
-    path:      /admin/tournament/{tournamentId}/validationstatus
-    defaults:  { _controller: AppBundle:Tournament:validationstatus }
+    path:       /admin/tournament/{tournamentId}/validationstatus
+    defaults:   { _controller: AppBundle:Tournament:validationstatus }
 
 program_tournament:
-    path: admin/tournament/{tournamentId}/program
-    defaults: { _controller: AppBundle:Tournament:program }
+    path:       /admin/tournament/{tournamentId}/program
+    defaults:   { _controller: AppBundle:Tournament:program }
 
 program_tournament_matches:
-    path: admin/tournament/{tournamentId}/programMatches
-    defaults: { _controller: AppBundle:Tournament:programMatches }
+    path:       /admin/tournament/{tournamentId}/programMatches
+    defaults:   { _controller: AppBundle:Tournament:programMatches }
 
 program_tournament_rounds:
-    path: admin/tournament/{tournamentId}/programRounds
-    defaults: { _controller: AppBundle:Tournament:programRounds }
+    path:       /admin/tournament/{tournamentId}/programRounds
+    defaults:   { _controller: AppBundle:Tournament:programRounds }
 
 edit_day:
     path:      /admin/day/{dayId}/edit
     defaults:  { _controller: AppBundle:Day:edit }
-
 
 add_teams:
     path:      /admin/tournament/{tournamentId}/teams
@@ -106,6 +108,8 @@ view_match:
 edit_match:
     path:      /admin/match/{matchId}/edit
     defaults:  { _controller: AppBundle:Match:edit }
+
+#------------ ROUTES API ------------
 
 api_match_add_goal:
     path:       /api/match/{matchId}/addGoal/{teamId}

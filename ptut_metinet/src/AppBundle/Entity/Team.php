@@ -11,6 +11,7 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Util\Debug;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -209,6 +210,36 @@ class Team extends BaseEntity
         $this->cards->add($cards);
         $cards->setTeam($this);
     }
+
+    public function getPlayedMatchOrdered(){
+
+        $playedMatchesCallback = function($match){
+            return $match->isPlayed();
+        };
+
+        $playedMatches = $this->matches->filter($playedMatchesCallback);
+
+        $orderMatchesCallback = function($a,$b){
+            //Classement par match plus récent
+          if($a->getMatchEndTime() > $b->getMatchEndTime()){
+              return 1;
+          }
+          else{
+              return -1;
+          }
+        };
+        $orderedMatches = $playedMatches->toArray();
+         usort($orderedMatches,$orderMatchesCallback);
+        return $orderedMatches;
+
+    }
+
+    public function getLastPlayedMatch(){
+
+        return $this->getPlayedMatchOrdered()[0];
+
+    }
+
 
 
 

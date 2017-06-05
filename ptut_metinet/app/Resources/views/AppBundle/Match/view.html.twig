@@ -13,9 +13,11 @@
 
 {% block body %}
 
-
-    <h4>{{ match.tournament.name }} > {{ match.name }}</h4>
-
+    <div class=row">
+        <div class="col-md-12">
+            <span class="ariane-thread"><a href="{{ path('view_tournament', {'tournamentId': match.tournament.id}) }}">{{ match.tournament.name }}</a> > {{ match.name }}</span>
+        </div>
+    </div>
 
     <div class=row">
         <div class="col-md-6 col-md-offset-3">
@@ -60,7 +62,7 @@
         {% for team in match.teams %}
             <div class="col-md-6">
                 <div class="team-container" data-id="{{ team.id }}">
-                    <span class="team-name">{{ team.name }}</span>
+                    <span class="team-name"><a href="{{ url('view_team',{'teamId': team.id}) }}">{{ team.name }}</a></span>
 
                     <div class="row score-container">
 

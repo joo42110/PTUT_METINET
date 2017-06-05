@@ -20,7 +20,7 @@
     </div>
 
 
-    <h1>Programmer les matchs du tournoi {{ tournament.name }}</h1>
+    <h1>Programmer les matchs du tournoi <span class="tournament-name"><a href="{{ url('view_tournament', {'tournamentId': tournament.id}) }}">{{ tournament.name }}</a></span></h1>
 
     {% if tournament.finalsOngoing %}
         {% set phaseName = 'finale' %}
