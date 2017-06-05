@@ -4,25 +4,100 @@
 
 {% block body %}
 
-<table class="table text-center list-table">
-    <thead>
-        <tr>
-            <th class="text-center">N°</th>
-            <th class="text-center">Nom</th>
-            <th class="text-center">Mail</th>
-            <th class="text-center">Inscrit depuis</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for user in users %}
-        <tr>
-            <td>{{ user.id }}</td>
-            <td>{{ user.firstname|capitalize }} <b>{{ user.lastname|upper }}</b></td>
-            <td>{{ user.mail }}</td>
-            <td>{{ user.created|date("d/m/Y") }}</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+    <div class=row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="errors">
+            </div>
+        </div>
+    </div>
 
+    <div class=row">
+        <div class="col-md-12">
+            <table class="table text-center list-table">
+                <thead>
+                    <tr>
+                        <th class="text-center">Nom</th>
+                        <th class="text-center">Mail</th>
+                        <th class="text-center">Inscrit depuis</th>
+                        <th class="text-center">Rôle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.firstname|capitalize }} <b>{{ user.lastname|upper }}</b></td>
+                        <td>{{ user.mail }}</td>
+                        <td>{{ user.created|date("d/m/Y") }}</td>
+                        <td>
+                            {% if "ROLE_SUPER_ADMIN" in user.roles  %}
+                                Super-Administrateur
+                            {% else %}
+                                <select name="user_role_{{ loop.index }}" class="user-role-selector form-control" data-id="{{ user.id }}">
+                                    <option value="ROLE_USER"  {% if "ROLE_USER" in user.roles %}selected{% endif %}>Utilisateur non validé</option>
+                                    <option value="ROLE_REFEREE" {% if "ROLE_REFEREE" in user.roles %}selected{% endif %}>Arbitre</option>
+                                    <option value="ROLE_ADMIN" {% if "ROLE_ADMIN" in user.roles %}selected{% endif %}>Administrateur</option>
+                                </select>
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+
+    <script>
+
+        $(function(){
+            $('.user-role-selector').on('change',function(e){
+                var selector = $(e.target);
+                var userId = selector.data('id');
+                var role = selector.val();
+                changePlayerRole(userId,role)
+            })
+        });
+
+        function changePlayerRole(userId,role){
+
+            var data = new FormData();
+            data.append('role',role);
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ url('user_change_role', {'userId': '__userId__'}) }}'.replace('__userId__',userId),
+                processData: false,
+                contentType: false,
+                data: data
+            })
+                .done(function(data){
+                    addMessage(data,"success");
+                })
+                .fail(function(data){
+                    addMessage(data,"danger");
+                })
+        }
+
+        function addMessage(message,type){
+            if(type === "danger" || type === "success"){
+                var alert = $("<div class='alert alert-"+type+" alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><span class='alert-content'></span></div>");
+                alert.find('.alert-content').text(message);
+                $('.errors').append(alert);
+            }
+            else{
+                throw new Error('Incorrect error type parameter');
+            }
+
+        }
+
+
+    </script>
 {% endblock %}

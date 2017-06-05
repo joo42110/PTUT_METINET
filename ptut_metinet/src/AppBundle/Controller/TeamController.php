@@ -9,6 +9,7 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Entity\Team;
 use AppBundle\Form\TeamEditType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -61,5 +62,19 @@ class TeamController extends Controller
 
 
 
+    }
+
+    public function viewAction($teamId){
+        $em = $this->getDoctrine()->getManager();
+
+        $team =  $em->getRepository(Team::class)->findOneById($teamId);
+
+        if (!$team) {
+            throw $this->createNotFoundException("Cette équipe n'existe pas.");
+        }
+
+        return $this->render(':AppBundle/Team:view.html.twig',array(
+            'team' => $team
+        ));
     }
 }

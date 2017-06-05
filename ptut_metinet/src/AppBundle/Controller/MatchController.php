@@ -164,6 +164,7 @@ class MatchController extends Controller
         }
 
         $match->setPlayed(true);
+        $match->setMatchEndTime(new \DateTime());
 
         $em->persist($match);
         $em->flush();

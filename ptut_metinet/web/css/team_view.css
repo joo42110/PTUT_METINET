@@ -1,0 +1,18 @@
+.tie{
+    background-color: #ffffff;
+}
+
+.win{
+    background-color: green;
+}
+
+.loose{
+    background-color: red;
+}
+
+.played-matches{
+    text-align: center;
+    color: #ffffff;
+    font-weight: 900;
+    text-shadow: 1px 1px 5px #000000;
+}

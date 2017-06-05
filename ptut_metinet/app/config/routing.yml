@@ -8,7 +8,7 @@ homepage:
 
 signup:
     path:      /signup
-    defaults:  { _controller: UserBundle:User:newUser }
+    defaults:  { _controller: UserBundle:User:new }
 
 login:
     path: /login
@@ -19,15 +19,24 @@ logout:
 
 user_edit:
     path: /user/{userId}/edit
-    defaults: {_controller: UserBundle:User:editUser}
+    defaults: {_controller: UserBundle:User:edit}
 
 user_list:
     path: /admin/users
-    defaults: {_controller: UserBundle:User:listUser}
+    defaults: {_controller: UserBundle:User:list}
+
+user_change_role:
+    path: /admin/user/{userId}/changeRole
+    defaults: {_controller: UserBundle:User:changeRole}
 
 tournament_list:
     path:      /tournament/list
     defaults:  { _controller: AppBundle:Tournament:list }
+
+
+view_tournament:
+    path:      /tournament/{tournamentId}
+    defaults:  { _controller: AppBundle:Tournament:view }
 
 create_tournament:
     path:      /admin/tournament/create
@@ -86,6 +95,9 @@ edit_team:
     path:      /admin/team/{teamId}/edit
     defaults:  { _controller: AppBundle:Team:edit }
 
+view_team:
+    path:      /team/{teamId}
+    defaults:  { _controller: AppBundle:Team:view }
 
 view_match:
     path:      /match/{matchId}

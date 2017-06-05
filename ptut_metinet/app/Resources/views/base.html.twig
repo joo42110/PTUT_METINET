@@ -29,7 +29,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                        <a><p class="navbar-text"><a href="{{ url('user_edit',{'userId' : app.user.id}) }}"><span class="glyphicon glyphicon-user"></span>  {{ app.user.firstname }} {{ app.user.lastname }}</p></a></li>
+                        <li><p class="navbar-text"><a href="{{ url('user_edit',{'userId' : app.user.id}) }}"><span class="glyphicon glyphicon-user"></span>  {{ app.user.firstname }} {{ app.user.lastname }}</a></p></li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li><button class="btn btn-warning navbar-btn btn-edit-users"><span class="glyphicon glyphicon-th-list"></span> Gestion des utilisateurs</button></li>
+                        {% endif %}
                         <li><button class="btn btn-default navbar-btn btn-logout">Se déconnecter</button></li>
                     {% else %}
                         <li><button class="btn btn-default navbar-btn btn-login">Se connecter</button></li>
@@ -66,6 +69,10 @@
 
                     $('.btn-signin').on('click',function(){
                         window.location = "{{ url('signup') }}";
+                    });
+
+                    $('.btn-edit-users').on('click',function(){
+                        window.location = "{{ url('user_list') }}";
                     });
                 });
 

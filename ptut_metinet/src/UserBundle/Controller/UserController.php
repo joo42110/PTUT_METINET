@@ -12,7 +12,7 @@ use \Doctrine\Common\Util\Debug;
 class UserController extends Controller
 {
 
-    public function listUserAction()
+    public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -23,7 +23,7 @@ class UserController extends Controller
         ));
     }
 
-    public function newUserAction(Request $request)
+    public function newAction(Request $request)
     {
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
@@ -47,7 +47,13 @@ class UserController extends Controller
                 $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
 
                 $user->setUsername($user->getMail());
-                $user->setRoles(array("ROLE_USER"));
+
+                $users = $em->getRepository('UserBundle:User')->findAll();
+                if(count($users) > 0)
+                    $user->setRoles(array("ROLE_USER"));
+                else{ //Si il n'y a pas encore d'utilisateurs, le premier utilisateur deviens le super-admin
+                    $user->setRoles(array("ROLE_SUPER_ADMIN"));
+                }
 
                 $em->persist($user);
                 $em->flush();
@@ -73,7 +79,7 @@ class UserController extends Controller
 
     }
 
-    public function editUserAction(Request $request, $userId)
+    public function editAction(Request $request, $userId)
     {
 
         $errors = array();
@@ -140,6 +146,30 @@ class UserController extends Controller
                 'error_msg' => $errors,
                 'success' => $success
             ));
+
+    }
+
+    public function changeRoleAction(Request $request, $userId){
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('UserBundle:User')->findOneById($userId);
+
+        if(!$user){
+            return new JsonResponse("Cet utilisateur n'existe pas",404);
+        }
+
+        $newRole = $request->request->get('role');
+
+
+        if(!in_array($newRole,['ROLE_USER','ROLE_REFEREE','ROLE_ADMIN'])){
+            return new JsonResponse("Valeur du rôle invalide",500);
+        }
+        else{
+            $user->setRoles([$newRole]);
+            $em->persist($user);
+            $em->flush();
+            return new JsonResponse("Modification effectuée");
+        }
 
     }
 

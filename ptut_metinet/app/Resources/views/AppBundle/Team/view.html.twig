@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/team_view.css') }}"/>
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1>{{ team.name }}</h1>
+        </div>
+    </div>
+
+    <div class="row last-match lost">
+        <div class="col-md-12 text-center">
+            <h1>{{ team.name }}</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Matchs Joués</h2>
+            <table class="table table-bordered played-matches">
+                <tbody>
+                {% for match in team.matches if match.played == true %}
+                    {% if match.tie %}
+                        {% set class = "tie" %}
+                    {% elseif match.winner == team %}
+                        {% set class = "win" %}
+                    {% else %}
+                        {% set class = "loose" %}
+                    {% endif %}
+                    <tr class="{{ class }}">
+                        <td>{{ match.name }} -  {% if match.tie %}Egalité{% else %}Gagnant: {{ match.winner.name }}{% endif %}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+
+        </div>
+        <div class="col-md-6">
+            <h1>{{ team.name }}</h1>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

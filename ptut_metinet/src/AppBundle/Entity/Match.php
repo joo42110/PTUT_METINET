@@ -86,6 +86,12 @@ class Match extends BaseEntity
      */
     private $played = false;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="match_end_time",type="datetime",nullable=true)
+     */
+    private $matchEndTime;
 
 
 
@@ -281,6 +287,43 @@ class Match extends BaseEntity
     {
         $this->played = $played;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getMatchEndTime()
+    {
+        return $this->matchEndTime;
+    }
+
+    /**
+     * @param \DateTime $matchEndTime
+     */
+    public function setMatchEndTime(\DateTime $matchEndTime)
+    {
+        $this->matchEndTime = $matchEndTime;
+    }
+
+    public function isTie(){
+        //Le match est-t-il une égalité ou non ?
+        return($this->scores[0]->getGoals() == $this->scores[1]->getGoals());
+    }
+
+    public function getWinner(){
+        if(!$this->played || $this->isTie()){ //Dans le cas ou le match n'a pas été joué ou est une égalité on renvoie null
+            return null;
+        }
+        else{
+            if($this->scores[0]->getGoals() > $this->scores[1]->getGoals()){
+                return $this->scores[0]->getTeam();
+            }
+            else{
+                return $this->scores[1]->getTeam();
+            }
+        }
+    }
+
+
 
 
 
