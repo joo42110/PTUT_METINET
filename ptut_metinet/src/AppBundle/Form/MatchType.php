@@ -12,6 +12,7 @@ use AppBundle\Entity\Day;
 use AppBundle\Entity\Field;
 use AppBundle\Entity\Match;
 use AppBundle\Entity\Round;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -74,6 +75,13 @@ class MatchType extends AbstractType
             'label' => false,
             'class' => User::class,
             'choice_label' => 'printableName',
+            'query_builder' => function (EntityRepository $er) { //QueryBuilder pour ne séléctionner que les arbitres dans les utilisateurs
+                $qb = $er->createQueryBuilder('u');
+                $cond = $qb->expr()->like('u.roles',':cond');
+                $qb->setParameter('cond',"%ROLE_REFEREE%");
+                return $qb->where($cond);
+
+            },
             'attr' => array(
                 'class' => 'form-control'
             )

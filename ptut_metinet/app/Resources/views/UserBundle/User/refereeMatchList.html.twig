@@ -48,12 +48,26 @@
                     <div id="{{ match.id }}" class="match-details">
                         <h3>{{ match.name }}</h3>
                         <div class="match-details-list">
-                            <ul>
-                                <li><b>Date :</b> {{ match.round.day.stringDate }}</li>
-                                <li><b>Horaire :</b> {{ match.round.scheduledTime }}</li>
-                                <li><b>Terrain :</b> {{ match.field.name }}</li>
-                            </ul>
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <ul>
+                                        <li><b>Date :</b> {{ match.round.day.stringDate }}</li>
+                                        <li><b>Horaire :</b> {{ match.round.scheduledTime }}</li>
+                                        <li><b>Terrain :</b> {{ match.field.name }}</li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-6">
+                                    {% if match.round.day.date|date('dmY') == 'now'|date('dmY') %} {# On affiche le bouton d'arbitrage uniquement sur les matchs a jouer dans la journée #}
+                                    <a class="btn btn-lg btn-info" href="{{ url('view_match',{"matchId": match.id}) }}">Arbitrer le match</a>
+                                    {% endif %}
+                                </div>
+
+                            </div>
+
                         </div>
+
                     </div>
                 {% endfor %}
 
