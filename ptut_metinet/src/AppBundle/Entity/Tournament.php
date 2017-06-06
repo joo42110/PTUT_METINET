@@ -312,14 +312,17 @@ class Tournament extends BaseEntity
         $finalRound->setTournament($this);
     }
 
-
-
     /**
      * @param mixed $finalsOngoing
      */
     public function setFinalsOngoing($finalsOngoing)
     {
         $this->finalsOngoing = $finalsOngoing;
+    }
+
+    public function getCurrentFinalRound(){
+        $finalRounds = $this->getFinalRounds()->toArray();
+        return array_pop($finalRounds);
     }
 
     public function isPoolsPlayed(){

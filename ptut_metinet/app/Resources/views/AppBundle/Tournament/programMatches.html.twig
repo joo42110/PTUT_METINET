@@ -1,11 +1,34 @@
-<div class="row">
+{% if not tournament.finalsOngoing %}
+    <div class="row">
+        {% for pool in tournament.pools %}
+            <div class="col-md-6">
+                <h3 class="text-center">Poule {{ loop.index }}</h3>
+                <table class="table table-bordered pool-container">
+                    <tbody>
+                    {% for match in pool.matches %}
 
-    {% for pool in tournament.pools %}
-        <div class="col-md-6">
-            <h3 class="text-center">Poule {{ loop.index }}</h3>
+                        {% if match.programed %}
+                            {% set class = "match-row programed" %}
+                        {% else %}
+                            {% set class = "match-row unprogramed" %}
+                        {% endif %}
+
+                        <tr class="{{ class }}" data-id="{{ match.id }}">
+                            <td>{{ match.name }}  {% if match.programed %} ({{ match.round.day.stringDate }} - {{ match.round.scheduledTime }}) {% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3 class="text-center">{{ tournament.currentFinalRound.name }}</h3>
             <table class="table table-bordered pool-container">
                 <tbody>
-                {% for match in pool.matches %}
+                {% for match in tournament.currentFinalRound.matches %}
 
                     {% if match.programed %}
                         {% set class = "match-row programed" %}
@@ -20,6 +43,6 @@
                 </tbody>
             </table>
         </div>
-    {% endfor %}
+    </div>
+{% endif %}
 
-</div>
