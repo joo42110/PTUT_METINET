@@ -49,6 +49,7 @@ class Team extends BaseEntity
      */
     private $pool;
 
+
     /**
      * @var ArrayCollection
      *
@@ -239,6 +240,7 @@ class Team extends BaseEntity
         return $this->getPlayedMatchOrdered()[0];
 
     }
+
 
 
 

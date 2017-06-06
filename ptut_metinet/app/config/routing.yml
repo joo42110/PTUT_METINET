@@ -65,6 +65,10 @@ program_tournament:
     path:       /admin/tournament/{tournamentId}/program
     defaults:   { _controller: AppBundle:Tournament:program }
 
+tournament_validate_pools:
+    path:       /admin/tournament/{tournamentId}/validatePools
+    defaults:   { _controller: AppBundle:Tournament:validatePools }
+
 program_tournament_matches:
     path:       /admin/tournament/{tournamentId}/programMatches
     defaults:   { _controller: AppBundle:Tournament:programMatches }

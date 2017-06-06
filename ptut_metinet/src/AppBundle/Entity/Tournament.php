@@ -288,6 +288,33 @@ class Tournament extends BaseEntity
     }
 
     /**
+     * @return ArrayCollection
+     */
+    public function getFinalRounds()
+    {
+        return $this->finalRounds;
+    }
+
+    /**
+     * @param ArrayCollection $finalRounds
+     */
+    public function setFinalRounds(ArrayCollection $finalRounds)
+    {
+        $this->finalRounds = $finalRounds;
+    }
+
+    /**
+     * @param FinalRound $finalRound
+     */
+    public function addFinalRounds(FinalRound $finalRound)
+    {
+        $this->finalRounds->add($finalRound);
+        $finalRound->setTournament($this);
+    }
+
+
+
+    /**
      * @param mixed $finalsOngoing
      */
     public function setFinalsOngoing($finalsOngoing)
@@ -368,6 +395,53 @@ class Tournament extends BaseEntity
     }
 
     public function initializeFinals(){
+
+        $qualifiedTeamsPerPool = intdiv($this->teamsOutOfPools,$this->poolsNumber);
+
+        $qualifiedTeamsComplement = $this->teamsOutOfPools % $this->poolsNumber;
+
+        $qualifiedTeams = [];
+
+        foreach($this->pools as $pool){ //Sélectrion des teams dans les poules
+            $qualifiedTeams = array_merge($qualifiedTeams,$pool->getFirstTeams($qualifiedTeamsPerPool));
+        }
+
+        //Sélection des teams hors poules en cas de trucs impairs
+        if($qualifiedTeamsComplement > 0){
+            $tournamentTeams = $this->teams;
+            foreach($qualifiedTeams as $team){ //on enlève les teams déjà qualifiées
+                $tournamentTeams->removeElement($team);
+            }
+
+            $rankings = [];
+            foreach($tournamentTeams as $team){
+                $rankings[] = new PoolRanking($team);
+            }
+
+            usort($rankings,function($a,$b){ //Classement des équipes restantes
+               return $a->compareTo($b);
+            });
+
+            $complementTeams = [];
+
+            foreach(array_slice($rankings,0,$qualifiedTeamsComplement) as $score){ //Récupération des équipes
+                $complementTeams[] = $score->getTeam();
+            }
+
+            $qualifiedTeams = array_merge($qualifiedTeams,$complementTeams);
+        }
+
+        // Création du tour de phase finale avec remplissage de les équipes
+        $round = new FinalRound();
+
+        foreach($qualifiedTeams as $team){
+            $round->addTeam($team);
+        }
+
+        $this->addFinalRounds($round);
+        $round->setTeamsNumber($this->teamsOutOfPools);
+        $round->initialize();
+
 
     }
 

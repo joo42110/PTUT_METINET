@@ -152,6 +152,32 @@ class Pool extends BaseEntity
         }
     }
 
+    public function getRankings(){
+        $rankings = [];
+        foreach($this->teams as $team){
+            $rankings[] = new PoolRanking($team);
+        }
+
+        usort($rankings,function($a,$b){
+            return $a->compareTo($b);
+        });
+
+        return $rankings;
+    }
+
+    public function getFirstTeams($teamsNumber){
+        if($teamsNumber > $this->getTeams()->count()){
+            throw new \Exception("Pas suffisament d'équipes dans la poule pour en séléctionner autant");
+        }
+        $rankings = $this->getRankings();
+        $firstRankings = array_slice($rankings,0,$teamsNumber);
+        $firstTeams = [];
+        foreach($firstRankings as $ranking){
+            $firstTeams[] = $ranking->getTeam();
+        }
+        return $firstTeams;
+    }
+
 
     
 

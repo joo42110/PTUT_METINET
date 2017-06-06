@@ -376,18 +376,20 @@ class TournamentController extends Controller
         if (!$tournament) {
             return new JsonResponse("Ce tournoi n'existe pas.",404);
         }
-        if ($tournament->isFinalsOngoing()) {
+        if ($tournament->getFinalsOngoing()) {
             return new JsonResponse("Ce tournoi est déjà en phase finale.",500);
         }
-        if ($tournament->isPoolsPlayed()) {
+        if (!$tournament->isPoolsPlayed()) {
             return new JsonResponse("Tous les matchs de poules n'ont pas été joués",500);
         }
 
+        $tournament->initializeFinals();
 
+        $tournament->setFinalsOngoing(true);
+        $em->persist($tournament);
+        $em->flush();
 
-
-
-
+        return $this->render('base.html.twig');
     }
 
 

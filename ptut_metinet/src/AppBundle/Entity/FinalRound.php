@@ -59,6 +59,25 @@ class FinalRound extends BaseEntity
     private $matches;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Team")
+     * @ORM\JoinTable(name="final_round_teams",
+     *      joinColumns={@ORM\JoinColumn(name="fianl_round_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="team_id", referencedColumnName="id")}
+     *      )
+     */
+    private $teams;
+
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->teams = new ArrayCollection();
+        $this->matches = new ArrayCollection();
+    }
+
+    /**
      * @return int
      */
     public function getTeamsNumber()
@@ -105,6 +124,61 @@ class FinalRound extends BaseEntity
     {
         $this->matches = $matches;
     }
+
+    /**
+     * @param Match $match
+     */
+    public function addMatch($match)
+    {
+        $this->matches->add($match);
+    }
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getTeams()
+    {
+        return $this->teams;
+    }
+
+    /**
+     * @param mixed $teams
+     */
+    public function setTeams($teams)
+    {
+        $this->teams = $teams;
+    }
+
+    /**
+     * @param Team $team
+     */
+    public function addTeam(Team $team)
+    {
+        $this->teams->add($team);
+    }
+
+    public function initialize(){
+
+        $teams = $this->getTeams()->toArray();
+        shuffle($teams);
+
+        $machups = array_chunk($teams,2);
+
+        foreach($machups as $machup){
+            //Création du match
+            $match = new Match();
+            foreach($machup as $team){
+                $match->addTeam($team);
+            }
+            $match->initialize();
+            $this->addMatch($match);
+            $match->setTournament($this->tournament);
+        }
+
+    }
+
 
 
 
