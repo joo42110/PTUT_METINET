@@ -69,7 +69,7 @@ class MatchController extends Controller
 
 
         if($errorNoRound){
-            return new JsonResponse("Vous devez ajouter des créneaux horaire aux jours de ce tounroi avant de pouvoir commencer a programmer les matchs",500);
+            return new JsonResponse("Vous devez ajouter des créneaux horaire aux jours de ce tournoi avant de pouvoir commencer a programmer les matchs",500);
         }
 
 
