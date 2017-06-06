@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="791cd93a-ad03-4527-9c36-0e57195b4d89" name="Default" comment="Oui le travail">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/FinalRound.php" />
+    <list default="true" id="791cd93a-ad03-4527-9c36-0e57195b4d89" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/AppBundle/Team/view.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/AppBundle/Team/view.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/program.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/program.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/UserBundle/User/list.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/UserBundle/User/list.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/MatchController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/MatchController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/list.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/list.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/TournamentController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/TournamentController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Team.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Team.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Tournament.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Tournament.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/UserBundle/Form/UserType.php" afterPath="$PROJECT_DIR$/src/UserBundle/Form/UserType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/css/team_view.css" afterPath="$PROJECT_DIR$/web/css/team_view.css" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,11 +34,25 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="list.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/list.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="355">
+              <caret line="33" column="51" lean-forward="false" selection-start-line="33" selection-start-column="51" selection-end-line="33" selection-end-column="51" />
+              <folding>
+                <marker date="1496744085753" expanded="true" signature="4425:4438" ph="..." />
+                <marker date="1496744085753" expanded="true" signature="5154:5167" ph="..." />
+                <marker date="1496744085753" expanded="true" signature="5506:5519" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="TournamentController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/TournamentController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="379" column="0" lean-forward="false" selection-start-line="379" selection-start-column="0" selection-end-line="379" selection-end-column="0" />
+            <state relative-caret-position="403">
+              <caret line="118" column="99" lean-forward="false" selection-start-line="118" selection-start-column="99" selection-end-line="118" selection-end-column="99" />
               <folding />
             </state>
           </provider>
@@ -62,7 +68,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FinalRound.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FinalRound.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/FinalRound.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="454">
@@ -114,7 +120,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/list.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Day.php" />
         <option value="$PROJECT_DIR$/src/UserBundle/Entity/User.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Round.php" />
@@ -132,10 +137,11 @@
         <option value="$PROJECT_DIR$/app/Resources/views/UserBundle/User/list.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/program.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/MatchController.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/TournamentController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/FinalsRound.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Tournament.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/FinalRound.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/TournamentController.php" />
+        <option value="$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/list.html.twig" />
       </list>
     </option>
   </component>
@@ -856,7 +862,7 @@
       <workItem from="1496326049607" duration="4178000" />
       <workItem from="1496385933699" duration="204000" />
       <workItem from="1496386169978" duration="6543000" />
-      <workItem from="1496731952860" duration="9987000" />
+      <workItem from="1496731952860" duration="10785000" />
     </task>
     <task id="LOCAL-00001" summary="lel">
       <created>1496326216068</created>
@@ -879,11 +885,18 @@
       <option name="project" value="LOCAL" />
       <updated>1496392617008</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="On push pas nous ?">
+      <created>1496743303603</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1496743303603</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21153000" />
+    <option name="totallyTimeSpent" value="21951000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -917,7 +930,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="lel" />
     <MESSAGE value="Oui le travail" />
-    <option name="LAST_COMMIT_MESSAGE" value="Oui le travail" />
+    <MESSAGE value="On push pas nous ?" />
+    <option name="LAST_COMMIT_MESSAGE" value="On push pas nous ?" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1110,13 +1124,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/list.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="100" column="49" lean-forward="true" selection-start-line="100" selection-start-column="49" selection-end-line="100" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/ManyToMany.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -1284,28 +1291,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/program.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="32" column="68" lean-forward="false" selection-start-line="32" selection-start-column="68" selection-end-line="32" selection-end-column="68" />
-          <folding>
-            <marker date="1496738864583" expanded="true" signature="3581:3588" ph="×" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/MatchController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="52" column="69" lean-forward="false" selection-start-line="52" selection-start-column="69" selection-end-line="52" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/TournamentController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="379" column="0" lean-forward="false" selection-start-line="379" selection-start-column="0" selection-end-line="379" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1350,6 +1339,36 @@
           <caret line="105" column="34" lean-forward="true" selection-start-line="105" selection-start-column="34" selection-end-line="105" selection-end-column="34" />
           <folding>
             <element signature="e#115#163#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/TournamentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="118" column="99" lean-forward="false" selection-start-line="118" selection-start-column="99" selection-end-line="118" selection-end-column="99" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/program.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="32" column="68" lean-forward="false" selection-start-line="32" selection-start-column="68" selection-end-line="32" selection-end-column="68" />
+          <folding>
+            <marker date="1496738864583" expanded="true" signature="3581:3588" ph="×" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/AppBundle/Tournament/list.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="33" column="51" lean-forward="false" selection-start-line="33" selection-start-column="51" selection-end-line="33" selection-end-column="51" />
+          <folding>
+            <marker date="1496744085753" expanded="true" signature="4425:4438" ph="..." />
+            <marker date="1496744085753" expanded="true" signature="5154:5167" ph="..." />
+            <marker date="1496744085753" expanded="true" signature="5506:5519" ph="..." />
           </folding>
         </state>
       </provider>

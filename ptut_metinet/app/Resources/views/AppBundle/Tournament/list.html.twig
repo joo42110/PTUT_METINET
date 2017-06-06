@@ -31,7 +31,7 @@
                     <div class="tournament_tile {% if tournament.enabled %}enabled_tile{% else %}disabled_tile{% endif %}">
                         <div class="div_into_tournament_title">
                             <p>{{ tournament.name }}</p>
-                            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            {% if is_granted('ROLE_ADMIN') %}
                                 <button class="btn btn-xs btn-danger btn-delete-tournament" data-name="{{ tournament.name }}"
                                    data-idtournament="{{ tournament.id }}">
                                     <span class="glyphicon glyphicon-trash"></span>

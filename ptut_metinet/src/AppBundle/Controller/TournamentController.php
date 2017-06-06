@@ -113,6 +113,12 @@ class TournamentController extends Controller
         if (!$tournament) {
             return new JsonResponse("Ce tournoi n'existe pas.",404);
         }
+        $authorization = $this->get('security.authorization_checker');
+
+        if ($authorization->isGranted('ROLE_ADMIN')) {
+            return new JsonResponse("Vous n'avez pas la permission d'effectuer cette action.",503);
+        }
+
 
         $em->remove($tournament);
         $em->flush();
