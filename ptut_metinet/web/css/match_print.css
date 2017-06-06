@@ -1,3 +1,14 @@
+body{
+    background-color:white;
+    padding: 15px;
+    color:black;
+}
+
+#federation-logo{
+    width:100px;
+}
+
+
 .ariane-thread{
     font-size: 1.5em;
     font-weight: 300;
@@ -34,17 +45,13 @@
     text-align: center;
 }
 
-.team-name a{
-    color: inherit;
-}
-
-.team-name a:hover{
-    color: #ffffff;
-    text-decoration: none;
-}
 
 .score-container{
-    font-size: 10em;
+    font-size: 3em;
+}
+.name-player{
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .score-btn{
@@ -54,8 +61,7 @@
 }
 
 .team-name{
-    font-size: 2.5em;
-    font-weight: 900;
+    font-size: 2em;
 }
 
 .match-infos{
@@ -66,10 +72,10 @@
 
 .card{
     display: inline-block;
-    height: 2.5em;
-    line-height: 2.5em;
-    width: 2em;
-    font-size: 2em;
+    height: 2em;
+    line-height: 2em;
+    width: 1.5em;
+    font-size: 1.5em;
     font-weight: 900;
     color: #ffffff;
     text-shadow: 1px 1px 2px #000000;
@@ -77,11 +83,6 @@
     box-shadow: 0 0 6px #000000;
 }
 
-.name-player{
-    text-transform: uppercase;
-    font-weight: bold;
-
-}
 .card-btn{
     font-size: 2em;
     cursor: pointer;
@@ -97,4 +98,16 @@
 
 .div-print-match{
     margin: 15px 0 15px 0;
+}
+
+#div-signature-arbitre{
+    margin: 100px 0 100px 0;
+}
+
+#div-observation{
+    margin-bottom: 100px;
+}
+@media print {
+    @page { margin: 0; }
+    body { margin: 1.6cm; }
 }

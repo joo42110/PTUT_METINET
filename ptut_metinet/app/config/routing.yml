@@ -113,6 +113,10 @@ edit_match:
     path:      /admin/match/{matchId}/edit
     defaults:  { _controller: AppBundle:Match:edit }
 
+print_match:
+    path:      /match/{matchId}/print
+    defaults:  { _controller: AppBundle:Match:print }
+
 #------------ ROUTES API ------------
 
 api_match_add_goal:
