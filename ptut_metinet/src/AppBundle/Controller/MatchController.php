@@ -49,6 +49,11 @@ class MatchController extends Controller
         if (!$match) {
             return new JsonResponse("Ce match n'existe pas.",404);
         }
+        if ($match->isPlayed()) {
+            return new JsonResponse("Ce match à déjà été joué.",500);
+        }
+
+
 
         $errorNoRound = false;
         if ($match->getTournament()->getDays()->count() > 0) { //Y'a-t-il des jours de tournoi ?

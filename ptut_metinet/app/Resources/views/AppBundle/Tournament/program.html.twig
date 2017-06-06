@@ -28,7 +28,11 @@
         {% set phaseName = 'de poules' %}
     {% endif %}
 
-    <h4>Ce tournoi est actuellement en phase {{ phaseName }}</h4>
+    <h4>Ce tournoi est actuellement en phase {{ phaseName }}
+        {% if tournament.poolsPlayed %}
+            <button class="btn btn-lg btn-success btn-validate-pools"><span class="glyphicon glyphicon-ok"></span> Valider les poules et passer aux phases finales</button>
+        {% endif %}
+    </h4>
 
     <div class=row">
         <div class="col-md-8 col-md-offset-2">

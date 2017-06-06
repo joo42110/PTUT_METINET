@@ -361,5 +361,28 @@ class TournamentController extends Controller
         ));
     }
 
+    public function validatePoolsAction($tournamentId){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $tournament =  $em->getRepository(Tournament::class)->findOneById($tournamentId);
+
+        if (!$tournament) {
+            return new JsonResponse("Ce tournoi n'existe pas.",404);
+        }
+        if ($tournament->isFinalsOngoing()) {
+            return new JsonResponse("Ce tournoi est déjà en phase finale.",500);
+        }
+        if ($tournament->isPoolsPlayed()) {
+            return new JsonResponse("Tous les matchs de poules n'ont pas été joués",500);
+        }
+
+
+
+
+
+
+    }
+
 
 }

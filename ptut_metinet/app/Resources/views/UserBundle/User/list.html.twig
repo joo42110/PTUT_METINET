@@ -29,7 +29,7 @@
                         <td>{{ user.mail }}</td>
                         <td>{{ user.created|date("d/m/Y") }}</td>
                         <td>
-                            {% if "ROLE_SUPER_ADMIN" in user.roles  %}
+                            {% if "ROLE_SUPER_ADMIN" in user.roles %}
                                 Super-Administrateur
                             {% else %}
                                 <select name="user_role_{{ loop.index }}" class="user-role-selector form-control" data-id="{{ user.id }}">

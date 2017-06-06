@@ -35,34 +35,6 @@ class UserType extends AbstractType
     
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        
-        if($this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')){
-
-            
-            $builder->add('roles', ChoiceType::class, array(
-                    'label' => "Niveau d'autorisations",
-                    'choices'  => array(
-                        'Utilisateur' => 'ROLE_USER',
-                        'Arbitre' => 'ROLE_ADMIN',
-                        'Administrateur' => 'ROLE_SUPER_ADMIN',
-                    ),
-                    'multiple' => false,
-                    'attr' => array(
-                        'class' => 'form-control mail-field'
-                    ),
-                )
-            );
-    
-            $builder->get('roles')->addModelTransformer(new CallbackTransformer(
-                        function ($rolesAsArray){
-                            return array_shift($rolesAsArray);
-                        },
-                        function ($rolesAsString){
-                            return(array($rolesAsString));
-                        }
-                    ))
-            ;
-        }
     
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             

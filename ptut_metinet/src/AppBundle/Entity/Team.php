@@ -222,10 +222,10 @@ class Team extends BaseEntity
         $orderMatchesCallback = function($a,$b){
             //Classement par match plus récent
           if($a->getMatchEndTime() > $b->getMatchEndTime()){
-              return 1;
+              return -1;
           }
           else{
-              return -1;
+              return 1;
           }
         };
         $orderedMatches = $playedMatches->toArray();

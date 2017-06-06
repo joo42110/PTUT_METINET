@@ -91,6 +91,13 @@ class Tournament extends BaseEntity
      */
     private $finalsOngoing = false;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="FinalRound", mappedBy="tournament",cascade={"persist"},orphanRemoval=true)
+     */
+    private $finalRounds;
+
     
     /**
      * Tournament constructor.
@@ -288,7 +295,17 @@ class Tournament extends BaseEntity
         $this->finalsOngoing = $finalsOngoing;
     }
 
-
+    public function isPoolsPlayed(){
+        if($this->finalsOngoing){ //Si on est déjà dans les phases finales, les poules sont bien évidemment jouées
+            return true;
+        }
+        foreach($this->matches as $match){
+            if(!$match->isPlayed()){
+                return false; //Si un match n'a pas encore été joué alors les poules ne sont pas finies
+            }
+        }
+        return true;  //Si tous les matchs ont été joués alors les poules sont finies
+    }
 
 
     public function validate(){
@@ -349,6 +366,12 @@ class Tournament extends BaseEntity
         }
 
     }
+
+    public function initializeFinals(){
+
+    }
+
+
 
 
 

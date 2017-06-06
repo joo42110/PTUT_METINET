@@ -16,8 +16,51 @@
     </div>
 
     <div class="row last-match lost">
-        <div class="col-md-12 text-center">
-            <h1>{{ team.lastPlayedMatch.name }}</h1>
+        {% if team.lastPlayedMatch.tie %}
+            {% set class = "tie"  %}
+        {% elseif  team.lastPlayedMatch.winner == team %}
+            {% set class = "win"  %}
+        {% else %}
+            {% set class = "loose"  %}
+        {% endif %}
+        <div class="col-md-12 last-match-container {{ class }}">
+            <div class="row">
+                {% for matchTeam in team.lastPlayedMatch.teams %}
+                    <div class="col-md-5">
+                        <div class="row">
+                            {% if loop.first %} {# organisation des scores en Equipe 1 0 - 0 Equipe 2 #}
+                                <div class="col-md-6 lastmatch-team-name">
+                                    {{ matchTeam.name }}
+                                </div>
+                            {% endif %}
+
+                            {% for score in team.lastPlayedMatch.scores %}
+                                {% if score.team == matchTeam %}
+                                    <div class="col-md-6 {% if loop.first %}lastmatch-team-score-left{% else %}lastmatch-team-score-right{% endif %}">
+                                        {{ score.goals }}
+                                    </div>
+                                {% endif %}
+
+                            {% endfor %}
+
+                            {% if not loop.first %} {# organisation des scores en Equipe 1 0 - 0 Equipe 2 #}
+                                <div class="col-md-6 lastmatch-team-name">
+                                    {{ matchTeam.name }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                    </div>
+
+                    {% if loop.first %}
+                        <div class="col-md-2">
+                            -
+                        </div>
+                    {% endif %}
+
+                {% endfor %}
+            </div>
+
         </div>
     </div>
 
