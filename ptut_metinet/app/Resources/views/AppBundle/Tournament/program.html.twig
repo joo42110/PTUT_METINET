@@ -28,11 +28,28 @@
         {% set phaseName = 'de poules' %}
     {% endif %}
 
-    <h4>Ce tournoi est actuellement en phase {{ phaseName }}
-        {% if tournament.poolsPlayed and not tournament.finalsOngoing %}
-            <button class="btn btn-lg btn-success btn-validate-pools"><span class="glyphicon glyphicon-ok"></span> Valider les poules et passer aux phases finales</button>
-        {% endif %}
-    </h4>
+    {% if tournament.poolsPlayed and not tournament.finalsOngoing %}
+        {% set poolsEnded = true %}
+    {% else %}
+        {% set poolsEnded = false %}
+    {% endif %}
+
+    {% if tournament.finalsOngoing and tournament.isCurrentFinalRoundPlayed  %}
+        {% set finalRoundEnded = true %}
+    {% else %}
+        {% set finalRoundEnded = false %}
+    {% endif %}
+
+    <h4>Ce tournoi est actuellement en phase {{ phaseName }} {% if poolsEnded or finalRoundEnded %}&nbsp;&nbsp;<span class="text-success"><span class="glyphicon glyphicon-ok"></span> Tous les matchs on été joués</span>{% endif %}</h4>
+    {% if poolsEnded %}
+        <button class="btn btn-lg btn-success btn-validate-pools"><span class="glyphicon glyphicon-ok"></span> Valider les poules et passer aux phases finales</button>
+    {% endif %}
+
+    {% if finalRoundEnded %}
+        <button class="btn btn-lg btn-success btn-setup-next-final-round"><span class="glyphicon glyphicon-ok"></span> Valider les {{ tournament.currentFinalRound.name }} et passer au tour suivant</button>
+    {% endif %}
+
+
 
     <div class=row">
         <div class="col-md-8 col-md-offset-2">
@@ -84,6 +101,8 @@
         $(function(){
 
             $('.btn-add-day').on('click',addDay);
+            $('.btn-validate-pools').on('click',validatePools);
+            $('.btn-setup-next-final-round').on('click',setupNextFinalRound);
             bindDayEdit();
             bindMatchEdit();
 
@@ -293,6 +312,40 @@
                 })
                 .fail(function(data){
                     addModalError(data.responseJSON);
+                })
+        }
+
+        function validatePools(){
+
+            $.ajax({
+                type: 'GET',
+                url: '{{ url('tournament_validate_pools', {'tournamentId': tournament.id}) }}',
+                processData: false,
+                contentType: false
+            })
+                .done(function(){
+                    window.location.reload();
+                })
+                .fail(function(data){
+                    addError(data);
+                })
+        }
+
+        function setupNextFinalRound(){
+
+            $.ajax({
+                type: 'GET',
+                url: '{{ url('tournament_setup_next_final_round', {'tournamentId': tournament.id}) }}',
+                processData: false,
+                contentType: false
+            })
+                .done(function(data){
+                    if(data.tournamentEnded){
+                        window.location = data.redirectUrl;
+                    }
+                })
+                .fail(function(data){
+                    addError(data.responseJSON);
                 })
         }
 

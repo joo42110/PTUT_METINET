@@ -9,6 +9,7 @@
 namespace AppBundle\Entity;
 
 
+use Doctrine\Common\Util\Debug;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -97,6 +98,13 @@ class Tournament extends BaseEntity
      * @ORM\OneToMany(targetEntity="FinalRound", mappedBy="tournament",cascade={"persist"},orphanRemoval=true)
      */
     private $finalRounds;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="completed",type="boolean")
+     */
+    private $completed = false;
 
     
     /**
@@ -320,9 +328,27 @@ class Tournament extends BaseEntity
         $this->finalsOngoing = $finalsOngoing;
     }
 
+    /**
+     * @return bool
+     */
+    public function isCompleted()
+    {
+        return $this->completed;
+    }
+
+    /**
+     * @param bool $completed
+     */
+    public function setCompleted(bool $completed)
+    {
+        $this->completed = $completed;
+    }
+
+
+
     public function getCurrentFinalRound(){
         $finalRounds = $this->getFinalRounds()->toArray();
-        return array_pop($finalRounds);
+        return array_shift($finalRounds);
     }
 
     public function isPoolsPlayed(){
@@ -332,6 +358,19 @@ class Tournament extends BaseEntity
         foreach($this->matches as $match){
             if(!$match->isPlayed()){
                 return false; //Si un match n'a pas encore été joué alors les poules ne sont pas finies
+            }
+        }
+        return true;  //Si tous les matchs ont été joués alors les poules sont finies
+    }
+
+    public function isCurrentFinalRoundPlayed(){
+        if(!$this->finalsOngoing){ //Si on est pas dans les finales, cela ne fait aucun sens
+
+            return false;
+        }
+        foreach($this->getCurrentFinalRound()->getMatches() as $match){
+            if(!$match->isPlayed()){
+                return false; //Si un match n'a pas encore été joué alors ce tour n'est pas fini
             }
         }
         return true;  //Si tous les matchs ont été joués alors les poules sont finies
@@ -446,6 +485,45 @@ class Tournament extends BaseEntity
         $round->initialize();
 
 
+    }
+
+    public function finalsNextRound(){
+
+        if($this->getCurrentFinalRound()->getTeamsNumber() == 2){ //Si le tour que l'on valide est la finale (= tour a 2 équipes) on gère la fin du tournoi
+            $this->completed = true;
+        }
+        else{
+
+            $qualifiedTeams = [];
+            foreach($this->getCurrentFinalRound()->getMatches() as $match ){
+                if($match->isTie()){ //TODO: Gestion des égalités dans les matchs de phase finale (au niveau du match ? Du passage au tour suivant ?)
+                    throw new \Exception("Un match de phase finale ne peut pas se terminer sur une égalité");
+                }
+                $qualifiedTeams[] = $match->getWinner();
+            }
+
+            // Création du tour de phase finale avec remplissage de les équipes
+            $round = new FinalRound();
+
+            foreach($qualifiedTeams as $team){
+                $round->addTeam($team);
+            }
+
+            $this->addFinalRounds($round);
+            $round->setTeamsNumber(count($qualifiedTeams));
+            $round->initialize();
+        }
+
+    }
+
+    public function getWinner(){
+        if(!$this->completed){
+            return null;
+        }
+        else{
+            $finalMatch = $this->getCurrentFinalRound()->getMatches()[0];
+            return $finalMatch->getWinner();
+        }
     }
 
 

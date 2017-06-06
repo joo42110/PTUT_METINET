@@ -22,6 +22,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class TournamentController extends Controller
 {
@@ -266,6 +267,11 @@ class TournamentController extends Controller
         if (!$tournament) {
             throw $this->createNotFoundException("Ce tournoi n'existe pas.");
         }
+        if($tournament->isCompleted()){
+            return $this->redirectToRoute("view_tournament",array(
+                'tournamentId' => $tournament->getId()
+            ));
+        }
 
         return $this->render(':AppBundle/Tournament:program.html.twig',array(
             'tournament' => $tournament
@@ -389,7 +395,38 @@ class TournamentController extends Controller
         $em->persist($tournament);
         $em->flush();
 
-        return $this->render('base.html.twig');
+        return new JsonResponse();
+    }
+
+    public function setupNextFinalRoundAction($tournamentId){
+        $em = $this->getDoctrine()->getManager();
+
+        $tournament =  $em->getRepository(Tournament::class)->findOneById($tournamentId);
+
+        if (!$tournament) {
+            return new JsonResponse("Ce tournoi n'existe pas.",404);
+        }
+        if (!$tournament->isCurrentFinalRoundPlayed()) {
+            return new JsonResponse("Tous les matchs de ce tour n'ont pas été joués",500);
+        }
+
+        $tournament->finalsNextRound();
+
+        $em->persist($tournament);
+        $em->flush();
+
+        if($tournament->isCompleted()){
+            $redirectUrl = $this->generateUrl("view_tournament",array("tournamentId" => $tournament->getId()),UrlGeneratorInterface::ABSOLUTE_URL);
+            return new JsonResponse(array(
+               "tournamentEnded" => true,
+               "redirectUrl" => $redirectUrl
+            ));
+        }
+
+        return new JsonResponse(array(
+            "tournamentEnded" => false,
+        ));
+
     }
 
 
