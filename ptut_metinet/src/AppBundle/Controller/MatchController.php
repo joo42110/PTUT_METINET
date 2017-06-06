@@ -132,6 +132,22 @@ class MatchController extends Controller
 
     }
 
+    public function printAction($matchId){
+        $em = $this->getDoctrine()->getManager();
+
+        $match =  $em->getRepository(Match::class)->findOneById($matchId);
+
+
+        if (!$match) {
+            throw $this->createNotFoundException("Ce match n'existe pas.");
+        }
+
+        return $this->render('AppBundle/Match/print.html.twig', array(
+            'match' => $match,
+        ));
+    }
+
+
 
     // ------------ API RELATED ACTIONS ------------
 

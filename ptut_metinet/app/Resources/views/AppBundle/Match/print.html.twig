@@ -1,0 +1,105 @@
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('jquery/css/jquery-ui.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/custom_styles.css') }}"/>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/match_print.css') }}"/>
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+<body>
+
+<div class="container">
+    {% block body %}
+        <div class="row">
+            <div class="col-xs-3">
+                <img src="{{ asset('images/logo_federation.jpg') }}" id="federation-logo"/>
+            </div>
+            <div class="col-xs-6">
+                <div class="match-infos">
+                    <b>{{ match.round.day.stringDate }}</b> - {{ match.round.scheduledTime }}<br/>
+                    <b>Terrain</b> : {{ match.field.name }}<br/>
+                    <b>Arbitre</b> : {{ match.referee.firstname }} {{ match.referee.lastname }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            {% for team in match.teams %}
+                <div class="col-xs-6">
+                    <div class="team-container" data-id="{{ team.id }}">
+                        <span class="team-name">{{ team.name }}</span>
+
+                        <div class="row score-container">
+                            <span class="score">
+                                 {% for score in match.scores if score.team == team %}
+                                     {{ score.goals }}
+                                 {% endfor %}
+                            </span>
+                        </div>
+
+                        <div class="player-list-container">
+                            <table class="table table-bordered player-list">
+
+                                <thead>
+                                <tr>
+                                    <th>N°</th>
+                                    <th>N° licence</th>
+                                    <th>Nom</th>
+                                    <th>Prénom</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {% for player in team.players %}
+
+                                    <tr>
+                                        <td>{{ loop.index }}</td>
+                                        <td>{{ player.licenceNumber }}</td>
+                                        <td><span class="name-player">{{ player.name }}</span></td>
+                                        <td>{{ player.firstname }}</td>
+                                    </tr>
+
+                                {% endfor %}
+                                </tbody>
+
+                            </table>
+                            <span>
+                                {% for cards in match.cards if cards.team == team %}
+                                    <p>Nombre de cartons jaunes : <span
+                                                class="card yellow-card">{{ cards.yellow }}</span></p>
+                                    <p>Nombre de cartons rouges: <span class="card red-card">{{ cards.red }}</span></p>
+                                {% endfor %}
+
+                            </span>
+                            <p class="pull-left">Signature du capitaine :</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+        <div id="div-signature-arbitre" class="clearfix row">
+            <p>Signature de l'arbitre</p>
+        </div>
+
+        <div id="div-observation" class="row">
+            <p>Observations, blessés et réserves d'après match</p>
+        </div>
+
+
+    {% endblock %}
+</div>
+</body>
+
+{% block javascripts %}
+    <script src="{{ asset('jquery/js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ asset('jquery/js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('jquery/js/datepicker-fr.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+
+{% endblock %}

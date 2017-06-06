@@ -15,7 +15,8 @@
 
     <div class=row">
         <div class="col-md-12">
-            <span class="ariane-thread"><a href="{{ path('view_tournament', {'tournamentId': match.tournament.id}) }}">{{ match.tournament.name }}</a> > {{ match.name }}</span>
+            <span class="ariane-thread"><a
+                        href="{{ path('view_tournament', {'tournamentId': match.tournament.id}) }}">{{ match.tournament.name }}</a> > {{ match.name }}</span>
         </div>
     </div>
 
@@ -37,24 +38,37 @@
     </div>
 
 
-    {% if refereeing  %}
-    <div class=row">
-        <div class="col-md-12">
-            <div class="timer">
-                <h3>Chronomètre</h3>
+    {% if refereeing %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="timer">
+                    <h3>Chronomètre</h3>
 
-                <div class="time">
-                    <span class="timer-minutes">00</span> : <span class="timer-seconds">00</span>
-                </div>
+                    <div class="time">
+                        <span class="timer-minutes">00</span> : <span class="timer-seconds">00</span>
+                    </div>
 
-                <div class="time-controls">
-                    <button class="btn btn-primary btn-start-timer"><span class="glyphicon glyphicon-play"></span> Démarrer</button>
-                    <button class="btn btn-warning btn-pause-timer"><span class="glyphicon glyphicon-pause"></span> Pause</button>
-                    <button class="btn btn-danger btn-stop-timer"><span class="glyphicon glyphicon-stop"></span> Fin du match</button>
+                    <div class="time-controls">
+                        <button class="btn btn-primary btn-start-timer"><span class="glyphicon glyphicon-play"></span>
+                            Démarrer
+                        </button>
+                        <button class="btn btn-warning btn-pause-timer"><span class="glyphicon glyphicon-pause"></span>
+                            Pause
+                        </button>
+                        <button class="btn btn-danger btn-stop-timer"><span class="glyphicon glyphicon-stop"></span> Fin
+                            du match
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% else %}
+        <div class="row row-print-match">
+            <div class="col-md-12 text-center div-print-match">
+                <a class="btn btn-primary" href="{{ url('print_match',{'matchId': match.id}) }}"><span class="glyphicon glyphicon-print"></span> Imprimer
+                </a>
+            </div>
+        </div>
     {% endif %}
 
 
@@ -62,7 +76,8 @@
         {% for team in match.teams %}
             <div class="col-md-6">
                 <div class="team-container" data-id="{{ team.id }}">
-                    <span class="team-name"><a href="{{ url('view_team',{'teamId': team.id}) }}">{{ team.name }}</a></span>
+                    <span class="team-name"><a
+                                href="{{ url('view_team',{'teamId': team.id}) }}">{{ team.name }}</a></span>
 
                     <div class="row score-container">
 
@@ -83,21 +98,21 @@
 
                         {% for cards in match.cards if cards.team == team %}
 
-                        <div class="col-md-4 col-md-offset-2 yellow-card-container">
-                            <span class="glyphicon glyphicon-minus-sign referee-control card-btn remove-card-btn"></span>
+                            <div class="col-md-4 col-md-offset-2 yellow-card-container">
+                                <span class="glyphicon glyphicon-minus-sign referee-control card-btn remove-card-btn"></span>
 
-                            <div class="card yellow-card">{{ cards.yellow }}</div>
+                                <div class="card yellow-card">{{ cards.yellow }}</div>
 
-                            <span class="glyphicon glyphicon-plus-sign referee-control card-btn add-card-btn"></span>
-                        </div>
+                                <span class="glyphicon glyphicon-plus-sign referee-control card-btn add-card-btn"></span>
+                            </div>
 
-                        <div class="col-md-4 red-card-container">
-                            <span class="glyphicon glyphicon-minus-sign referee-control card-btn remove-card-btn"></span>
+                            <div class="col-md-4 red-card-container">
+                                <span class="glyphicon glyphicon-minus-sign referee-control card-btn remove-card-btn"></span>
 
-                            <div class="card red-card">{{ cards.red }}</div>
+                                <div class="card red-card">{{ cards.red }}</div>
 
-                            <span class="glyphicon glyphicon-plus-sign referee-control card-btn add-card-btn"></span>
-                        </div>
+                                <span class="glyphicon glyphicon-plus-sign referee-control card-btn add-card-btn"></span>
+                            </div>
 
                         {% endfor %}
 
@@ -107,18 +122,18 @@
                         <table class="table player-list">
 
                             <thead>
-                                <tr>
-                                    <th>Joueurs</th>
-                                </tr>
+                            <tr>
+                                <th>Joueurs</th>
+                            </tr>
                             </thead>
 
                             <tbody>
-                                {% for player in team.players %}
+                            {% for player in team.players %}
                                 <tr>
-                                    <td>{{ player.firstname }} <b>{{ player.name }}</b></td>
+                                    <td>{{ player.firstname }} <span class="name-player">{{ player.name }}</span></td>
                                 </tr>
 
-                                {% endfor %}
+                            {% endfor %}
                             </tbody>
 
                         </table>
@@ -140,42 +155,45 @@
 
         <script>
 
+            $('.row-print-match').hide();
+
             // Gestion du timer
             var timer = {
                 seconds: 0,
                 minutes: 0,
                 running: false,
                 intervalId: 0,
-                NumberFormater: new Intl.NumberFormat('fr-FR',{minimumIntegerDigits: 2}),
+                NumberFormater: new Intl.NumberFormat('fr-FR', {minimumIntegerDigits: 2}),
 
-                start: function(){
+                start: function () {
                     $('.referee-control').show();
-                    if(!this.running){ // On ne peut démarrer le compteur que s'il n'est pas en train de tourner
+                    if (!this.running) { // On ne peut démarrer le compteur que s'il n'est pas en train de tourner
                         this.update(this); //On exécute la fonction une première fois pour démarrer instantanément
-                        this.intervalId = setInterval(this.update,1000,this); //On passe la référence de l'objet en paramètre car setInterval apelle la callback avec un contexte erroné
+                        this.intervalId = setInterval(this.update, 1000, this); //On passe la référence de l'objet en paramètre car setInterval apelle la callback avec un contexte erroné
                         this.running = true;
                     }
                 },
 
-                pause: function(){
-                    if(this.running){
+                pause: function () {
+                    if (this.running) {
                         this.intervalId = clearInterval(this.intervalId);
                         this.running = false;
                     }
                 },
 
-                stop: function(){
+                stop: function () {
                     this.pause();
                     $('.referee-control').hide();
+                    $('.row-print-match').show();
                     $('.timer').remove();
                     endMatch();
 
                 },
 
                 // La fonction est appelée par setInterval qui l'apelle avec le contexte window, il faut donc passer manuellement une référence vers l'objet timer
-                update: function(selfReference){
+                update: function (selfReference) {
                     selfReference.seconds++;
-                    if(selfReference.seconds >= 60){
+                    if (selfReference.seconds >= 60) {
                         selfReference.minutes++;
                         selfReference.seconds = 0;
                     }
@@ -186,133 +204,129 @@
             };
 
 
-            $(function(){
+            $(function () {
 
 
-
-                $('.add-goal-btn').on('click',function(e){
-                    goalChange(e,"add");
+                $('.add-goal-btn').on('click', function (e) {
+                    goalChange(e, "add");
                 });
 
-                $('.remove-goal-btn').on('click',function(e){
-                    goalChange(e,"remove");
+                $('.remove-goal-btn').on('click', function (e) {
+                    goalChange(e, "remove");
                 });
 
-                $('.yellow-card-container .add-card-btn').on('click',function(e){
-                    cardChange(e,"add","yellow");
+                $('.yellow-card-container .add-card-btn').on('click', function (e) {
+                    cardChange(e, "add", "yellow");
                 });
 
-                $('.red-card-container .add-card-btn').on('click',function(e){
-                    cardChange(e,"add","red");
+                $('.red-card-container .add-card-btn').on('click', function (e) {
+                    cardChange(e, "add", "red");
                 });
 
-                $('.yellow-card-container .remove-card-btn').on('click',function(e){
-                    cardChange(e,"remove","yellow");
+                $('.yellow-card-container .remove-card-btn').on('click', function (e) {
+                    cardChange(e, "remove", "yellow");
                 });
 
-                $('.red-card-container .remove-card-btn').on('click',function(e){
-                    cardChange(e,"remove","red");
+                $('.red-card-container .remove-card-btn').on('click', function (e) {
+                    cardChange(e, "remove", "red");
                 });
 
-                $('.btn-start-timer').on('click',function(){
+                $('.btn-start-timer').on('click', function () {
                     timer.start();
                 });
 
-                $('.btn-pause-timer').on('click',function(){
+                $('.btn-pause-timer').on('click', function () {
                     timer.pause();
                 });
 
-                $('.btn-stop-timer').on('click',function(){
+                $('.btn-stop-timer').on('click', function () {
                     timer.stop();
                 });
-
-
-
 
 
             });
 
 
-
-            function addError(message){
+            function addError(message) {
                 var alert = $("<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><span class='alert-content'></span></div>");
                 alert.find('.alert-content').text(message);
                 $('.errors').append(alert);
             }
 
-            function goalChange(e,action){
+            function goalChange(e, action) {
                 var target = $(e.target);
                 var teamId = target.parents('.team-container').data('id');
                 var scoreWrapper = target.parents('.score-container').find('.score');
 
                 var url;
-                if(action === "add"){
+                if (action === "add") {
                     url = '{{ url('api_match_add_goal', {'matchId': match.id, 'teamId': "__teamId__"}) }}';
                 }
-                else if(action === "remove"){
+                else if (action === "remove") {
                     url = '{{ url('api_match_remove_goal', {'matchId': match.id, 'teamId': "__teamId__"}) }}';
                 }
-                else{
+                else {
                     throw new Error('Incorrect value for "action" parameter');
                 }
 
                 $.ajax({
-                    type: 'GET',
-                    url: url.replace('__teamId__',teamId),
-                    processData: false,
-                    contentType: false
-                })
-                    .done(function(data) {
-                        scoreWrapper.text(data);
-                    })
-                    .fail(function(data) {
-                        addError(data.responseJSON);
-                    })
+                            type: 'GET',
+                            url: url.replace('__teamId__', teamId),
+                            processData: false,
+                            contentType: false
+                        })
+                        .done(function (data) {
+                            scoreWrapper.text(data);
+                        })
+                        .fail(function (data) {
+                            addError(data.responseJSON);
+                        })
             }
 
 
-            function cardChange(e,action,color){
+            function cardChange(e, action, color) {
                 var target = $(e.target);
                 var teamId = target.parents('.team-container').data('id');
-                var card = target.parents('.'+color+'-card-container').find('.card');
+                var card = target.parents('.' + color + '-card-container').find('.card');
 
                 var url;
-                if(action === "add"){
+                if (action === "add") {
                     url = '{{ url('api_match_add_card', {'matchId': match.id, 'teamId': "__teamId__", 'color': "__color__"}) }}';
                 }
-                else if(action === "remove"){
+                else if (action === "remove") {
                     url = '{{ url('api_match_remove_card', {'matchId': match.id, 'teamId': "__teamId__", 'color': "__color__"}) }}';
                 }
-                else{
+                else {
                     throw new Error('Incorrect value for "action" parameter');
                 }
 
                 $.ajax({
-                    type: 'GET',
-                    url: url.replace('__teamId__',teamId).replace('__color__',color),
-                    processData: false,
-                    contentType: false
-                })
-                    .done(function(data) {
-                        card.text(data);
-                    })
-                    .fail(function(data) {
-                        addError(data.responseJSON);
-                    })
+                            type: 'GET',
+                            url: url.replace('__teamId__', teamId).replace('__color__', color),
+                            processData: false,
+                            contentType: false
+                        })
+                        .done(function (data) {
+                            card.text(data);
+                        })
+                        .fail(function (data) {
+                            addError(data.responseJSON);
+                        })
             }
 
-            function endMatch(){
+            function endMatch() {
                 $.ajax({
-                    type: 'GET',
-                    url: '{{ url('api_match_end', {'matchId': match.id}) }}',
-                    processData: false,
-                    contentType: false
-                })
-                    .done(function(data) {
-                    })
-                    .fail(function(data) {
-                        addError(data.responseJSON);
-                    })
+                            type: 'GET',
+                            url: '{{ url('api_match_end', {'matchId': match.id}) }}',
+                            processData: false,
+                            contentType: false
+                        })
+                        .done(function (data) {
+
+                        })
+                        .fail(function (data) {
+                            addError(data.responseJSON);
+                        })
             }
 
 
