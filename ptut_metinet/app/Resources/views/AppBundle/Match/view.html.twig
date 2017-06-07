@@ -63,12 +63,16 @@
             </div>
         </div>
     {% else %}
-        <div class="row row-print-match">
-            <div class="col-md-12 text-center div-print-match">
-                <a class="btn btn-primary" href="{{ url('print_match',{'matchId': match.id}) }}"><span class="glyphicon glyphicon-print"></span> Imprimer
-                </a>
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_REFEREE') %}
+            <div class="row row-print-match">
+                <div class="col-md-12 text-center div-print-match">
+                    <a class="btn btn-primary" href="{{ url('print_match',{'matchId': match.id}) }}"><span
+                                class="glyphicon glyphicon-print"></span> Imprimer
+                    </a>
+                </div>
             </div>
-        </div>
+        {% endif %}
+
     {% endif %}
 
 
@@ -322,7 +326,7 @@
                             contentType: false
                         })
                         .done(function (data) {
-
+                            document.location = '{{ url('view_match', {'matchId': match.id}) }}';
                         })
                         .fail(function (data) {
                             addError(data.responseJSON);
