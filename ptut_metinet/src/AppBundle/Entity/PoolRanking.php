@@ -78,26 +78,29 @@ class PoolRanking
 
         foreach($this->team->getMatches() as $match){
 
-            if(!$match->isTie()){ //Stats sur gagnés/perdus/nuls
-                if($match->getWinner() == $this->team){
-                    $this->won++;
+            if($match->isPlayed()){
+                if(!$match->isTie()){ //Stats sur gagnés/perdus/nuls
+                    if($match->getWinner() == $this->team){
+                        $this->won++;
+                    }
+                    else{
+                        $this->lost++;
+                    }
                 }
                 else{
-                    $this->lost++;
+                    $this->tie++;
                 }
-            }
-            else{
-                $this->tie++;
+
+                foreach($match->getScores() as $score){ //Stats sur buts pris/mis
+                    if($score->getTeam() == $this->team){
+                        $this->goalsScored += $score->getGoals();
+                    }
+                    else{
+                        $this->goalsTaken += $score->getGoals();
+                    }
+                }
             }
 
-            foreach($match->getScores() as $score){ //Stats sur buts pris/mis
-                if($score->getTeam() == $this->team){
-                    $this->goalsScored += $score->getGoals();
-                }
-                else{
-                    $this->goalsTaken += $score->getGoals();
-                }
-            }
         }
 
         $this->goalDifference = $this->goalsScored - $this->goalsTaken;

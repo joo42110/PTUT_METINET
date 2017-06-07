@@ -34,6 +34,30 @@
                     </div>
                 {% endfor %}
             </div>
+        {% else %}
+            <div class="row">
+                {% for match in tournament.currentFinalRound.matches %}
+                    <div class="col-md-6 text-center">
+                        <h3>{{ tournament.currentFinalRound.name }} {{ loop.index }}</h3>
+                        <table class="table table-bordered final-rounds-match">
+                            <tbody>
+                                {% for score in match.scores %}
+                                    {% if score.match.played %}
+                                        {% set displayScore = score.goals %}
+                                    {% else %}
+                                        {% set displayScore = "TbD" %}
+                                    {% endif %}
+
+                                    <tr>
+                                        <td><a href="{{ url('view_team',{"teamId": score.team.id}) }}">{{ score.team.name }}</a></td>
+                                        <td>{{ displayScore }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% endfor %}
+            </div>
         {% endif %}
 
     {% else %}

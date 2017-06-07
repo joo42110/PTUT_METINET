@@ -305,6 +305,9 @@ class Match extends BaseEntity
     }
 
     public function isTie(){
+        if(!$this->played){
+            return false;
+        }
         //Le match est-t-il une égalité ou non ?
         return($this->scores[0]->getGoals() == $this->scores[1]->getGoals());
     }

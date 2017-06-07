@@ -2,13 +2,13 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Foot Adapté{% endblock %}</title>
         <link rel = "stylesheet" href= "{{ asset('bootstrap/css/bootstrap.min.css') }}"/>
         <link rel = "stylesheet" href= "{{ asset('jquery/css/jquery-ui.min.css') }}"/>
         <link rel = "stylesheet" href= "{{ asset('css/custom_styles.css') }}"/>
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,900" rel="stylesheet">
         {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('images/referee_jersey.png') }}" />
     </head>
     <body>
 
@@ -22,7 +22,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ path('homepage') }}">Foot.10</a>
+                <a class="navbar-brand" href="{{ path('homepage') }}">Foot Adapté</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->

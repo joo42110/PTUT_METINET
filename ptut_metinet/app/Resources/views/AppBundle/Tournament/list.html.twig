@@ -24,7 +24,7 @@
     </div>
 
     <div class="row text-center">
-        <h1>Bienvenue sur notre page d'accueil</h1>
+        <h1>Gestion de tournois de foot adapté</h1>
         <div class="tournament_list_wrapper ">
             {% for tournament in tournaments if tournament.enabled or is_granted('ROLE_ADMIN') %}
                 <a href="{% if tournament.enabled %}{{ path('view_tournament',{'tournamentId': tournament.id }) }}{% else %}{{ path('edit_tournament',{'tournamentId': tournament.id }) }}{% endif %}">

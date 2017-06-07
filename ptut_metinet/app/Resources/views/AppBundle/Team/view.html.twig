@@ -108,11 +108,11 @@
     <script>
         $(function(){
 
-
            $('.played-match-row').on('click',function(e){
                var matchId = $(e.target).parents('.played-match-row').data('id');
                window.location = '{{ url('view_match',{"matchId": '__matchId__'}) }}'.replace('__matchId__',matchId);
            });
+           
         });
     </script>
 
