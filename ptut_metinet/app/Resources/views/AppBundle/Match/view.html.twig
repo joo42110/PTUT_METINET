@@ -322,7 +322,7 @@
                             contentType: false
                         })
                         .done(function (data) {
-
+                            document.location = '{{ url('view_match', {'matchId': match.id}) }}';
                         })
                         .fail(function (data) {
                             addError(data.responseJSON);
