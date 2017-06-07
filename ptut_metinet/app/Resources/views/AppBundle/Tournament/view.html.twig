@@ -24,6 +24,18 @@
                 {% endif %}
             </div>
         </div>
+
+        {% if not tournament.finalsOngoing %}
+            <div class="row">
+                {% for pool in tournament.pools %}
+                    <div class="col-md-6 text-center">
+                        <h3>Poule {{ loop.index }}</h3>
+                        {% include ':AppBundle/Pool:poolRanking.html.twig' %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
     {% else %}
         <div class="row">
             <div class="col-md-12 text-center">

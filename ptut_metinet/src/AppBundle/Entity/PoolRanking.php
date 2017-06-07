@@ -27,37 +27,37 @@ class PoolRanking
     /**
      * @var int
      */
-    private $won;
+    private $won = 0;
 
     /**
      * @var int
      */
-    private $tie;
+    private $tie = 0;
 
     /**
      * @var int
      */
-    private $lost;
+    private $lost = 0;
 
     /**
      * @var int
      */
-    private $goalsScored;
+    private $goalsScored = 0;
 
     /**
      * @var int
      */
-    private $goalsTaken;
+    private $goalsTaken = 0;
 
     /**
      * @var int
      */
-    private $goalDifference;
+    private $goalDifference = 0;
 
     /**
      * @var int
      */
-    private $points;
+    private $points = 0;
 
 
 

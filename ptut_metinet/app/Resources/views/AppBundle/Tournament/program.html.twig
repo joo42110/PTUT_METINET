@@ -41,13 +41,18 @@
     {% endif %}
 
     <h4>Ce tournoi est actuellement en phase {{ phaseName }} {% if poolsEnded or finalRoundEnded %}&nbsp;&nbsp;<span class="text-success"><span class="glyphicon glyphicon-ok"></span> Tous les matchs on été joués</span>{% endif %}</h4>
-    {% if poolsEnded %}
-        <button class="btn btn-lg btn-success btn-validate-pools"><span class="glyphicon glyphicon-ok"></span> Valider les poules et passer aux phases finales</button>
-    {% endif %}
+    <div class=row">
+        <div class="col-md-12 program-validation-btn-container text-center">
+            {% if poolsEnded %}
+                <button class="btn btn-lg btn-success btn-validate-pools"><span class="glyphicon glyphicon-ok"></span> Valider les poules et passer aux phases finales</button>
+            {% endif %}
 
-    {% if finalRoundEnded %}
-        <button class="btn btn-lg btn-success btn-setup-next-final-round"><span class="glyphicon glyphicon-ok"></span> Valider les {{ tournament.currentFinalRound.name }} et passer au tour suivant</button>
-    {% endif %}
+            {% if finalRoundEnded %}
+                <button class="btn btn-lg btn-success btn-setup-next-final-round"><span class="glyphicon glyphicon-ok"></span> Valider les {{ tournament.currentFinalRound.name }} et passer au tour suivant</button>
+            {% endif %}
+        </div>
+    </div>
+
 
 
 
@@ -342,6 +347,9 @@
                 .done(function(data){
                     if(data.tournamentEnded){
                         window.location = data.redirectUrl;
+                    }
+                    else{
+                        window.location.reload();
                     }
                 })
                 .fail(function(data){

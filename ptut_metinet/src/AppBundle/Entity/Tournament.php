@@ -348,6 +348,15 @@ class Tournament extends BaseEntity
 
     public function getCurrentFinalRound(){
         $finalRounds = $this->getFinalRounds()->toArray();
+        $callback= function($a,$b){
+            if($a->getTeamsNumber() > $b->getTeamsNumber()){ //Moins d'équipes = tour plus "loin" dans le tournoi
+                return 1;
+            }
+            else{
+                return -1;
+            }
+        };
+        usort($finalRounds,$callback);
         return array_shift($finalRounds);
     }
 

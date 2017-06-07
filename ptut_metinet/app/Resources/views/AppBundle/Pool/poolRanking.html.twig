@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-md-12">
+        <table class="table pool-ranking">
+            <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>Equipe</th>
+                    <th>Points</th>
+                    <th data-toggle="tooltip" data-placement="top" title="Victoires">V</th>
+                    <th data-toggle="tooltip" title="Nuls">N</th>
+                    <th data-toggle="tooltip" title="Défaites">D</th>
+                    <th data-toggle="tooltip" title="Buts Pour">BP</th>
+                    <th data-toggle="tooltip" title="Buts Contre">BC</th>
+                    <th data-toggle="tooltip" title="Différence de Buts">DB</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for teamRanking in pool.rankings %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td><a href="{{ url('view_team',{"teamId": teamRanking.team.id}) }}">{{ teamRanking.team.name }}</a></td>
+                        <td>{{ teamRanking.points }}</td>
+                        <td>{{ teamRanking.won }}</td>
+                        <td>{{ teamRanking.tie }}</td>
+                        <td>{{ teamRanking.lost }}</td>
+                        <td>{{ teamRanking.goalsScored }}</td>
+                        <td>{{ teamRanking.goalsTaken }}</td>
+                        <td>{{ teamRanking.goalDifference }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

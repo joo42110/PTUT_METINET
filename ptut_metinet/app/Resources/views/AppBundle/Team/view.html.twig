@@ -87,7 +87,14 @@
 
         </div>
         <div class="col-md-6">
-            <h1>{{ team.name }}</h1>
+            {% if team.tournament %}
+                <h2>Poule</h2>
+                {% set pool = team.pool %}
+                {% include ':AppBundle/Pool:poolRanking.html.twig' %}
+            {% else %}
+
+            {% endif %}
+
         </div>
     </div>
 
@@ -100,6 +107,8 @@
 
     <script>
         $(function(){
+
+
            $('.played-match-row').on('click',function(e){
                var matchId = $(e.target).parents('.played-match-row').data('id');
                window.location = '{{ url('view_match',{"matchId": '__matchId__'}) }}'.replace('__matchId__',matchId);

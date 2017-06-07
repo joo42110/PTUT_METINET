@@ -158,8 +158,12 @@ class Pool extends BaseEntity
             $rankings[] = new PoolRanking($team);
         }
 
+        /*
+         * On veut la première équipe en haut du tableau => début du tableau = plus haut classement
+         * On doit donc inverser la fonction de comparaison d'ou le -($a->compareTo($b))
+         */
         usort($rankings,function($a,$b){
-            return $a->compareTo($b);
+            return -($a->compareTo($b));
         });
 
         return $rankings;

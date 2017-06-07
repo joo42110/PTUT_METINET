@@ -145,3 +145,24 @@ h1,h2,h3,h4,h5,h6{
     border: 1px solid #dddddd;
     padding: 2em;
 }
+
+.program-validation-btn-container{
+    padding-bottom: 2em;
+    padding-top: 1em;
+}
+
+.pool-ranking th,.pool-ranking td {
+    text-align: center;
+}
+
+.pool-ranking a{
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.pool-ranking a:hover{
+    text-decoration: none;
+    font-weight: 400;
+}
+
+
