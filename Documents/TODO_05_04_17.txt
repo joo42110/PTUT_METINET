@@ -1,0 +1,6 @@
+﻿TODO
+
+-> dans le CSV, ajouter catégorie dans les champs
+-> Vérifier suppression équipes dans tournoi
+-> 2 niveau d'admin différents
+-> Config tournoi : demander si on veux commencer la sortie de poules aux 16eme/8eme/4uart/2mi
