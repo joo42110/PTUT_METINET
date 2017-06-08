@@ -24,4 +24,12 @@ class DefaultController extends Controller
         return $this->render('base.html.twig',array());
 
     }
+
+    public function videoPresAction(Request $request){
+
+        return $this->render('videopres.html.twig',array());
+
+    }
+
+
 }

@@ -17,6 +17,11 @@ login:
 logout:
     path: /logout
 
+# Vidéo de présentation
+pres_vid:
+    path: /presentation
+    defaults: {_controller: AppBundle:Default:videoPres }
+
 user_edit:
     path: /user/{userId}/edit
     defaults: {_controller: UserBundle:User:edit}
